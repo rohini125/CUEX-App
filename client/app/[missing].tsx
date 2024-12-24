@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const home = () => {
+const page = () => {
   return (
     <View>
-      <Text>home</Text>
+      <Text style={{fontSize:20}}>Not Found!!</Text>
     </View>
   )
 }
 
-export default home
+export default page;

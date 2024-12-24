@@ -12,8 +12,8 @@ const TabRoot = () =>{
             //     tabBarStyle: { backgroundColor: 'white' }, // Optional: Tab bar background color
             // }}
         >
-            <Tabs.Screen 
-              name="index" 
+           <Tabs.Screen 
+              name="home" 
               options={{title:"Home",  
               tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />}} />
             <Tabs.Screen

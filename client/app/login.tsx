@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import Mybutton from "@/components/Mybutton";
 import { useRouter } from 'expo-router';
 
@@ -6,7 +6,7 @@ const Login = () => {
   const router = useRouter();
 
   const onLogin = () => {
-    router.navigate('/home');
+    router.navigate('/market');
   };
 
   const onSignUp = () => {
@@ -14,7 +14,7 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" />
       <View style={{ padding: 20, gap: 20 }}>
         <TextInput placeholder="Enter Your Email / Mobile no" style={styles.input} />
@@ -27,7 +27,7 @@ const Login = () => {
           </Text>
         </Text>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
