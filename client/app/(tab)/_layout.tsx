@@ -6,14 +6,14 @@ import { FontAwesome5 } from '@expo/vector-icons';
 const TabRoot = () =>{
     return (
         <Tabs 
-            // screenOptions={{
-            //     tabBarActiveTintColor: 'blue', // Active tab icon color
-            //     tabBarInactiveTintColor: 'gray', // Inactive tab icon color
-            //     tabBarStyle: { backgroundColor: 'white' }, // Optional: Tab bar background color
-            // }}
+            screenOptions={{
+                tabBarActiveTintColor: 'blue', // Active tab icon color
+                tabBarInactiveTintColor: 'gray', // Inactive tab icon color
+                tabBarStyle: { backgroundColor: 'white' }, // Optional: Tab bar background color
+            }}
         >
            <Tabs.Screen 
-              name="home" 
+              name="front" 
               options={{title:"Home",  
               tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />}} />
             <Tabs.Screen
