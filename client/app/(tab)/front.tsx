@@ -1,15 +1,25 @@
-
-
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import CurrencyConverter from '../Home/currencyconverter';
+
 
 const Home = () => {
+  const router = useRouter();
+
+  // Navigation functions
+  const navigateToMobile = () => router.push('/ToMobile');
+  const navigateToBank = () => router.push('/ToBank');
+  const navigateToSelfAccount = () => router.push('/ToSelfAccount');
+  const navigateToCheckBalance = () => router.push('/CheckBalance');
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <CurrencyConverter/>
       <Text style={styles.title}>Transfer Money</Text>
       <View style={styles.iconContainer}>
-        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7} onPress={navigateToMobile}>
           <View style={styles.iconBackground}>
             <FontAwesome5 name="mobile-alt" size={18} color="white" />
           </View>
@@ -17,7 +27,7 @@ const Home = () => {
             To Mobile Number
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7} onPress={navigateToBank}>
           <View style={styles.iconBackground}>
             <MaterialIcons name="account-balance" size={18} color="white" />
           </View>
@@ -25,7 +35,7 @@ const Home = () => {
             To Bank/UPI ID
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7} onPress={navigateToSelfAccount}>
           <View style={styles.iconBackground}>
             <FontAwesome5 name="wallet" size={18} color="white" />
           </View>
@@ -33,7 +43,7 @@ const Home = () => {
             To Self Account
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.iconBox} activeOpacity={0.7} onPress={navigateToCheckBalance}>
           <View style={styles.iconBackground}>
             <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
           </View>
@@ -42,7 +52,7 @@ const Home = () => {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -53,39 +63,41 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    marginTop: 20,
+    textAlign:'center',
   },
   iconContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flexWrap: 'wrap', // Ensure icons wrap properly if needed
+    flexWrap: 'wrap',
     marginTop: 16,
   },
   iconBox: {
-    width: '22%', // Adjust width so icons are spaced evenly
-    height: 80, // Adjust the height if necessary
+    width: '22%',
+    height: 80,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16, // Spacing between icons
+    marginBottom: 16,
   },
   iconBackground: {
-    width: 40,  // Icon background size
-    height: 40, // Icon background height
+    width: 40,
+    height: 40,
     backgroundColor: '#333333',
-    borderRadius: 15, // Circular shape
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    transform: [{ scale: 1 }], // Default size for the icon background
   },
   iconText: {
     marginTop: 8,
     fontSize: 12,
     color: '#333',
     textAlign: 'center',
-    flexWrap: 'wrap', // Ensures text wraps to the next line
+    flexWrap: 'wrap',
   },
 });
 
 export default Home;
+
