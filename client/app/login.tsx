@@ -6,7 +6,7 @@ const Login = () => {
   const router = useRouter();
 
   const onLogin = () => {
-    router.navigate('/market');
+    router.navigate('/front');
   };
 
   const onSignUp = () => {
