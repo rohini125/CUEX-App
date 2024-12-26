@@ -1,12 +1,26 @@
 
 
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import Header from '../Header';
+import Sidebar from '../sidebar';
 
 const Home = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleProfilePress = () => {
+    setIsSidebarOpen(true); // Open sidebar when profile is pressed
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false); // Close sidebar
+  };
+
   return (
     <View style={styles.container}>
+       <Header onProfilePress={handleProfilePress} />
+       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
       <Text style={styles.title}>Transfer Money</Text>
       <View style={styles.iconContainer}>
         <TouchableOpacity style={styles.iconBox} activeOpacity={0.7}>
