@@ -1,7 +1,6 @@
-// import { Link } from 'expo-router';
 import { Text, View,StyleSheet } from 'react-native';
 import Mybutton from "@/components/Mybutton";
-import { useRouter } from 'expo-router';
+import { useRouter} from 'expo-router';
 import { Link } from 'expo-router'
 
 const index = () => {
@@ -16,9 +15,6 @@ const index = () => {
       <Text style={styles.text}>WelCome To CUEX App </Text>
       {/* <Mybutton title={"Continue"} onPress={onContinue}/> */}
       <Text>
-        {/* <Link href="/market" asChild>
-            <Mybutton title={"Continue"} onPress={onContinue}/>
-        </Link> */}
         <Link href="/login" asChild>
           <Mybutton title={"Login"} onPress={onContinue}/>
         </Link>
@@ -41,3 +37,4 @@ const styles = StyleSheet.create({
     marginBottom:20
   }
 });
+
