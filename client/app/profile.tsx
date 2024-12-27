@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ActivityIndicator, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 
 const Profile = () => {
@@ -8,6 +18,7 @@ const Profile = () => {
   // State for user details
   const [name, setName] = useState('John Doe');
   const [mobile, setMobile] = useState('7620171779');
+  const [profileImage, setProfileImage] = useState('https://via.placeholder.com/100'); // Default profile picture
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -38,14 +49,37 @@ const Profile = () => {
     }
   };
 
+  // Function to pick image from the device
+  const pickImage = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permissionResult.granted) {
+      Alert.alert('Permission Denied', 'You need to allow access to your photo library.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setProfileImage(result.assets[0].uri); // Update profile picture
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* Profile Picture */}
       <View style={styles.header}>
-        <Image
-          source={{ uri: 'https://via.placeholder.com/100' }} // Replace with dynamic user image URL
-          style={styles.profileImage}
-        />
+        <TouchableOpacity onPress={pickImage}>
+          <Image
+            source={{ uri: profileImage }}
+            style={styles.profileImage}
+          />
+          <Text style={styles.changePictureText}>Change Picture</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Personal Details Section */}
@@ -132,6 +166,12 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 2,
     borderColor: '#6200ee',
+  },
+  changePictureText: {
+    marginTop: 8,
+    color: '#6200ee',
+    fontWeight: 'bold',
+    fontSize: 14,
   },
   section: {
     backgroundColor: '#fff',

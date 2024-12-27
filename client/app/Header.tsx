@@ -16,6 +16,7 @@ const Header: React.FC<HeaderProps> = ({ onProfilePress }) => {
           }}
           style={styles.profileImage}
         />
+        
       </TouchableOpacity>
       <Text style={styles.appName}>CUEX</Text>
       <View style={styles.rightIcons}>
