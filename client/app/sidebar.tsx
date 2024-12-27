@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Modal, ScrollView, Animated, Image, TextInput, Button } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Modal, ScrollView, Animated, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 type SidebarProps = {
   isOpen: boolean;
@@ -8,12 +9,13 @@ type SidebarProps = {
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [profile, setProfile] = useState({
+  const router = useRouter();
+
+  const profile = {
     name: 'John Doe',
     email: 'john.doe@example.com',
     image: 'https://via.placeholder.com/100', // Replace with dynamic user image URL
-  });
+  };
 
   const slideAnim = new Animated.Value(-300); // Initial position off the screen
 
@@ -34,16 +36,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const handleSaveProfile = () => {
-    setIsEditing(false);
-  };
-
-  const handleInputChange = (name: string, value: string) => {
-    setProfile((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  const navigateAndClose = (route: `/profile` | `/wallet` | `/transactions` | `/promotions` | `/settings` | `/help` | `/logout`) => {
+    router.push(route);
+    onClose();
+};
 
   return (
     <Modal visible={isOpen} transparent={true} animationType="fade" onRequestClose={onClose}>
@@ -52,64 +48,40 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           {/* Profile Section */}
           <View style={styles.profileSection}>
             <Image source={{ uri: profile.image }} style={styles.profileImage} />
-            {isEditing ? (
-              <>
-                <TextInput
-                  value={profile.name}
-                  onChangeText={(text) => handleInputChange('name', text)}
-                  style={styles.profileInput}
-                  placeholder="Enter name"
-                />
-                <TextInput
-                  value={profile.email}
-                  onChangeText={(text) => handleInputChange('email', text)}
-                  style={styles.profileInput}
-                  placeholder="Enter email"
-                />
-                <Button title="Save Changes" onPress={handleSaveProfile} />
-              </>
-            ) : (
-              <>
-                <Text style={styles.profileName}>{profile.name}</Text>
-                <Text style={styles.profileEmail}>{profile.email}</Text>
-                <TouchableOpacity onPress={() => setIsEditing(true)}>
-                  <Text style={styles.editText}>Edit</Text>
-                </TouchableOpacity>
-              </>
-            )}
+            <Text style={styles.profileName}>{profile.name}</Text>
+            <Text style={styles.profileEmail}>{profile.email}</Text>
           </View>
 
           <ScrollView contentContainerStyle={styles.menuContainer}>
             <Text style={styles.sidebarTitle}>Menu</Text>
-            <TouchableOpacity style={styles.menuItem} onPress={() => alert('Navigate to Profile')}>
-  <Feather name="user" size={20} color="#4A4A4A" />
-  <Text style={styles.menuText}>Profile</Text>
-</TouchableOpacity>
-<TouchableOpacity style={styles.menuItem} onPress={() => alert('Navigate to Wallet')}>
-  <Feather name="credit-card" size={20} color="#4A4A4A" />
-  <Text style={styles.menuText}>Wallet</Text>
-</TouchableOpacity>
-<TouchableOpacity style={styles.menuItem} onPress={() => alert('Navigate to Transactions')}>
-  <Feather name="credit-card" size={20} color="#4A4A4A" />
-  <Text style={styles.menuText}>Transactions</Text>
-</TouchableOpacity>
-<TouchableOpacity style={styles.menuItem} onPress={() => alert('Navigate to Promotions')}>
-  <Feather name="gift" size={20} color="#4A4A4A" />
-  <Text style={styles.menuText}>Promotions</Text>
-</TouchableOpacity>
-<TouchableOpacity style={styles.menuItem} onPress={() => alert('Navigate to Settings')}>
-  <Feather name="settings" size={20} color="#4A4A4A" />
-  <Text style={styles.menuText}>Settings</Text>
-</TouchableOpacity>
-<TouchableOpacity style={styles.menuItem} onPress={() => alert('Navigate to Help')}>
-  <Feather name="help-circle" size={20} color="#4A4A4A" />
-  <Text style={styles.menuText}>Help & Support</Text>
-</TouchableOpacity>
-<TouchableOpacity style={styles.menuItem} onPress={() => alert('Logout')}>
-  <Feather name="log-out" size={20} color="#4A4A4A" />
-  <Text style={styles.menuText}>Logout</Text>
-</TouchableOpacity>
-
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/profile')}>
+              <Feather name="user" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Profile</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/wallet')}>
+              <Feather name="credit-card" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Wallet</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/transactions')}>
+              <Feather name="credit-card" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Transactions</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/promotions')}>
+              <Feather name="gift" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Promotions</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/settings')}>
+              <Feather name="settings" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Settings</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/help')}>
+              <Feather name="help-circle" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Help & Support</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/logout')}>
+              <Feather name="log-out" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Logout</Text>
+            </TouchableOpacity>
           </ScrollView>
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Feather name="x" size={24} color="#4A4A4A" />
@@ -162,22 +134,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#7A7A7A',
     marginTop: 5,
-  },
-  profileInput: {
-    fontSize: 14,
-    color: '#4A4A4A',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    marginTop: 10,
-    width: '100%', // Adjust width to sidebar width
-    padding: 5,
-    textAlign: 'center',
-  },
-  editText: {
-    color: '#4A4A4A',
-    fontSize: 16,
-    marginTop: 10,
-    textDecorationLine: 'underline',
   },
   sidebarTitle: {
     fontSize: 18,
