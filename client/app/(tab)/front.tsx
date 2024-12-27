@@ -215,11 +215,12 @@
 
 
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import CurrencyConverter from '../Home/currencyconverter';
-
+import Header from '../Header';
+import Sidebar from '../sidebar';
 const Home = () => {
   const router = useRouter();
 
@@ -228,10 +229,19 @@ const Home = () => {
   const handleNavigateToBank = () => router.push('/ToBank');
   const handleNavigateToSelfAccount = () => router.push('/ToSelfAccount');
   const handleNavigateToCheckBalance = () => router.push('/CheckBalance');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const handleProfilePress = () => {
+    setIsSidebarOpen(true); // Open sidebar when profile is pressed
+  };
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false); // Close sidebar
+  };
 
   return (
     <ScrollView style={styles.container}>
       <View>
+      <Header onProfilePress={handleProfilePress} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
         <CurrencyConverter />
       </View>
       <Text style={styles.title}>Transfer Money</Text>

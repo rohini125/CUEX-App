@@ -120,6 +120,13 @@ const Profile = () => {
         )}
       </View>
 
+      {/* Save Changes Button */}
+      {!isEditing && (
+        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+          <Text style={styles.saveButtonText}>Save Changes</Text>
+        </TouchableOpacity>
+      )}
+
       {/* Other Sections */}
       <TouchableOpacity
         style={styles.section}
@@ -220,6 +227,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 8,
     backgroundColor: '#28a745',
+    marginTop: 10,
   },
   saveButtonText: {
     color: '#fff',
