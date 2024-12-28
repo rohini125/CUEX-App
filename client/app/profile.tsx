@@ -120,29 +120,17 @@ const Profile = () => {
         )}
       </View>
 
-      {/* Save Changes Button */}
-      {!isEditing && (
-        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-          <Text style={styles.saveButtonText}>Save Changes</Text>
-        </TouchableOpacity>
-      )}
-
+     
       {/* Other Sections */}
-      <TouchableOpacity
-        style={styles.section}
-        onPress={() => router.push('/financial-details')}
-      >
-        <Text style={styles.sectionTitle}>Financial Details</Text>
-        <Text style={styles.detailText}>Income, employment details, and more</Text>
-      </TouchableOpacity>
+      
 
       <TouchableOpacity
-        style={styles.section}
-        onPress={() => router.push('/additional-details')}
-      >
-        <Text style={styles.sectionTitle}>Additional Details</Text>
-        <Text style={styles.detailText}>Age, gender, and more</Text>
-      </TouchableOpacity>
+  style={styles.section}
+  onPress={() => router.push('/additional-details')} // Ensure the path matches your routing setup
+>
+  <Text style={styles.sectionTitle}>Additional Details</Text>
+  <Text style={styles.detailText}>Age, gender, and more</Text>
+</TouchableOpacity>
 
       <TouchableOpacity
         style={styles.section}
