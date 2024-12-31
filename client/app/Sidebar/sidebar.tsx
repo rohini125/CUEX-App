@@ -36,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const navigateAndClose = (route: `/profile` | `/wallet` | `/transactions` | `/promotions` | `/settings` | `/help` | `/logout`) => {
+  const navigateAndClose = (route: `/Sidebar/profile` |`/Sidebar/AccountSetting`|`/Sidebar/price-alert`|  `/Sidebar/promotions` | `/Sidebar/settings` | `/Sidebar/help` | `/Sidebar/logout`) => {
     router.push(route);
     onClose();
 };
@@ -45,40 +45,36 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     <Modal visible={isOpen} transparent={true} animationType="fade" onRequestClose={onClose}>
       <View style={styles.modalOverlay}>
         <Animated.View style={[styles.sidebar, { transform: [{ translateX: slideAnim }] }]}>
-          {/* Profile Section */}
-          <View style={styles.profileSection}>
-            <Image source={{ uri: profile.image }} style={styles.profileImage} />
-            <Text style={styles.profileName}>{profile.name}</Text>
-            <Text style={styles.profileEmail}>{profile.email}</Text>
-          </View>
+
 
           <ScrollView contentContainerStyle={styles.menuContainer}>
             <Text style={styles.sidebarTitle}>Menu</Text>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/profile')}>
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/profile')}>
               <Feather name="user" size={20} color="#4A4A4A" />
               <Text style={styles.menuText}>Profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/wallet')}>
-              <Feather name="credit-card" size={20} color="#4A4A4A" />
-              <Text style={styles.menuText}>Wallet</Text>
+
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/AccountSetting')}>
+              <Feather name="settings" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Account Settings</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/transactions')}>
-              <Feather name="credit-card" size={20} color="#4A4A4A" />
-              <Text style={styles.menuText}>Transactions</Text>
+
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/price-alert')}>
+              <Feather name="alert-circle" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>Price Alerts</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/promotions')}>
+    
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/promotions')}>
               <Feather name="gift" size={20} color="#4A4A4A" />
               <Text style={styles.menuText}>Promotions</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/settings')}>
-              <Feather name="settings" size={20} color="#4A4A4A" />
-              <Text style={styles.menuText}>Settings</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/help')}>
+            
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/help')}>
               <Feather name="help-circle" size={20} color="#4A4A4A" />
               <Text style={styles.menuText}>Help & Support</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/logout')}>
+      
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/logout')}>
               <Feather name="log-out" size={20} color="#4A4A4A" />
               <Text style={styles.menuText}>Logout</Text>
             </TouchableOpacity>

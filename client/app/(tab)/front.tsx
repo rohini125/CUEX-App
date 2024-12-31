@@ -220,7 +220,7 @@ import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import CurrencyConverter from '../Home/currencyconverter';
 import Header from '../Header';
-import Sidebar from '../sidebar';
+import Sidebar from '../Sidebar/sidebar';
 const Home = () => {
   const router = useRouter();
 
