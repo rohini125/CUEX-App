@@ -31,7 +31,7 @@ const PaymentResult = () => {
       <Text style={styles.details}>Amount: ₹{amount}</Text>
       <Text style={styles.details}>Date and Time: {dateTime}</Text>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push('/history')}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/front')}>
         <Text style={styles.buttonText}> Done </Text>
       </TouchableOpacity>
     </View>
