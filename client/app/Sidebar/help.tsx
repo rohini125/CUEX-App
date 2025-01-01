@@ -150,9 +150,9 @@ const HelpSupport = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Contact Us</Text>
         <Text style={styles.contactText}>📧 Email: support@cuexapp.com</Text>
-        <Text style={styles.contactText}>📞 Phone: +1 234 567 890</Text>
+        <Text style={styles.contactText}>📞 Phone: +91 8234 567 890</Text>
         <Text style={styles.contactText}>🌐 Website: www.cuexapp.com</Text>
-        <Text style={styles.contactText}>📍 Address: 123 FinTech Avenue, Currency City, USA</Text>
+        <Text style={styles.contactText}>📍 Address: 123 CUEX Center Maharastra India</Text>
       </View>
     </ScrollView>
   );
