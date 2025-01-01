@@ -1,214 +1,4 @@
 
-// import React, { useState, useEffect } from 'react';
-// import {
-//   View,
-//   Text,
-//   TextInput,
-//   TouchableOpacity,
-//   StyleSheet,
-//   ActivityIndicator,
-// } from 'react-native';
-// import { Picker } from '@react-native-picker/picker';
-
-// const CurrencyConverter = () => {
-//   const [currencies, setCurrencies] = useState<string[]>([]);
-//   const [fromCurrency, setFromCurrency] = useState('USD');
-//   const [toCurrency, setToCurrency] = useState('INR');
-//   const [amount, setAmount] = useState('');
-//   const [convertedAmount, setConvertedAmount] = useState<string | null>(null);
-//   const [loading, setLoading] = useState(false);
-
-//   // Fetch currency list from API
-//   useEffect(() => {
-//     const fetchCurrencies = async () => {
-//       try {
-//         setLoading(true);
-//         const response = await fetch(
-//           'https://api.exchangerate-api.com/v4/latest/USD'
-//         );
-//         const data = await response.json();
-//         setCurrencies(Object.keys(data.rates));
-//         setLoading(false);
-//       } catch (error) {
-//         console.error('Error fetching currency data:', error);
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchCurrencies();
-//   }, []);
-
-//   const handleConvert = async () => {
-//     try {
-//       if (!amount) return; // Don't proceed if amount is empty
-//       setLoading(true);
-//       const response = await fetch(
-//         `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`
-//       );
-//       const data = await response.json();
-//       const rate = data.rates[toCurrency];
-//       const result = (parseFloat(amount) * rate).toFixed(2);
-//       setConvertedAmount(result);
-//       setLoading(false);
-//     } catch (error) {
-//       console.error('Error converting currency:', error);
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.header}>Currency Converter</Text>
-
-//       {loading ? (
-//         <ActivityIndicator size="large" color="#5e5af6" />
-//       ) : (
-//         <>
-//           <View style={styles.row}>
-//             <View style={styles.column}>
-//               <Text>From: {fromCurrency}</Text>
-//               <Picker
-//                 selectedValue={fromCurrency}
-//                 style={styles.picker}
-//                 onValueChange={(itemValue) => setFromCurrency(itemValue)}
-//               >
-//                 {currencies.map((currency) => (
-//                   <Picker.Item
-//                     label={currency}
-//                     value={currency}
-//                     key={currency}
-//                   />
-//                 ))}
-//               </Picker>
-//             </View>
-
-//             <Text style={styles.icon}>↔</Text>
-
-//             <View style={styles.column}>
-//               <Text>To: {toCurrency}</Text>
-//               <Picker
-//                 selectedValue={toCurrency}
-//                 style={styles.picker}
-//                 onValueChange={(itemValue) => setToCurrency(itemValue)}
-//               >
-//                 {currencies.map((currency) => (
-//                   <Picker.Item
-//                     label={currency}
-//                     value={currency}
-//                     key={currency}
-//                   />
-//                 ))}
-//               </Picker>
-//             </View>
-//           </View>
-
-//           <View style={styles.row}>
-//             <Text>Amount:</Text>
-//             <TextInput
-//               style={styles.input}
-//               keyboardType="numeric"
-//               value={amount}
-//               onChangeText={(text) => setAmount(text)}
-//               placeholder="Enter amount"
-//             />
-//           </View>
-
-//           <View style={styles.row}>
-//             <Text>Converted Amount:</Text>
-//             <TextInput
-//               style={styles.input}
-//               value={convertedAmount || ''}
-//               editable={false}
-//               placeholder="Converted amount will appear here"
-//             />
-//           </View>
-
-//           <View style={styles.buttonRow}>
-//             <TouchableOpacity style={styles.button} onPress={handleConvert}>
-//               <Text style={styles.buttonText}>Convert</Text>
-//             </TouchableOpacity>
-
-//             <TouchableOpacity style={styles.buttonAddFunds}>
-//               <Text style={styles.buttonText}>Add Funds</Text>
-//             </TouchableOpacity>
-//           </View>
-//         </>
-//       )}
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 20,
-//     justifyContent: 'center',
-//     backgroundColor: '#f9f9f9',
-//   },
-//   header: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     textAlign: 'center',
-//     marginBottom: 20,
-//   },
-//   row: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginBottom: 15,
-//   },
-//   column: {
-//     flex: 1,
-//   },
-//   picker: {
-//     height: 40,
-//     backgroundColor: '#fff',
-//     borderColor: '#ccc',
-//     borderWidth: 1,
-//     borderRadius: 5,
-//   },
-//   input: {
-//     flex: 1,
-//     height: 40,
-//     borderColor: '#ccc',
-//     borderWidth: 1,
-//     borderRadius: 5,
-//     backgroundColor: '#fff',
-//     paddingHorizontal: 10,
-//   },
-//   buttonRow: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     marginTop: 20,
-//   },
-//   button: {
-//     flex: 1,
-//     backgroundColor: '#007bff',
-//     padding: 10,
-//     borderRadius: 5,
-//     alignItems: 'center',
-//     marginRight: 10,
-//   },
-//   buttonAddFunds: {
-//     flex: 1,
-//     backgroundColor: '#28a745',
-//     padding: 10,
-//     borderRadius: 5,
-//     alignItems: 'center',
-//   },
-//   buttonText: {
-//     color: '#fff',
-//     fontWeight: 'bold',
-//   },
-//   icon: {
-//     fontSize: 24,
-//     paddingHorizontal: 10,
-//     textAlign: 'center',
-//   },
-// });
-
-// export default CurrencyConverter;
-
-
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -217,8 +7,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
+  FlatList,
+  Modal,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 
 const CurrencyConverter = () => {
   const [currencies, setCurrencies] = useState<string[]>([]);
@@ -229,7 +21,11 @@ const CurrencyConverter = () => {
   const [walletBalance, setWalletBalance] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  // Fetch currency list from API
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCurrencies, setFilteredCurrencies] = useState<string[]>([]);
+  const [showFromModal, setShowFromModal] = useState(false);
+  const [showToModal, setShowToModal] = useState(false);
+
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
@@ -238,7 +34,9 @@ const CurrencyConverter = () => {
           'https://api.exchangerate-api.com/v4/latest/USD'
         );
         const data = await response.json();
-        setCurrencies(Object.keys(data.rates));
+        const currencyList = Object.keys(data.rates);
+        setCurrencies(currencyList);
+        setFilteredCurrencies(currencyList);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching currency data:', error);
@@ -249,29 +47,39 @@ const CurrencyConverter = () => {
     fetchCurrencies();
   }, []);
 
-  const handleConvert = async () => {
-    try {
-      if (!amount) return;
-      setLoading(true);
-      const response = await fetch(
-        `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`
-      );
-      const data = await response.json();
-      const rate = data.rates[toCurrency];
-      const result = (parseFloat(amount) * rate).toFixed(2);
-      setConvertedAmount(result);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error converting currency:', error);
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const autoConvert = async () => {
+      if (!amount) {
+        setConvertedAmount('0');
+        return;
+      }
 
-  const handleAddFunds = () => {
-    const amountToAdd = parseFloat(convertedAmount);
-    if (!isNaN(amountToAdd)) {
-      setWalletBalance(walletBalance + amountToAdd);
-    }
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`
+        );
+        const data = await response.json();
+        const rate = data.rates[toCurrency];
+        const result = (parseFloat(amount) * rate).toFixed(2);
+        setConvertedAmount(result);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error converting currency:', error);
+        setLoading(false);
+      }
+    };
+
+    autoConvert();
+  }, [amount, fromCurrency, toCurrency]);
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+    setFilteredCurrencies(
+      currencies.filter((currency) =>
+        currency.toLowerCase().includes(term.toLowerCase())
+      )
+    );
   };
 
   return (
@@ -282,46 +90,28 @@ const CurrencyConverter = () => {
         <ActivityIndicator size="large" color="#5e5af6" />
       ) : (
         <>
+          {/* From Currency Selector */}
           <View style={styles.row}>
-            <View style={styles.column}>
-              <Text>From:</Text>
-              <Picker
-                selectedValue={fromCurrency}
-                style={styles.picker}
-                onValueChange={(itemValue) => setFromCurrency(itemValue)}
-              >
-                {currencies.map((currency) => (
-                  <Picker.Item
-                    label={currency}
-                    value={currency}
-                    key={currency}
-                  />
-                ))}
-              </Picker>
-            </View>
+            <TouchableOpacity
+              style={styles.pickerContainer}
+              onPress={() => setShowFromModal(true)}
+            >
+              <Text>From: {fromCurrency}</Text>
+            </TouchableOpacity>
+          </View>
 
-            <Text style={styles.icon}>↔</Text>
-
-            <View style={styles.column}>
-              <Text>To:</Text>
-              <Picker
-                selectedValue={toCurrency}
-                style={styles.picker}
-                onValueChange={(itemValue) => setToCurrency(itemValue)}
-              >
-                {currencies.map((currency) => (
-                  <Picker.Item
-                    label={currency}
-                    value={currency}
-                    key={currency}
-                  />
-                ))}
-              </Picker>
-            </View>
+          {/* To Currency Selector */}
+          <View style={styles.row}>
+            <TouchableOpacity
+              style={styles.pickerContainer}
+              onPress={() => setShowToModal(true)}
+            >
+              <Text>To: {toCurrency}</Text>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.row}>
-            <Text>Amount:</Text>
+            <Text>Amount: </Text>
             <TextInput
               style={styles.input}
               keyboardType="numeric"
@@ -331,7 +121,7 @@ const CurrencyConverter = () => {
           </View>
 
           <View style={styles.row}>
-            <Text>Converted Amount:</Text>
+            <Text>Converted Amount: </Text>
             <TextInput
               style={styles.input}
               value={convertedAmount}
@@ -340,20 +130,80 @@ const CurrencyConverter = () => {
           </View>
 
           <View style={styles.rowButtons}>
-            <TouchableOpacity style={styles.button} onPress={handleConvert}>
+            <TouchableOpacity style={[styles.button, styles.shadow]}>
               <Text style={styles.buttonText}>Convert</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buttonAddFunds} onPress={handleAddFunds}>
+            <TouchableOpacity style={[styles.buttonAddFunds, styles.shadow]}>
               <Text style={styles.buttonText}>Add Funds</Text>
             </TouchableOpacity>
           </View>
-
-          <View style={styles.walletRow}>
-            <Text style={styles.walletText}>Wallet Balance: ₹{walletBalance.toFixed(2)}</Text>
-          </View>
         </>
       )}
+
+      {/* Modal for From Currency */}
+      <Modal visible={showFromModal} animationType="slide" transparent>
+        <TouchableWithoutFeedback onPress={() => setShowFromModal(false)}>
+          <View style={styles.modalOverlay} />
+        </TouchableWithoutFeedback>
+        <View style={styles.modalContent}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search currency"
+            value={searchTerm}
+            onChangeText={handleSearch}
+          />
+          <FlatList
+            data={filteredCurrencies}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.currencyItem}
+                onPress={() => {
+                  setFromCurrency(item);
+                  setShowFromModal(false);
+                  setSearchTerm('');
+                  setFilteredCurrencies(currencies);
+                }}
+              >
+                <Text>{item}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </Modal>
+
+      {/* Modal for To Currency */}
+      <Modal visible={showToModal} animationType="slide" transparent>
+        <TouchableWithoutFeedback onPress={() => setShowToModal(false)}>
+          <View style={styles.modalOverlay} />
+        </TouchableWithoutFeedback>
+        <View style={styles.modalContent}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search currency"
+            value={searchTerm}
+            onChangeText={handleSearch}
+          />
+          <FlatList
+            data={filteredCurrencies}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.currencyItem}
+                onPress={() => {
+                  setToCurrency(item);
+                  setShowToModal(false);
+                  setSearchTerm('');
+                  setFilteredCurrencies(currencies);
+                }}
+              >
+                <Text>{item}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -375,16 +225,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 15,
-  },
-  column: {
-    flex: 1,
-  },
-  picker: {
-    height: 40,
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
   },
   input: {
     flex: 1,
@@ -419,18 +259,49 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  icon: {
-    fontSize: 24,
+  pickerContainer: {
+    flex: 1,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    backgroundColor: '#fff',
+    marginBottom: 10,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  modalContent: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    maxHeight: '50%',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  searchInput: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
     paddingHorizontal: 10,
-    textAlign: 'center',
+    marginBottom: 10,
   },
-  walletRow: {
-    marginTop: 20,
-    alignItems: 'center',
+  currencyItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
-  walletText: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 3,
   },
 });
 
