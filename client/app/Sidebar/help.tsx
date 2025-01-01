@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 
 const HelpSupport = () => {
   const [visibleAnswer, setVisibleAnswer] = useState<number | null>(null);
@@ -44,6 +44,21 @@ const HelpSupport = () => {
       answer:
         'The daily limit depends on your account tier. Please check the "Limits & Fees" section in the app for details.',
     },
+    {
+      question: 'What should I do if I lose my device?',
+      answer:
+        'Immediately log in to your account from another device and change your password. Contact support to secure your account.',
+    },
+    {
+      question: 'How do I update my account details?',
+      answer:
+        'Go to the "Profile" section in the app to update your personal details like email, phone number, and address.',
+    },
+    {
+      question: 'How can I check my transaction history?',
+      answer:
+        'Navigate to the "Transaction History" section in the app to view all past transactions.',
+    },
   ];
 
   return (
@@ -70,35 +85,74 @@ const HelpSupport = () => {
 
       {/* About Us Section */}
       <View style={styles.section}>
-  <Text style={styles.sectionTitle}>About Us</Text>
-  <View style={styles.card}>
-    <Text style={styles.aboutCardTitle}>CUEX</Text>
-    <Text style={styles.aboutCardText}>
-      CUEX is a next-generation currency exchange platform designed to make
-      transactions seamless, secure, and fast. Our mission is to empower
-      users with cutting-edge tools for managing their finances across
-      multiple currencies. With real-time updates and robust security
-      measures, we aim to revolutionize the currency exchange experience.
-    </Text>
-  </View>
-</View>
+        <Text style={styles.sectionTitle}>About Us</Text>
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Company Overview</Text>
+          <Text style={styles.cardText}>
+            "At CUEX, we are redefining how people exchange and manage their money globally. 
+            Founded with the vision to create a seamless and secure currency exchange experience, 
+            we empower our users to transact across borders effortlessly."
+          </Text>
+        </View>
 
+        {/* Developer Section */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Meet Our Developers</Text>
+
+          {/* Developer Cards */}
+          <View style={styles.card}>
+            <View style={styles.developerCard}>
+              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
+              <Text style={styles.cardTitle}>John Doe</Text>
+              <Text style={styles.cardText}>
+                Role: Lead Developer{'\n'}
+                Expertise in React Native and backend services. John has led the architecture of CUEX to ensure a seamless experience.
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.card}>
+            <View style={styles.developerCard}>
+              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
+              <Text style={styles.cardTitle}>Jane Smith</Text>
+              <Text style={styles.cardText}>
+                Role: UI/UX Designer{'\n'}
+                Responsible for the sleek and user-friendly interface of CUEX, Jane ensures that the design is intuitive and engaging.
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.card}>
+            <View style={styles.developerCard}>
+              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
+              <Text style={styles.cardTitle}>Alice Johnson</Text>
+              <Text style={styles.cardText}>
+                Role: Security Specialist{'\n'}
+                Alice is focused on making CUEX a secure platform with top-notch encryption and fraud prevention mechanisms.
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.card}>
+            <View style={styles.developerCard}>
+              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
+              <Text style={styles.cardTitle}>Michael Brown</Text>
+              <Text style={styles.cardText}>
+                Role: QA Engineer{'\n'}
+                Michael ensures that the app is free from bugs and runs smoothly by rigorously testing all features.
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
 
       {/* Contact Us Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Contact Us</Text>
-        <Text style={styles.contactText}>
-          📧 Email: support@cuexapp.com
-        </Text>
-        <Text style={styles.contactText}>
-          📞 Phone: +1 234 567 890
-        </Text>
-        <Text style={styles.contactText}>
-          🌐 Website: www.cuexapp.com
-        </Text>
-        <Text style={styles.contactText}>
-          📍 Address: 123 FinTech Avenue, Currency City, USA
-        </Text>
+        <Text style={styles.contactText}>📧 Email: support@cuexapp.com</Text>
+        <Text style={styles.contactText}>📞 Phone: +1 234 567 890</Text>
+        <Text style={styles.contactText}>🌐 Website: www.cuexapp.com</Text>
+        <Text style={styles.contactText}>📍 Address: 123 FinTech Avenue, Currency City, USA</Text>
       </View>
     </ScrollView>
   );
@@ -148,17 +202,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
     paddingLeft: 10,
   },
-  aboutText: {
-    fontSize: 14,
-    color: '#555',
-    lineHeight: 20,
-  },
-  contactText: {
-    fontSize: 14,
-    color: '#555',
-    lineHeight: 20,
-    marginBottom: 4,
-  },
   card: {
     backgroundColor: '#ffffff',
     borderRadius: 10,
@@ -167,25 +210,40 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 4,
-    marginTop: 8,
+    marginBottom: 16,
     borderWidth: 1,
     borderColor: '#ddd',
-    
+    alignItems: 'center', // Center the content within the card
   },
-  aboutCardTitle: {
+  cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 10,
     textAlign: 'center',
   },
-  aboutCardText: {
+  cardText: {
     fontSize: 14,
     color: '#555',
     lineHeight: 20,
     textAlign: 'center',
   },
-  
+  contactText: {
+    fontSize: 14,
+    color: '#555',
+    lineHeight: 20,
+    marginBottom: 4,
+  },
+  developerCard: {
+    alignItems: 'center', // Center content in the developer card
+    justifyContent: 'center',
+  },
+  profilePic: {
+    width: 80,
+    height: 80,
+    borderRadius: 40, // Make the image circular
+    marginBottom: 16,
+  },
 });
 
 export default HelpSupport;
