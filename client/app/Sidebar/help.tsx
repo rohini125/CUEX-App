@@ -103,7 +103,7 @@ const HelpSupport = () => {
           <View style={styles.card}>
             <View style={styles.developerCard}>
               <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>John Doe</Text>
+              <Text style={styles.cardTitle}>Parkale Sakshi</Text>
               <Text style={styles.cardText}>
                 Role: Lead Developer{'\n'}
                 Expertise in React Native and backend services. John has led the architecture of CUEX to ensure a seamless experience.
@@ -114,7 +114,7 @@ const HelpSupport = () => {
           <View style={styles.card}>
             <View style={styles.developerCard}>
               <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>Jane Smith</Text>
+              <Text style={styles.cardTitle}>Salunke Yash</Text>
               <Text style={styles.cardText}>
                 Role: UI/UX Designer{'\n'}
                 Responsible for the sleek and user-friendly interface of CUEX, Jane ensures that the design is intuitive and engaging.
@@ -125,7 +125,7 @@ const HelpSupport = () => {
           <View style={styles.card}>
             <View style={styles.developerCard}>
               <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>Alice Johnson</Text>
+              <Text style={styles.cardTitle}>Navale Komal</Text>
               <Text style={styles.cardText}>
                 Role: Security Specialist{'\n'}
                 Alice is focused on making CUEX a secure platform with top-notch encryption and fraud prevention mechanisms.
@@ -136,7 +136,7 @@ const HelpSupport = () => {
           <View style={styles.card}>
             <View style={styles.developerCard}>
               <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>Michael Brown</Text>
+              <Text style={styles.cardTitle}>Kandekar Rohini</Text>
               <Text style={styles.cardText}>
                 Role: QA Engineer{'\n'}
                 Michael ensures that the app is free from bugs and runs smoothly by rigorously testing all features.
