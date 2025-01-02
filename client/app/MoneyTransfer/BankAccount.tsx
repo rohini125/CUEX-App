@@ -1,58 +1,54 @@
+
+
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
-const BankPaymentPage = () => {
-  const router = useRouter();
-  const [bankAccount, setBankAccount] = useState('');
+const BankAccount = () => {
+  const [accountNumber, setAccountNumber] = useState('');
   const [ifscCode, setIfscCode] = useState('');
   const [amount, setAmount] = useState('');
+  const router = useRouter();
 
   const handleConfirm = () => {
-    const numericAmount = parseFloat(amount);
-
-    if (!amount || isNaN(numericAmount) || numericAmount <= 0) {
-      Alert.alert('Error', 'Enter a valid amount');
-      return;
-    }
-
-    if (!bankAccount || !ifscCode) {
-      Alert.alert('Error', 'Please provide valid Bank Account and IFSC Code');
-      return;
-    }
-
-    // Use params instead of query for navigation
+    // Navigate to BankSuccess screen with details
     router.push({
       pathname: '/MoneyTransfer/banksuccess',
-      params: {
-        amount: numericAmount.toString(),
-        paymentDetails: `Bank Account: ${bankAccount}, IFSC: ${ifscCode}`,
-        dateTime: new Date().toLocaleString(),
-      },
+      params: { accountNumber, ifscCode, amount },
     });
   };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Bank Account Details</Text>
+
+      {/* Input for Bank Account Number */}
       <TextInput
+        style={styles.input}
         placeholder="Enter Bank Account"
-        style={styles.input}
-        value={bankAccount}
-        onChangeText={setBankAccount}
+        value={accountNumber}
+        onChangeText={setAccountNumber}
+        keyboardType="number-pad"
       />
+
+      {/* Input for IFSC Code */}
       <TextInput
-        placeholder="Enter IFSC Code"
         style={styles.input}
+        placeholder="Enter IFSC Code"
         value={ifscCode}
         onChangeText={setIfscCode}
       />
+
+      {/* Input for Amount */}
       <TextInput
-        placeholder="Enter Amount"
-        keyboardType="numeric"
         style={styles.input}
+        placeholder="Enter Amount"
         value={amount}
         onChangeText={setAmount}
+        keyboardType="number-pad"
       />
+
+      {/* Confirm Button */}
       <TouchableOpacity style={styles.button} onPress={handleConfirm}>
         <Text style={styles.buttonText}>Confirm</Text>
       </TouchableOpacity>
@@ -60,33 +56,44 @@ const BankPaymentPage = () => {
   );
 };
 
-export default BankPaymentPage;
+export default BankAccount;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#f9f9f9',
+    padding: 20,
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
+    width: '100%',
     height: 50,
-    paddingHorizontal: 15,
-    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginBottom: 15,
+    backgroundColor: '#fff',
     fontSize: 16,
   },
   button: {
+    width: '100%',
+    height: 50,
     backgroundColor: '#007BFF',
-    borderRadius: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 15,
+    borderRadius: 8,
   },
   buttonText: {
-    color: 'white',
+    color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },
 });
-
