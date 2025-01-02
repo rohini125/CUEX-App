@@ -16,9 +16,11 @@ const Profile = () => {
   const router = useRouter();
 
   // State for user details
-  const [name, setName] = useState('John Doe');
-  const [mobile, setMobile] = useState('7620171779');
   const [profileImage, setProfileImage] = useState('https://via.placeholder.com/100'); // Default profile picture
+  const [username, setUsername] = useState('komal 123');
+  const [email, setEmail] = useState('komal123e@example.com');
+  const [mobile, setMobile] = useState('1234567890');
+  const [idNumber, setIdNumber] = useState('A12345678');
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -36,8 +38,8 @@ const Profile = () => {
 
   const handleSave = async () => {
     // Validate inputs
-    if (!name.trim() || !mobile.trim()) {
-      Alert.alert('Error', 'Name and Mobile Number cannot be empty!');
+    if (!username.trim() || !email.trim() || !mobile.trim() || !idNumber.trim()) {
+      Alert.alert('Error', 'All fields must be filled out!');
       return;
     }
 
@@ -74,32 +76,42 @@ const Profile = () => {
       {/* Profile Picture */}
       <View style={styles.header}>
         <TouchableOpacity onPress={pickImage}>
-          <Image
-            source={{ uri: profileImage }}
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: profileImage }} style={styles.profileImage} />
           <Text style={styles.changePictureText}>Change Picture</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Personal Details Section */}
+      {/* Basic Information Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Personal Details</Text>
+        <Text style={styles.sectionTitle}>Basic Information</Text>
 
         {isEditing ? (
           <>
             <TextInput
               style={styles.input}
-              value={name}
-              onChangeText={setName}
-              placeholder="Enter your name"
+              value={username}
+              onChangeText={setUsername}
+              placeholder="Enter username"
+            />
+            <TextInput
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Enter email ID"
+              keyboardType="email-address"
             />
             <TextInput
               style={styles.input}
               value={mobile}
               onChangeText={setMobile}
-              placeholder="Enter your mobile number"
+              placeholder="Enter phone number"
               keyboardType="phone-pad"
+            />
+            <TextInput
+              style={styles.input}
+              value={idNumber}
+              onChangeText={setIdNumber}
+              placeholder="Enter ID number"
             />
             <TouchableOpacity style={styles.saveButton} onPress={handleSave} disabled={loading}>
               {loading ? (
@@ -111,8 +123,10 @@ const Profile = () => {
           </>
         ) : (
           <>
-            <Text style={styles.detailText}>Name: {name}</Text>
+            <Text style={styles.detailText}>Username: {username}</Text>
+            <Text style={styles.detailText}>Email: {email}</Text>
             <Text style={styles.detailText}>Mobile: +91 {mobile}</Text>
+            <Text style={styles.detailText}>ID Number: {idNumber}</Text>
             <TouchableOpacity style={styles.editButton} onPress={() => setIsEditing(true)}>
               <Text style={styles.editButtonText}>Edit</Text>
             </TouchableOpacity>
@@ -120,17 +134,14 @@ const Profile = () => {
         )}
       </View>
 
-     
       {/* Other Sections */}
-      
-
       <TouchableOpacity
-  style={styles.section}
-  onPress={() => router.push('/additional-details')} // Ensure the path matches your routing setup
->
-  <Text style={styles.sectionTitle}>Additional Details</Text>
-  <Text style={styles.detailText}>Age, gender, and more</Text>
-</TouchableOpacity>
+        style={styles.section}
+        onPress={() => router.push('/Sidebar/additionaldetails')}
+      >
+        <Text style={styles.sectionTitle}>Additional Details</Text>
+        <Text style={styles.detailText}>Age, gender, and more</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.section}
