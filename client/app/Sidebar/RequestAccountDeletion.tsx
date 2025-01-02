@@ -8,7 +8,7 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import CheckBox from '@react-native-community/checkbox'; // Ensure this is installed correctly
 
 export default function RequestAccountDeletion() {
   const [reason, setReason] = useState('');
@@ -95,3 +95,4 @@ const styles = StyleSheet.create({
   buttonDisabled: { backgroundColor: '#ccc' },
   buttonText: { color: '#fff', fontSize: 16 },
 });
+
