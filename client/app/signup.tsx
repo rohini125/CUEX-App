@@ -82,7 +82,7 @@ const SignUp = () => {
         </View>
 
         <TouchableOpacity style={styles.signUpButton}>
-          <Link href="/login">
+          <Link href="/UpiPin">
             <Text style={styles.signUpButtonText}>Sign Up</Text>
           </Link>
         </TouchableOpacity>
