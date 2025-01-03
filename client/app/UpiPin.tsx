@@ -99,7 +99,7 @@ const SetUPIPinPage = () => {
       // Save the PIN securely
       await SecureStore.setItemAsync('upiPin', pin);
       alert("UPI PIN has been set!");
-      router.push("/login");  // Navigate to login or other relevant page
+      router.push("/front");  // Navigate to login or other relevant page
     } else {
       alert("PIN does not match or it is not a 4-digit PIN!");
     }
