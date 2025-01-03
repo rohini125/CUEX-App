@@ -121,6 +121,7 @@ const UpiIdPaymentPage = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}> Enter Payment Details</Text>
       <TextInput
         placeholder="Enter UPI ID"
         style={styles.input}
@@ -146,6 +147,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#f9f9f9',
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 30,
   },
   input: {
     borderWidth: 1,
