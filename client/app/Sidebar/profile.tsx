@@ -11,21 +11,24 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+
+
 
 const Profile = () => {
-  const router = useRouter();
+ 
 
   // State for user details
-  const [profileImage, setProfileImage] = useState('https://via.placeholder.com/100'); // Default profile picture
-  const [username, setUsername] = useState('komal 123');
-  const [email, setEmail] = useState('komal123e@example.com');
-  const [mobile, setMobile] = useState('1234567890');
-  const [idNumber, setIdNumber] = useState('A12345678');
-  const [isEditing, setIsEditing] = useState(false);
-  const [loading, setLoading] = useState(false);
-
+  const [profileImage, setProfileImage] = useState<string>('https://via.placeholder.com/100'); // Default profile picture
+  const [username, setUsername] = useState<string>('komal 123');
+  const [email, setEmail] = useState<string>('komal123e@example.com');
+  const [mobile, setMobile] = useState<string>('1234567890');
+  const [idNumber, setIdNumber] = useState<string>('A12345678');
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+const router = useRouter(); // Use router for navigation
   // Mock API call to save user data
-  const saveProfile = async () => {
+  const saveProfile = async (): Promise<void> => {
     setLoading(true);
 
     // Simulate a network request delay
@@ -36,14 +39,22 @@ const Profile = () => {
     }, 1500);
   };
 
-  const handleSave = async () => {
+  // Mock API call to save profile image
+  const saveProfileImage = async (): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      setTimeout(() => {
+        const success = true; // Simulate API success
+        success ? resolve() : reject(new Error('Failed to save profile image'));
+      }, 1500);
+    });
+  };
+
+  const handleSave = async (): Promise<void> => {
     // Validate inputs
     if (!username.trim() || !email.trim() || !mobile.trim() || !idNumber.trim()) {
       Alert.alert('Error', 'All fields must be filled out!');
       return;
     }
-
-    // Simulate API call to save profile
     try {
       await saveProfile();
     } catch (error) {
@@ -52,7 +63,7 @@ const Profile = () => {
   };
 
   // Function to pick image from the device
-  const pickImage = async () => {
+  const pickImage = async (): Promise<void> => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permissionResult.granted) {
       Alert.alert('Permission Denied', 'You need to allow access to your photo library.');
@@ -67,14 +78,36 @@ const Profile = () => {
     });
 
     if (!result.canceled) {
-      setProfileImage(result.assets[0].uri); // Update profile picture
+      const newProfileImage = result.assets[0].uri; // Extract the selected image URI
+      setProfileImage(newProfileImage); // Update the profile image in the UI
+      setLoading(true); // Show loading spinner while saving
+
+      try {
+        await saveProfileImage(); // Simulate API call to save the profile image
+        Alert.alert('Success', 'Profile picture updated and saved successfully!');
+      } catch (error) {
+        Alert.alert('Error', 'Failed to save the profile picture. Please try again.');
+      } finally {
+        setLoading(false); // Hide loading spinner
+      }
     }
   };
 
   return (
     <View style={styles.container}>
+      {/* Loading Overlay */}
+      {loading && (
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator size="large" color="#6200ee" />
+        </View>
+      )}
+
       {/* Profile Picture */}
+      <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
+                  <Ionicons name="arrow-back" size={24} color="#333" />
+                </TouchableOpacity>
       <View style={styles.header}>
+        
         <TouchableOpacity onPress={pickImage}>
           <Image source={{ uri: profileImage }} style={styles.profileImage} />
           <Text style={styles.changePictureText}>Change Picture</Text>
@@ -173,6 +206,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#6200ee',
   },
+  backButton: {
+    marginRight: 10,
+  },
   changePictureText: {
     marginTop: 8,
     color: '#6200ee',
@@ -244,6 +280,17 @@ const styles = StyleSheet.create({
   addAddressText: {
     color: '#6200ee',
     fontWeight: 'bold',
+  },
+  loadingOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 10,
   },
 });
 
