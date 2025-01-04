@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, FlatList, TextInput } from 'react-native';
+import { useRouter } from 'expo-router'; // Import router for navigation
+
+import { Ionicons } from '@expo/vector-icons';
 
 // Define the AlertData interface
 interface AlertData {
@@ -87,6 +90,7 @@ export default function PriceAlerts() {
     currency.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     currency.code.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  const router = useRouter(); // Use router for navigation
 
   // Handle currency selection
   const handleCurrencySelect = (currency: { code: string; name: string; symbol: string }) => {
@@ -97,6 +101,9 @@ export default function PriceAlerts() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
       <Text style={styles.header}>Create Price Alerts</Text>
 
       {/* Currency Search Bar */}
@@ -205,6 +212,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#f9f9f9',
+  },
+  backButton: {
+    marginRight: 10,
   },
   header: {
     fontSize: 20,

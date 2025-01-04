@@ -1,98 +1,118 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-  ScrollView,
-} from 'react-native';
-import CheckBox from '@react-native-community/checkbox'; // Ensure this is installed correctly
+import React from "react";
+import { View, Text, TouchableOpacity, Alert, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
 
-export default function RequestAccountDeletion() {
-  const [reason, setReason] = useState('');
-  const [confirm, setConfirm] = useState(false);
+export default function AccountDelete() {
+  const router = useRouter();
 
-  const handleRequestDeletion = () => {
-    if (!confirm) {
-      Alert.alert('Confirmation Required', 'Please check the confirmation box to proceed.');
-      return;
-    }
-
-    if (!reason.trim()) {
-      Alert.alert('Reason Required', 'Please provide a reason for deleting your account.');
-      return;
-    }
-
+  // Function to handle delete account action
+  const handleDeleteAccount = () => {
     Alert.alert(
-      'Request Submitted',
-      'Your account deletion request has been submitted successfully. We will process it shortly.'
+      "Delete Account",
+      "Are you sure you want to delete your account? This action is irreversible.",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+          onPress: () => console.log("Cancel pressed"), // Debug log
+        },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: () => {
+            console.log("Account deleted"); // Debug log
+            router.push("/"); // Navigate to home
+          },
+        },
+      ]
     );
-
-    setReason('');
-    setConfirm(false);
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.infoSection}>
-        <Text style={styles.header}>Request Account Deletion</Text>
-        <Text style={styles.infoText}>
-          Deleting your account will remove all data, including:
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <Text style={styles.header}>Delete Account</Text>
+        <Text style={styles.warning}>
+          Deleting your account will remove all your data permanently.
         </Text>
-        <Text style={styles.bulletText}>• Profile information</Text>
-        <Text style={styles.bulletText}>• Wallet balance and transaction history</Text>
-        <Text style={styles.warningText}>
-          This action is irreversible. Please proceed with caution.
-        </Text>
+        <TouchableOpacity
+          style={styles.deleteButton}
+          onPress={handleDeleteAccount}
+        >
+          <Text style={styles.deleteButtonText}>Delete My Account</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => router.push("/Sidebar/AccountSetting")}
+          style={styles.cancelButton}
+        >
+          <Text style={styles.cancelButtonText}>Cancel and Go Back</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.formSection}>
-        <Text style={styles.label}>Reason for Deletion:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your reason"
-          value={reason}
-          onChangeText={setReason}
-          multiline
-        />
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            value={confirm}
-            onValueChange={setConfirm}
-            tintColors={{ true: '#4CAF50', false: '#ccc' }}
-          />
-          <Text style={styles.checkboxLabel}>
-            I confirm I understand the consequences of account deletion.
-          </Text>
-        </View>
-      </View>
-      <TouchableOpacity
-        style={[styles.button, confirm ? styles.buttonActive : styles.buttonDisabled]}
-        onPress={handleRequestDeletion}
-        disabled={!confirm}
-      >
-        <Text style={styles.buttonText}>Submit Request</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flexGrow: 1, padding: 20, backgroundColor: '#f8f8f8' },
-  infoSection: { backgroundColor: '#fff', padding: 15, borderRadius: 10, marginBottom: 20 },
-  header: { fontSize: 20, fontWeight: 'bold', marginBottom: 10 },
-  infoText: { fontSize: 16, marginBottom: 10 },
-  bulletText: { fontSize: 14, marginLeft: 10, marginBottom: 5 },
-  warningText: { fontSize: 14, color: '#D32F2F', fontWeight: 'bold', marginTop: 10 },
-  formSection: { backgroundColor: '#fff', padding: 15, borderRadius: 10 },
-  label: { fontSize: 16, marginBottom: 5 },
-  input: { height: 80, borderWidth: 1, borderColor: '#ccc', borderRadius: 10, marginBottom: 15 },
-  checkboxContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 15 },
-  checkboxLabel: { fontSize: 14, marginLeft: 10 },
-  button: { paddingVertical: 15, borderRadius: 10, alignItems: 'center' },
-  buttonActive: { backgroundColor: '#4CAF50' },
-  buttonDisabled: { backgroundColor: '#ccc' },
-  buttonText: { color: '#fff', fontSize: 16 },
+  container: {
+    flex: 1,
+    backgroundColor: "#F3F4F6",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+  card: {
+    width: "90%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    padding: 24,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 5,
+    alignItems: "center",
+  },
+  header: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#DC2626",
+    marginBottom: 16,
+  },
+  warning: {
+    fontSize: 14,
+    color: "#6B7280",
+    textAlign: "center",
+    marginBottom: 24,
+    lineHeight: 20,
+  },
+  deleteButton: {
+    backgroundColor: "#DC2626",
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    shadowColor: "#DC2626",
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 4,
+    marginBottom: 16,
+    width: "100%",
+    alignItems: "center",
+  },
+  deleteButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  cancelButton: {
+    marginTop: 8,
+    alignItems: "center",
+    width: "100%",
+  },
+  cancelButtonText: {
+    color: "#2563EB",
+    fontSize: 14,
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+  },
 });
-
