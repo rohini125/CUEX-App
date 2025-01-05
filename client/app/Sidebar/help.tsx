@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router'; // Import router for navigation
+
 
 const HelpSupport = () => {
   const [visibleAnswer, setVisibleAnswer] = useState<number | null>(null);
+  const router = useRouter(); // Use router for navigation
 
   const toggleAnswer = (index: number) => {
     setVisibleAnswer(visibleAnswer === index ? null : index);
@@ -64,8 +68,12 @@ const HelpSupport = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* Title */}
+      <View>
+      <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
       <Text style={styles.title}>Help & Support</Text>
-
+      </View>
       {/* FAQs Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}># TOP QUESTIONS</Text>
@@ -163,6 +171,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 16,
     backgroundColor: '#f9f9f9',
+  },
+  backButton: {
+    marginRight: 10,
   },
   title: {
     fontSize: 24,

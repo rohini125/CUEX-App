@@ -8,11 +8,15 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router'; // Import router for navigation
+
 
 const KYCVerification = () => {
   const [kycStatus, setKycStatus] = useState('Not Verified'); // Initial KYC Status
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [idNumber, setIdNumber] = useState(''); // For user to input their ID Number
+ const router = useRouter(); // Use router for navigation
 
   const handleKYCSubmit = async () => {
     if (!idNumber.trim()) {
@@ -32,6 +36,9 @@ const KYCVerification = () => {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
       <Text style={styles.header}>KYC Verification</Text>
 
       <View style={styles.card}>
@@ -77,6 +84,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#000',
     textAlign: 'center',
+  },
+  backButton: {
+    marginRight: 10,
   },
   card: {
     backgroundColor: '#fff',

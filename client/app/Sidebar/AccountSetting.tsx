@@ -1,14 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 const AccountingSettings = () => {
   const router = useRouter();
 
   return (
     <View style={styles.container}>
+      <View>
+          <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
       <Text style={styles.header}>ACCOUNTING SETTINGS</Text>
-
+      </View>
       {/* KYC Verification */}
       <TouchableOpacity
         style={styles.option}
@@ -59,6 +64,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 16,
     color: '#000',
+  },
+  backButton: {
+    marginRight: 10,
   },
   option: {
     flexDirection: 'row',
