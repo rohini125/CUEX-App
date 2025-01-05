@@ -62,7 +62,7 @@ const Login = () => {
   const router = useRouter();
 
   const onLogin = () => {
-    router.navigate('/front');
+    router.navigate('/Emailverification');
   };
 
   return (
@@ -72,7 +72,7 @@ const Login = () => {
         <TextInput placeholder="Enter Your Email / Mobile no" style={styles.input} />
         <TextInput placeholder="Enter Your Password" style={styles.input} secureTextEntry />
           <Mybutton title={"Login"} onPress={onLogin} />
-        <Text style={{ textAlign: 'center' }}>
+          <Text style={{ textAlign: 'center' }}>
           Don't have an account?{' '}
           <Link href="/signup">
             <Text style={styles.link}>

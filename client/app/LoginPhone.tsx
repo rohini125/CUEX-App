@@ -44,6 +44,10 @@ const LoginPhone = () => {
   const onConfirm = () =>{
         router.navigate('/UpiPin');
   }
+ 
+  const onSign = () =>{
+    router.navigate('/signup');
+  }
 
   return (
     <View style={styles.container}>
@@ -77,6 +81,15 @@ const LoginPhone = () => {
       >
         <Text style={styles.emailButtonText}>LOG IN WITH EMAIL</Text>
       </TouchableOpacity>
+      
+      <Text style={{ textAlign: 'center', marginTop:15}}>
+        Don't have an account?{' '}
+        {/* <Link href="/signup"> */}
+          <Text style={styles.link} onPress={onSign}>
+            Signup
+          </Text>
+        {/* </Link> */}
+      </Text>
 
       {/* OTP Modal */}
       <Modal
@@ -193,6 +206,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
   modalContainer: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -216,8 +233,8 @@ const styles = StyleSheet.create({
   },
   confirmButton: {
     backgroundColor: '#007bff',
-    paddingVertical: 15,
-    borderRadius: 5,
+    paddingVertical: 12,
+    borderRadius: 50,
     alignItems: 'center',
     width: '100%',
     marginTop: 10,

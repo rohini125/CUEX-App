@@ -265,6 +265,10 @@ const LoginEmail = () => {
     router.navigate('/LoginPhone');
   };
 
+  const onSign = () =>{
+    router.navigate('/signup');
+  }
+
   const onForgotPassword = () => {
     setModalVisible(true); // Show the modal when "Forgot Password?" is clicked
   };
@@ -317,6 +321,13 @@ const LoginEmail = () => {
       <TouchableOpacity style={styles.phoneLoginButton} onPress={onPhone}>
         <Text style={styles.phoneLoginButtonText}>LOG IN WITH PHONE</Text>
       </TouchableOpacity>
+      
+      <Text style={{ textAlign: 'center', marginTop:15}}>
+        Don't have an account?{' '}
+          <Text style={styles.link} onPress={onSign}>
+            Signup
+          </Text>
+      </Text>
 
       {/* Modal for Forgot Password */}
       <Modal
@@ -361,7 +372,7 @@ const LoginEmail = () => {
                   </View>
                   <Text style={styles.successMessage}>Email sent successfully!</Text>
                   <Text style={styles.emailConfirmation}>
-                    A link to reset your password has been sent to {email}.
+                    A link to reset your password has been sent to {email}
                   </Text>
                 </View>
 
@@ -448,6 +459,10 @@ const styles = StyleSheet.create({
     color: '#007bff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
   },
   // Modal styles
   modalBackground: {

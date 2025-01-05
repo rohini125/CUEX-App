@@ -10,38 +10,42 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const onPhone = () => {
+    router.navigate('/login');
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={{ padding: 20, gap: 20 }}>
         <Image source={require("@/assets/images/signup.jpg")} style={styles.image} resizeMode="cover" />
-        <TextInput placeholder="Enter Your First Name" style={styles.input} />
-        <TextInput placeholder="Enter Your Last Name" style={styles.input} />
+        <TextInput placeholder="Enter Your Name" style={styles.input} />
+        {/* <TextInput placeholder="Enter Your Last Name" style={styles.input} /> */}
 
         {/* Email Verification */}
         <View style={styles.row}>
           <TextInput
-            placeholder="Enter Your Email"
+            placeholder="Enter Your Email / Mobile No"
             style={[styles.input, styles.flexInput]}
           />
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Link href="/verification">
               <Text style={styles.verifyText}>Verify</Text>
             </Link>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* Mobile Number Verification */}
-        <View style={styles.row}>
+        {/* <View style={styles.row}>
           <TextInput
             placeholder="Enter Your Mobile No."
-            style={[styles.input, styles.flexInput]}
+            style={[styles.input,styles.flexInput]}
           />
           <TouchableOpacity>
             <Link href="/verification">
               <Text style={styles.verifyText}>Verify</Text>
             </Link>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* Password Field with Eye Icon Inside Input */}
         <View style={styles.inputWrapper}>
@@ -82,18 +86,16 @@ const SignUp = () => {
         </View>
 
         <TouchableOpacity style={styles.signUpButton}>
-          <Link href="/UpiPin">
+          <Link href="/login">
             <Text style={styles.signUpButtonText}>Sign Up</Text>
           </Link>
         </TouchableOpacity>
 
         <Text style={{ textAlign: 'center' }}>
           Already a member?{' '}
-          <Link href="/login">
-            <Text style={styles.link}>
+            <Text style={styles.link} onPress={onPhone}>
               Login
             </Text>
-          </Link>
         </Text>
       </View>
     </ScrollView>
