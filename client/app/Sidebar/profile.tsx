@@ -13,56 +13,52 @@ import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-
-
 const Profile = () => {
- 
-
-  // State for user details
-  const [profileImage, setProfileImage] = useState<string>('https://via.placeholder.com/100'); // Default profile picture
+  const [profileImage, setProfileImage] = useState<string>('https://via.placeholder.com/100');
   const [username, setUsername] = useState<string>('komal 123');
   const [email, setEmail] = useState<string>('komal123e@example.com');
   const [mobile, setMobile] = useState<string>('1234567890');
   const [idNumber, setIdNumber] = useState<string>('A12345678');
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-const router = useRouter(); // Use router for navigation
-  // Mock API call to save user data
-  const saveProfile = async (): Promise<void> => {
+  const [newAddress, setNewAddress] = useState<string>('');
+  const [savedAddresses, setSavedAddresses] = useState<string[]>([]);
+  const [showAddressInput, setShowAddressInput] = useState<boolean>(false);
+  const router = useRouter();
+
+  const handleFinalSave = async (): Promise<void> => {
+    if (loading) return;
+  
     setLoading(true);
-
-    // Simulate a network request delay
-    setTimeout(() => {
+    try {
+      // Perform API call or save logic here
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      Alert.alert('Success', 'Profile updated successfully!');
+      router.push('/front'); // Redirect to the front page
+    } catch (error) {
+      Alert.alert('Error', 'Failed to update profile. Please try again.');
+    } finally {
       setLoading(false);
-      setIsEditing(false);
-      Alert.alert('Success', 'Your profile has been updated!');
-    }, 1500);
+    }
   };
+  
 
-  // Mock API call to save profile image
-  const saveProfileImage = async (): Promise<void> => {
-    return new Promise<void>((resolve, reject) => {
-      setTimeout(() => {
-        const success = true; // Simulate API success
-        success ? resolve() : reject(new Error('Failed to save profile image'));
-      }, 1500);
-    });
-  };
-
-  const handleSave = async (): Promise<void> => {
-    // Validate inputs
-    if (!username.trim() || !email.trim() || !mobile.trim() || !idNumber.trim()) {
-      Alert.alert('Error', 'All fields must be filled out!');
+  const saveAddress = (): void => {
+    if (!newAddress.trim()) {
+      Alert.alert('Error', 'Address cannot be empty!');
       return;
     }
-    try {
-      await saveProfile();
-    } catch (error) {
-      Alert.alert('Error', 'Failed to save profile. Please try again.');
-    }
+    setSavedAddresses((prev) => [...prev, newAddress.trim()]);
+    setNewAddress('');
+    setShowAddressInput(false);
+    Alert.alert('Success', 'Address saved successfully!');
   };
+  const deleteAddress = (index: number): void => {
+    setSavedAddresses((prev) => prev.filter((_, idx) => idx !== index));
+    Alert.alert('Success', 'Address deleted successfully!');
+  };
+  
 
-  // Function to pick image from the device
   const pickImage = async (): Promise<void> => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permissionResult.granted) {
@@ -78,46 +74,33 @@ const router = useRouter(); // Use router for navigation
     });
 
     if (!result.canceled) {
-      const newProfileImage = result.assets[0].uri; // Extract the selected image URI
-      setProfileImage(newProfileImage); // Update the profile image in the UI
-      setLoading(true); // Show loading spinner while saving
-
-      try {
-        await saveProfileImage(); // Simulate API call to save the profile image
-        Alert.alert('Success', 'Profile picture updated and saved successfully!');
-      } catch (error) {
-        Alert.alert('Error', 'Failed to save the profile picture. Please try again.');
-      } finally {
-        setLoading(false); // Hide loading spinner
-      }
+      const newProfileImage = result.assets[0].uri;
+      setProfileImage(newProfileImage);
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* Loading Overlay */}
       {loading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color="#6200ee" />
         </View>
       )}
 
-      {/* Profile Picture */}
-      <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
-                  <Ionicons name="arrow-back" size={24} color="#333" />
-                </TouchableOpacity>
       <View style={styles.header}>
-        
+  <View style={styles.profileContainer}>
         <TouchableOpacity onPress={pickImage}>
           <Image source={{ uri: profileImage }} style={styles.profileImage} />
           <Text style={styles.changePictureText}>Change Picture</Text>
         </TouchableOpacity>
+        </View> 
+        <TouchableOpacity onPress={handleFinalSave} style={styles.finalSaveButton}>
+          <Text style={styles.finalSaveButtonText}>Save</Text>
+        </TouchableOpacity>
       </View>
 
-      {/* Basic Information Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Basic Information</Text>
-
         {isEditing ? (
           <>
             <TextInput
@@ -146,12 +129,8 @@ const router = useRouter(); // Use router for navigation
               onChangeText={setIdNumber}
               placeholder="Enter ID number"
             />
-            <TouchableOpacity style={styles.saveButton} onPress={handleSave} disabled={loading}>
-              {loading ? (
-                <ActivityIndicator size="small" color="#fff" />
-              ) : (
-                <Text style={styles.saveButtonText}>Save</Text>
-              )}
+            <TouchableOpacity style={styles.saveButton} onPress={() => setIsEditing(false)}>
+              <Text style={styles.saveButtonText}>Done</Text>
             </TouchableOpacity>
           </>
         ) : (
@@ -167,24 +146,49 @@ const router = useRouter(); // Use router for navigation
         )}
       </View>
 
-      {/* Other Sections */}
-      <TouchableOpacity
-        style={styles.section}
-        onPress={() => router.push('/Sidebar/additionaldetails')}
+      <View style={styles.section}>
+  <Text style={styles.sectionTitle}>Saved Addresses</Text>
+  {savedAddresses.map((address, index) => (
+    <View key={index} style={styles.addressItem}>
+      <Text style={styles.detailText}>
+        {index + 1}. {address}
+      </Text>
+      <TouchableOpacity 
+        style={styles.deleteButton} 
+        onPress={() => deleteAddress(index)}
       >
-        <Text style={styles.sectionTitle}>Additional Details</Text>
-        <Text style={styles.detailText}>Age, gender, and more</Text>
+        <Text style={styles.deleteButtonText}>Delete</Text>
       </TouchableOpacity>
+    </View>
+  ))}
+  {showAddressInput ? (
+    <View style={styles.addressInputContainer}>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter new address"
+        value={newAddress}
+        onChangeText={setNewAddress}
+      />
+      <TouchableOpacity style={styles.saveButton} onPress={saveAddress}>
+        <Text style={styles.saveButtonText}>Save Address</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.cancelButton}
+        onPress={() => setShowAddressInput(false)}
+      >
+        <Text style={styles.cancelButtonText}>Cancel</Text>
+      </TouchableOpacity>
+    </View>
+  ) : (
+    <TouchableOpacity
+      style={styles.addAddressBox}
+      onPress={() => setShowAddressInput(true)}
+    >
+      <Text style={styles.addAddressText}>+ Add New</Text>
+    </TouchableOpacity>
+  )}
+</View>
 
-      <TouchableOpacity
-        style={styles.section}
-        onPress={() => router.push('/add-address')}
-      >
-        <Text style={styles.sectionTitle}>Saved Addresses</Text>
-        <View style={styles.addAddressBox}>
-          <Text style={styles.addAddressText}>+ Add New</Text>
-        </View>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -196,8 +200,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
   },
   header: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent:'center',
     marginBottom: 20,
+  },
+  backButton: {
+    marginRight: 10,
+  },
+
+  profileContainer: {
+    alignItems: 'center', // Centers the content horizontally
+    justifyContent: 'center', // Centers the content vertically if needed
+    marginBottom: 16, // Adds spacing below the profile section
   },
   profileImage: {
     width: 100,
@@ -205,25 +220,34 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 2,
     borderColor: '#6200ee',
-  },
-  backButton: {
-    marginRight: 10,
+    marginBottom: 8, // Adds spacing between the image and the text
   },
   changePictureText: {
-    marginTop: 8,
     color: '#6200ee',
     fontWeight: 'bold',
     fontSize: 14,
+    textAlign: 'center', // Ensures the text is aligned with the image
+  },
+  
+  finalSaveButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    backgroundColor: '#28a745',
+    position: 'absolute',
+    right: 10, // Align save button to the right
+    top: '50%',
+    
+  },
+  finalSaveButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
   section: {
     backgroundColor: '#fff',
     padding: 16,
     borderRadius: 8,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
     elevation: 3,
   },
   sectionTitle: {
@@ -257,14 +281,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   saveButton: {
-    alignSelf: 'flex-start',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 8,
     backgroundColor: '#28a745',
-    marginTop: 10,
+    padding: 10,
+    borderRadius: 8,
   },
   saveButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  cancelButton: {
+    backgroundColor: '#dc3545',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 10,
+  },
+  cancelButtonText: {
     color: '#fff',
     fontWeight: 'bold',
   },
@@ -281,6 +312,30 @@ const styles = StyleSheet.create({
     color: '#6200ee',
     fontWeight: 'bold',
   },
+  addressInputContainer: {
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 8,
+  },
+  addressItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  deleteButton: {
+    backgroundColor: '#dc3545', // Red color for delete
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+  deleteButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+  
   loadingOverlay: {
     position: 'absolute',
     top: 0,
