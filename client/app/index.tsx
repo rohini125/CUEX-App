@@ -15,7 +15,7 @@ const index = () => {
       <Text style={styles.text}>WelCome To CUEX App </Text>
       {/* <Mybutton title={"Continue"} onPress={onContinue}/> */}
       <Text>
-        <Link href="/LoginPhone" asChild>
+        <Link href="/login" asChild>
           <Mybutton title={"Login"} onPress={onContinue}/>
         </Link>
       </Text>

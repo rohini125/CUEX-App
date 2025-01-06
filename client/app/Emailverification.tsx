@@ -219,10 +219,8 @@ export default function VerificationPage() {
         ))}
       </View>
       <TouchableOpacity
-          activeOpacity={0.7} 
           style={styles.verifyButton}
           onPress={handleVerify}
-
       >
         <Text style={styles.verifyButtonText}>Verify OTP</Text>
         </TouchableOpacity>
@@ -232,11 +230,7 @@ export default function VerificationPage() {
             : "Didn't receive OTP?"}
         </Text>
         {timer === 0 && (
-        <TouchableOpacity 
-          activeOpacity={0.7} 
-          style={styles.resendButton} 
-          onPress={handleResendOtp}
-        >
+        <TouchableOpacity style={styles.resendButton} onPress={handleResendOtp}>
           <Text style={styles.resendButtonText}>Resend OTP</Text>
         </TouchableOpacity>
       )}
@@ -279,7 +273,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   verifyButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#007bff',
     paddingVertical: 12,
     marginBottom: 12,
     borderRadius:50,
@@ -300,11 +294,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'blue',
+    borderColor: '#007bff',
     borderRadius: 8,
   },
   resendButtonText: {
-    color: 'blue',
+    color: '#007bff',
     fontWeight: 'bold',
     textAlign: 'center',
   },
