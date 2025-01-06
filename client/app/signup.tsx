@@ -14,6 +14,10 @@ const SignUp = () => {
     router.navigate('/login');
   };
 
+  const onSignUp = () => {
+    router.navigate('/UpiPin');
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={{ padding: 20, gap: 20 }}>
@@ -85,10 +89,8 @@ const SignUp = () => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signUpButton}>
-          <Link href="/login">
+        <TouchableOpacity activeOpacity={0.7} style={styles.signUpButton} onPress={onSignUp}>
             <Text style={styles.signUpButtonText}>Sign Up</Text>
-          </Link>
         </TouchableOpacity>
 
         <Text style={{ textAlign: 'center' }}>
