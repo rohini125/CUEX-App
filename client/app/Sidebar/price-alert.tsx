@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert, FlatList, TextInput } from 'react-native';
 import { useRouter } from 'expo-router'; // Import router for navigation
-
 import { Ionicons } from '@expo/vector-icons';
 
 // Define the AlertData interface
 interface AlertData {
-  type: 'price' | 'percentage';
-  value: string | number;
-  description: string;
+  type: 'price' | 'percentage'; // Type of alert (price or percentage)
+  value: number | string;       // Value of the alert
+  description: string;          // Description of the alert
 }
 
 export default function PriceAlerts() {
+  const router = useRouter(); // For navigation
+
   // List of currencies with their symbols
   const currencies = [
     { code: 'USD', name: 'US Dollar', symbol: '$' },
@@ -19,9 +20,38 @@ export default function PriceAlerts() {
     { code: 'GBP', name: 'British Pound', symbol: '£' },
     { code: 'INR', name: 'Indian Rupee', symbol: '₹' },
     { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' },
-    // Add more currencies as needed
-  ];
-
+    { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$' },
+    { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
+    { code: 'CNY', name: 'Chinese Yuan', symbol: '¥' },
+    { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF' },
+    { code: 'NZD', name: 'New Zealand Dollar', symbol: 'NZ$' },
+    { code: 'SEK', name: 'Swedish Krona', symbol: 'kr' },
+    { code: 'NOK', name: 'Norwegian Krone', symbol: 'kr' },
+    { code: 'RUB', name: 'Russian Ruble', symbol: '₽' },
+    { code: 'BRL', name: 'Brazilian Real', symbol: 'R$' },
+    { code: 'ZAR', name: 'South African Rand', symbol: 'R' },
+    { code: 'SGD', name: 'Singapore Dollar', symbol: 'S$' },
+    { code: 'HKD', name: 'Hong Kong Dollar', symbol: 'HK$' },
+    { code: 'KRW', name: 'South Korean Won', symbol: '₩' },
+    { code: 'MXN', name: 'Mexican Peso', symbol: 'MX$' },
+    { code: 'TRY', name: 'Turkish Lira', symbol: '₺' },
+    { code: 'SAR', name: 'Saudi Riyal', symbol: '﷼' },
+    { code: 'AED', name: 'United Arab Emirates Dirham', symbol: 'د.إ' },
+    { code: 'THB', name: 'Thai Baht', symbol: '฿' },
+    { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'RM' },
+    { code: 'PKR', name: 'Pakistani Rupee', symbol: '₨' },
+    { code: 'EGP', name: 'Egyptian Pound', symbol: 'E£' },
+    { code: 'VND', name: 'Vietnamese Dong', symbol: '₫' },
+    { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'Rp' },
+    { code: 'ARS', name: 'Argentine Peso', symbol: 'AR$' },
+    { code: 'TWD', name: 'New Taiwan Dollar', symbol: 'NT$' },
+    { code: 'PLN', name: 'Polish Zloty', symbol: 'zł' },
+    { code: 'DKK', name: 'Danish Krone', symbol: 'kr' },
+    { code: 'CZK', name: 'Czech Koruna', symbol: 'Kč' },
+    { code: 'HUF', name: 'Hungarian Forint', symbol: 'Ft' },
+    { code: 'RON', name: 'Romanian Leu', symbol: 'lei' },
+    // Add more currencies as per requirements
+];
   // State variables
   const [currentPrice, setCurrentPrice] = useState(1.0); // Example current price
   const [alertPrice, setAlertPrice] = useState(1.2); // Default alert price
@@ -30,16 +60,18 @@ export default function PriceAlerts() {
   const [alerts, setAlerts] = useState<AlertData[]>([]); // Array to store created alerts
   const [searchQuery, setSearchQuery] = useState(''); // For searching currencies
   const [selectedCurrency, setSelectedCurrency] = useState<{ code: string; name: string; symbol: string }>({
-    code: 'USD', name: 'US Dollar', symbol: '$'
-  }); // Default selected currency
+    code: 'USD',
+    name: 'US Dollar',
+    symbol: '$',
+  });
 
-  // Handle "By Price" Selection
+  // Handle "By Price" selection
   const handleByPrice = () => {
     setSelectedMode('price');
     setAlertPrice(currentPrice + 0.2);
   };
 
-  // Handle "By % Change" Selection
+  // Handle "By % Change" selection
   const handleByPercentageChange = () => {
     setSelectedMode('percentage');
     setPercentageChange(5);
@@ -57,53 +89,60 @@ export default function PriceAlerts() {
 
   // Handle Create Alert
   const handleCreateAlert = () => {
-    let alertData: AlertData = {
-      type: 'price', // Placeholder value
-      value: 0,
-      description: '',
-    };
-
+    let alertData: AlertData;
+  
     if (selectedMode === 'price') {
       alertData = {
         type: 'price',
         value: alertPrice.toFixed(2),
         description: `Alert when price reaches ${selectedCurrency.symbol}${alertPrice.toFixed(2)}`,
       };
-    } else if (selectedMode === 'percentage') {
+  
+      // Check if current price equals alert price
+      if (alertPrice.toFixed(2) === currentPrice.toFixed(2)) {
+        Alert.alert('Alert Triggered', `Price is already ${selectedCurrency.symbol}${alertPrice.toFixed(2)}!`);
+
+        return; // Do not add the alert if it's already triggered
+      }
+    } else {
       const targetPrice = currentPrice * (1 + percentageChange / 100);
       alertData = {
         type: 'percentage',
         value: percentageChange,
         description: `Alert when price changes by ${percentageChange}% to ${selectedCurrency.symbol}${targetPrice.toFixed(2)}`,
       };
+  
+      // Check if current price equals target price for percentage
+      if (targetPrice.toFixed(2) === currentPrice.toFixed(2)) {
+        Alert.alert('Alert Triggered', `Price has already changed by ${percentageChange}% to ${selectedCurrency.symbol}${currentPrice.toFixed(2)}!`);
+        return; // Do not add the alert if it's already triggered
+      }
     }
-
-    // Add the alert to the list
+  
     setAlerts((prev) => [...prev, alertData]);
-
+  
     // Show confirmation
     Alert.alert('Alert Created', alertData.description);
   };
-
+  
   // Search currencies based on query
   const filteredCurrencies = currencies.filter((currency) =>
     currency.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     currency.code.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  const router = useRouter(); // Use router for navigation
 
   // Handle currency selection
   const handleCurrencySelect = (currency: { code: string; name: string; symbol: string }) => {
     setSelectedCurrency(currency);
-    setSearchQuery(''); // Clear the search bar after selecting a currency
-    setCurrentPrice(1.0); // Reset price for now or set a real price here
+    setSearchQuery('');
+    setCurrentPrice(1.0); // Reset price or set a real price here
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#333" />
-        </TouchableOpacity>
+        <Ionicons name="arrow-back" size={24} color="#333" />
+      </TouchableOpacity>
       <Text style={styles.header}>Create Price Alerts</Text>
 
       {/* Currency Search Bar */}
@@ -131,7 +170,10 @@ export default function PriceAlerts() {
       {/* Current Currency and Value */}
       <View style={styles.currencyRow}>
         <Text style={styles.currencyText}>{selectedCurrency.code}</Text>
-        <Text style={styles.currencyValue}>{selectedCurrency.symbol}{currentPrice.toFixed(2)}</Text>
+        <Text style={styles.currencyValue}>
+          {selectedCurrency.symbol}
+          {currentPrice.toFixed(2)}
+        </Text>
       </View>
 
       {/* Mode Selection */}
@@ -158,7 +200,10 @@ export default function PriceAlerts() {
             <TouchableOpacity style={styles.adjustButton} onPress={() => adjustAlertPrice(-0.1)}>
               <Text style={styles.adjustButtonText}>-</Text>
             </TouchableOpacity>
-            <Text style={styles.alertPrice}>{selectedCurrency.symbol}{alertPrice.toFixed(2)}</Text>
+            <Text style={styles.alertPrice}>
+              {selectedCurrency.symbol}
+              {alertPrice.toFixed(2)}
+            </Text>
             <TouchableOpacity style={styles.adjustButton} onPress={() => adjustAlertPrice(0.1)}>
               <Text style={styles.adjustButtonText}>+</Text>
             </TouchableOpacity>
@@ -168,17 +213,11 @@ export default function PriceAlerts() {
         <View>
           <Text style={styles.alertLabel}>ALERT % CHANGE:</Text>
           <View style={styles.priceAdjuster}>
-            <TouchableOpacity
-              style={styles.adjustButton}
-              onPress={() => adjustPercentageChange(-1)}
-            >
+            <TouchableOpacity style={styles.adjustButton} onPress={() => adjustPercentageChange(-1)}>
               <Text style={styles.adjustButtonText}>-</Text>
             </TouchableOpacity>
             <Text style={styles.alertPrice}>{percentageChange}%</Text>
-            <TouchableOpacity
-              style={styles.adjustButton}
-              onPress={() => adjustPercentageChange(1)}
-            >
+            <TouchableOpacity style={styles.adjustButton} onPress={() => adjustPercentageChange(1)}>
               <Text style={styles.adjustButtonText}>+</Text>
             </TouchableOpacity>
           </View>
