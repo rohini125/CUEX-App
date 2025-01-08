@@ -21,7 +21,6 @@ export default function PriceAlerts() {
     { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' },
     // Add more currencies as needed
   ];
-
   // State variables
   const [currentPrice, setCurrentPrice] = useState(1.0); // Example current price
   const [alertPrice, setAlertPrice] = useState(1.2); // Default alert price
