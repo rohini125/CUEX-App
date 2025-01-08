@@ -76,7 +76,7 @@ const HelpSupport = () => {
       </View>
       {/* FAQs Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}># TOP QUESTIONS</Text>
+        <Text style={styles.sectionTitle}>TOP QUESTIONS</Text>
         {faqs.map((faq, index) => (
           <View key={index} style={styles.faqItem}>
             {/* Question */}
