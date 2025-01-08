@@ -12,6 +12,8 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import RNPickerSelect from 'react-native-picker-select';
+
 
 const Profile = () => {
   const [profileImage, setProfileImage] = useState<string>('https://via.placeholder.com/100');
@@ -25,6 +27,16 @@ const Profile = () => {
   const [savedAddresses, setSavedAddresses] = useState<string[]>([]);
   const [showAddressInput, setShowAddressInput] = useState<boolean>(false);
   const router = useRouter();
+  const [countryCode, setCountryCode] = useState('+91'); // Default to India
+  
+  const countryCodes = [
+    { label: '+1 (USA)', value: '+1' },
+    { label: '+91 (India)', value: '+91' },
+    { label: '+44 (UK)', value: '+44' },
+    { label: '+61 (Australia)', value: '+61' },
+    { label: '+81 (Japan)', value: '+81' },
+    // Add more as needed
+  ]; 
 
   const handleFinalSave = async (): Promise<void> => {
     if (loading) return;
@@ -100,51 +112,76 @@ const Profile = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Basic Information</Text>
-        {isEditing ? (
-          <>
-            <TextInput
-              style={styles.input}
-              value={username}
-              onChangeText={setUsername}
-              placeholder="Enter username"
-            />
-            <TextInput
-              style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Enter email ID"
-              keyboardType="email-address"
-            />
-            <TextInput
-              style={styles.input}
-              value={mobile}
-              onChangeText={setMobile}
-              placeholder="Enter phone number"
-              keyboardType="phone-pad"
-            />
-            <TextInput
-              style={styles.input}
-              value={idNumber}
-              onChangeText={setIdNumber}
-              placeholder="Enter ID number"
-            />
-            <TouchableOpacity style={styles.saveButton} onPress={() => setIsEditing(false)}>
-              <Text style={styles.saveButtonText}>Done</Text>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <>
-            <Text style={styles.detailText}>Username: {username}</Text>
-            <Text style={styles.detailText}>Email: {email}</Text>
-            <Text style={styles.detailText}>Mobile: +91 {mobile}</Text>
-            <Text style={styles.detailText}>ID Number: {idNumber}</Text>
-            <TouchableOpacity style={styles.editButton} onPress={() => setIsEditing(true)}>
-              <Text style={styles.editButtonText}>Edit</Text>
-            </TouchableOpacity>
-          </>
-        )}
+  <Text style={styles.sectionTitle}>Basic Information</Text>
+  {isEditing ? (
+    <>
+      <TextInput
+        style={styles.input}
+        value={username}
+        onChangeText={setUsername}
+        placeholder="Enter username"
+      />
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Enter email ID"
+        keyboardType="email-address"
+      />
+      <View style={styles.inputContainer}>
+        <RNPickerSelect
+          onValueChange={(value) => setCountryCode(value)}
+          items={countryCodes}
+          placeholder={{ label: 'Select Country Code', value: null }}
+          value={countryCode}
+          style={{
+            inputIOS: styles.pickerInput,
+            inputAndroid: styles.pickerInput,
+            inputWeb:styles.pickerInput,
+          }}
+        />
+        <TextInput
+          style={[styles.input, styles.flexInput]}
+          value={mobile}
+          onChangeText={(text) => {
+            if (text.length <= 10) {
+              setMobile(text.replace(/[^0-9]/g, '')); // Allows only numbers
+            }}}
+          placeholder="Enter phone number"
+          keyboardType="phone-pad"
+        />
       </View>
+      <TextInput
+        style={styles.input}
+        value={idNumber}
+        onChangeText={setIdNumber}
+        placeholder="Enter ID number"
+      />
+      <TouchableOpacity
+        style={styles.saveButton}
+        onPress={() => setIsEditing(false)}
+      >
+        <Text style={styles.saveButtonText}>Done</Text>
+      </TouchableOpacity>
+    </>
+  ) : (
+    <>
+      <Text style={styles.detailText}>Username: {username}</Text>
+      <Text style={styles.detailText}>Email: {email}</Text>
+      <Text style={styles.detailText}>
+        Mobile: {countryCode} {mobile}
+      </Text>
+      <Text style={styles.detailText}>ID Number: {idNumber}</Text>
+      <TouchableOpacity
+        style={styles.editButton}
+        onPress={() => setIsEditing(true)}
+      >
+        <Text style={styles.editButtonText}>Edit</Text>
+      </TouchableOpacity>
+    </>
+  )}
+</View>
+
 
       <View style={styles.section}>
   <Text style={styles.sectionTitle}>Saved Addresses</Text>
@@ -269,6 +306,31 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 14,
   },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    
+  },
+  pickerInput: {
+    width: 100, // Fixed width for picker
+    borderColor: '#ddd',
+    height:50,
+    padding: 10, // Increased padding for better touch area
+    borderRadius: 5,
+    flex: 0.5, // Adjusted flex to make the picker take more space
+    marginRight: 10,
+    backgroundColor: '#fff', // Optional: Add background for better visibility
+   
+  },
+  flexInput: {
+    flex: 0.5,
+
+    borderColor: '#ddd',
+    padding: 10,
+    borderRadius: 5,
+  },
+  
   editButton: {
     alignSelf: 'flex-start',
     paddingVertical: 6,

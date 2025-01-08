@@ -9,18 +9,47 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router'; // Import router for navigation
-
+import { useRouter } from 'expo-router';
+import RNPickerSelect from 'react-native-picker-select'; // Import the picker library
 
 const KYCVerification = () => {
-  const [kycStatus, setKycStatus] = useState('Not Verified'); // Initial KYC Status
+  const [kycStatus, setKycStatus] = useState('Not Verified');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [idNumber, setIdNumber] = useState(''); // For user to input their ID Number
- const router = useRouter(); // Use router for navigation
+  const [documentType, setDocumentType] = useState('');
+  const [documentNumber, setDocumentNumber] = useState('');
+  const router = useRouter();
+
+  const validateDocumentNumber = () => {
+    switch (documentType) {
+      case 'Passport':
+        return /^[a-zA-Z0-9]{8,10}$/.test(documentNumber); // Alphanumeric, 8–10 characters
+      case 'Aadhar':
+        return /^[0-9]{12}$/.test(documentNumber); // Numeric, 12 digits
+      case 'DriversLicense':
+        return /^[a-zA-Z0-9]{6,16}$/.test(documentNumber); // Alphanumeric, 6–16 characters
+      case 'PANCard':
+        return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(documentNumber); // Alphanumeric, 10 characters (specific PAN format)
+      default:
+        return false;
+    }
+  };
 
   const handleKYCSubmit = async () => {
-    if (!idNumber.trim()) {
-      Alert.alert('Error', 'Please enter your ID number!');
+    if (!documentType) {
+      Alert.alert('Error', 'Please select a document type!');
+      return;
+    }
+
+    if (!documentNumber.trim()) {
+      Alert.alert('Error', `Please enter your ${documentType} number!`);
+      return;
+    }
+
+    if (!validateDocumentNumber()) {
+      Alert.alert(
+        'Error',
+        `Invalid ${documentType} number! Please ensure it matches the correct format.`
+      );
       return;
     }
 
@@ -30,15 +59,30 @@ const KYCVerification = () => {
     setTimeout(() => {
       setIsSubmitting(false);
       setKycStatus('Verified');
-      Alert.alert('Success', 'Your KYC has been verified successfully!');
+      Alert.alert('Success', `Your ${documentType} has been verified successfully!`);
     }, 2000);
+  };
+
+  const getPlaceholder = () => {
+    switch (documentType) {
+      case 'Passport':
+        return 'Enter Passport Number (8-10 characters)';
+      case 'Aadhar':
+        return 'Enter Aadhar Number (12 digits)';
+      case 'DriversLicense':
+        return 'Enter Driver’s License Number (6-16 characters)';
+      case 'PANCard':
+        return 'Enter PAN Card Number (e.g., ABCDE1234F)';
+      default:
+        return 'Enter Document Number';
+    }
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#333" />
-        </TouchableOpacity>
+        <Ionicons name="arrow-back" size={24} color="#333" />
+      </TouchableOpacity>
       <Text style={styles.header}>KYC Verification</Text>
 
       <View style={styles.card}>
@@ -49,17 +93,47 @@ const KYCVerification = () => {
       </View>
 
       <View style={styles.card}>
-        <Text style={styles.label}>Enter your ID Number for KYC Verification:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter ID Number"
-          value={idNumber}
-          onChangeText={setIdNumber}
+        <Text style={styles.label}>Select Document Type:</Text>
+        <RNPickerSelect
+          onValueChange={(value) => {
+            setDocumentType(value);
+            setDocumentNumber(''); // Clear the document number when type changes
+          }}
+          items={[
+            { label: 'Passport', value: 'Passport' },
+            { label: 'Aadhar', value: 'Aadhar' },
+            { label: 'Driver’s License', value: 'DriversLicense' },
+            { label: 'PAN Card', value: 'PANCard' },
+          ]}
+          placeholder={{ label: 'Select a document type', value: null }}
+          value={documentType}
+          style={{
+            inputIOS: styles.pickerInput,
+            inputAndroid: styles.pickerInput,
+            inputWeb:styles.pickerInput,
+          }}
         />
+
+        {documentType && (
+          <>
+            <Text style={styles.label}>Enter {documentType} Number:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder={getPlaceholder()}
+              value={documentNumber}
+              onChangeText={setDocumentNumber}
+              keyboardType={documentType === 'Aadhar' ? 'numeric' : 'default'}
+              maxLength={
+                documentType === 'Aadhar' ? 12 : documentType === 'Passport' ? 10 : undefined
+              }
+            />
+          </>
+        )}
+
         <TouchableOpacity
           style={styles.submitButton}
           onPress={handleKYCSubmit}
-          disabled={isSubmitting}
+          disabled={isSubmitting || !documentType}
         >
           {isSubmitting ? (
             <ActivityIndicator size="small" color="#fff" />
@@ -116,6 +190,15 @@ const styles = StyleSheet.create({
   },
   notVerified: {
     color: '#dc3545', // Red color for not verified
+  },
+  pickerInput: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 16,
+    fontSize: 14,
+    color: '#333',
   },
   input: {
     borderWidth: 1,
