@@ -20,38 +20,9 @@ export default function PriceAlerts() {
     { code: 'GBP', name: 'British Pound', symbol: '£' },
     { code: 'INR', name: 'Indian Rupee', symbol: '₹' },
     { code: 'AUD', name: 'Australian Dollar', symbol: 'A$' },
-    { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$' },
-    { code: 'JPY', name: 'Japanese Yen', symbol: '¥' },
-    { code: 'CNY', name: 'Chinese Yuan', symbol: '¥' },
-    { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF' },
-    { code: 'NZD', name: 'New Zealand Dollar', symbol: 'NZ$' },
-    { code: 'SEK', name: 'Swedish Krona', symbol: 'kr' },
-    { code: 'NOK', name: 'Norwegian Krone', symbol: 'kr' },
-    { code: 'RUB', name: 'Russian Ruble', symbol: '₽' },
-    { code: 'BRL', name: 'Brazilian Real', symbol: 'R$' },
-    { code: 'ZAR', name: 'South African Rand', symbol: 'R' },
-    { code: 'SGD', name: 'Singapore Dollar', symbol: 'S$' },
-    { code: 'HKD', name: 'Hong Kong Dollar', symbol: 'HK$' },
-    { code: 'KRW', name: 'South Korean Won', symbol: '₩' },
-    { code: 'MXN', name: 'Mexican Peso', symbol: 'MX$' },
-    { code: 'TRY', name: 'Turkish Lira', symbol: '₺' },
-    { code: 'SAR', name: 'Saudi Riyal', symbol: '﷼' },
-    { code: 'AED', name: 'United Arab Emirates Dirham', symbol: 'د.إ' },
-    { code: 'THB', name: 'Thai Baht', symbol: '฿' },
-    { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'RM' },
-    { code: 'PKR', name: 'Pakistani Rupee', symbol: '₨' },
-    { code: 'EGP', name: 'Egyptian Pound', symbol: 'E£' },
-    { code: 'VND', name: 'Vietnamese Dong', symbol: '₫' },
-    { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'Rp' },
-    { code: 'ARS', name: 'Argentine Peso', symbol: 'AR$' },
-    { code: 'TWD', name: 'New Taiwan Dollar', symbol: 'NT$' },
-    { code: 'PLN', name: 'Polish Zloty', symbol: 'zł' },
-    { code: 'DKK', name: 'Danish Krone', symbol: 'kr' },
-    { code: 'CZK', name: 'Czech Koruna', symbol: 'Kč' },
-    { code: 'HUF', name: 'Hungarian Forint', symbol: 'Ft' },
-    { code: 'RON', name: 'Romanian Leu', symbol: 'lei' },
-    // Add more currencies as per requirements
-];
+    // Add more currencies as needed
+  ];
+
   // State variables
   const [currentPrice, setCurrentPrice] = useState(1.0); // Example current price
   const [alertPrice, setAlertPrice] = useState(1.2); // Default alert price
