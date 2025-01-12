@@ -23,33 +23,10 @@ const SignUp = () => {
       <View style={{ padding: 20, gap: 20 }}>
         <Image source={require("@/assets/images/signup.jpg")} style={styles.image} resizeMode="cover" />
         <TextInput placeholder="Enter Your Name" style={styles.input} />
-        {/* <TextInput placeholder="Enter Your Last Name" style={styles.input} /> */}
-
-        {/* Email Verification */}
-        <View style={styles.row}>
-          <TextInput
+        <TextInput
             placeholder="Enter Your Email / Mobile No"
-            style={[styles.input, styles.flexInput]}
+            style={styles.input}
           />
-          {/* <TouchableOpacity>
-            <Link href="/verification">
-              <Text style={styles.verifyText}>Verify</Text>
-            </Link>
-          </TouchableOpacity> */}
-        </View>
-
-        {/* Mobile Number Verification */}
-        {/* <View style={styles.row}>
-          <TextInput
-            placeholder="Enter Your Mobile No."
-            style={[styles.input,styles.flexInput]}
-          />
-          <TouchableOpacity>
-            <Link href="/verification">
-              <Text style={styles.verifyText}>Verify</Text>
-            </Link>
-          </TouchableOpacity>
-        </View> */}
 
         {/* Password Field with Eye Icon Inside Input */}
         <View style={styles.inputWrapper}>
@@ -138,10 +115,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  flexInput: {
-    flex: 1,
-    marginRight: 10,
   },
   verifyText: {
     color: 'blue',

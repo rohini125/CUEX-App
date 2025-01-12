@@ -22,73 +22,77 @@ const Home = () => {
       <View>
       <Header onProfilePress={handleProfilePress} />
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
-        <CurrencyConverter />
+
+      <CurrencyConverter />
+
       </View>
-      <Text style={styles.title}>Transfer Money</Text>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity
-          style={styles.iconBox}
-          activeOpacity={0.7}
-        > 
-          <Link href="/MoneyTransfer/ToMobileNo">
-            <View style={styles.iconTextWrapper}>
-              <View style={styles.iconBackground}>
-                <FontAwesome5 name="mobile-alt" size={18} color="white" />
+      <View style={styles.Cardcontainer}>
+        <Text style={styles.title}>Transfer Money</Text>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity
+            style={styles.iconBox}
+            activeOpacity={0.7}
+          > 
+            <Link href="/MoneyTransfer/ToMobileNo">
+              <View style={styles.iconTextWrapper}>
+                <View style={styles.iconBackground}>
+                  <FontAwesome5 name="mobile-alt" size={18} color="white" />
+                </View>
+                <Text style={styles.iconText} numberOfLines={2}>
+                  To Mobile Number
+                </Text>
               </View>
-              <Text style={styles.iconText} numberOfLines={2}>
-                To Mobile Number
-              </Text>
-            </View>
-          </Link>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconBox}
-          activeOpacity={0.7}
-        >
-          <Link href="/MoneyTransfer/ToBank">
-            <View style={styles.iconTextWrapper}>
-              <View style={styles.iconBackground}>
-                <MaterialIcons name="account-balance" size={18} color="white" />
+            </Link>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconBox}
+            activeOpacity={0.7}
+          >
+            <Link href="/MoneyTransfer/ToBank">
+              <View style={styles.iconTextWrapper}>
+                <View style={styles.iconBackground}>
+                  <MaterialIcons name="account-balance" size={18} color="white" />
+                </View>
+                <Text style={styles.iconText} numberOfLines={2}>
+                  To Bank/UPI ID
+                </Text>
               </View>
-              <Text style={styles.iconText} numberOfLines={2}>
-                To Bank/UPI ID
-              </Text>
-            </View>
-          </Link>
-        </TouchableOpacity>
+            </Link>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.iconBox}
-          activeOpacity={0.7}
-        >
-          <Link href="/MoneyTransfer/ToSelf">
-            <View style={styles.iconTextWrapper}>
-              <View style={styles.iconBackground}>
-                <FontAwesome5 name="wallet" size={18} color="white" />
+          <TouchableOpacity
+            style={styles.iconBox}
+            activeOpacity={0.7}
+          >
+            <Link href="/MoneyTransfer/ToSelf">
+              <View style={styles.iconTextWrapper}>
+                <View style={styles.iconBackground}>
+                  <FontAwesome5 name="wallet" size={18} color="white" />
+                </View>
+                <Text style={styles.iconText} numberOfLines={2}>
+                  To Self Account
+                </Text>
               </View>
-              <Text style={styles.iconText} numberOfLines={2}>
-                To Self Account
-              </Text>
-            </View>
-          </Link>
-        </TouchableOpacity>
+            </Link>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.iconBox}
-          activeOpacity={0.7}
-        >
-          <Link href="/MoneyTransfer/CheckBalance">
-            <View style={styles.iconTextWrapper}>
-              <View style={styles.iconBackground}>
-                <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
+          <TouchableOpacity
+            style={styles.iconBox}
+            activeOpacity={0.7}
+          >
+            <Link href="/MoneyTransfer/CheckBalance">
+              <View style={styles.iconTextWrapper}>
+                <View style={styles.iconBackground}>
+                  <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
+                </View>
+                <Text style={styles.iconText} numberOfLines={2}>
+                  Check Balance
+                </Text>
               </View>
-              <Text style={styles.iconText} numberOfLines={2}>
-                Check Balance
-              </Text>
-            </View>
-          </Link>
-        </TouchableOpacity>
+            </Link>
+          </TouchableOpacity>
 
+        </View>
       </View>
     </ScrollView>
   );
@@ -100,11 +104,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F9FA',
     padding: 16,
   },
+  Cardcontainer: {
+  
+    // justifyContent: 'center',
+    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#ffffff',
+    borderRadius: 5,
+    // shadowOpacity: 0.3,
+    // shadowRadius: 8,
+    elevation: 1,
+    // borderWidth: 1,
+    borderColor: '#ddd',
+
+  },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 20,
+    marginTop: 10,
+    // marginVertical:10,
     textAlign: 'center',
   },
   iconContainer: {
