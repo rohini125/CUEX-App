@@ -58,43 +58,62 @@ export default function PriceAlerts() {
     setPercentageChange((prev) => Math.max(0, prev + amount));
   };
 
-  // Handle Create Alert
-  const handleCreateAlert = () => {
-    let alertData: AlertData;
-  
-    if (selectedMode === 'price') {
-      alertData = {
-        type: 'price',
-        value: alertPrice.toFixed(2),
-        description: `Alert when price reaches ${selectedCurrency.symbol}${alertPrice.toFixed(2)}`,
-      };
-  
-      // Check if current price equals alert price
-      if (alertPrice.toFixed(2) === currentPrice.toFixed(2)) {
-        Alert.alert('Alert Triggered', `Price is already ${selectedCurrency.symbol}${alertPrice.toFixed(2)}!`);
-
-        return; // Do not add the alert if it's already triggered
-      }
-    } else {
-      const targetPrice = currentPrice * (1 + percentageChange / 100);
-      alertData = {
-        type: 'percentage',
-        value: percentageChange,
-        description: `Alert when price changes by ${percentageChange}% to ${selectedCurrency.symbol}${targetPrice.toFixed(2)}`,
-      };
-  
-      // Check if current price equals target price for percentage
-      if (targetPrice.toFixed(2) === currentPrice.toFixed(2)) {
-        Alert.alert('Alert Triggered', `Price has already changed by ${percentageChange}% to ${selectedCurrency.symbol}${currentPrice.toFixed(2)}!`);
-        return; // Do not add the alert if it's already triggered
-      }
-    }
-  
-    setAlerts((prev) => [...prev, alertData]);
-  
-    // Show confirmation
-    Alert.alert('Alert Created', alertData.description);
+  const handleDeleteAlert = (index: number) => {
+    setAlerts((prev) => prev.filter((_, i) => i !== index));
+    Alert.alert('Alert Deleted', 'The selected alert has been removed.');
   };
+
+//handle create alert
+const handleCreateAlert = () => {
+  let alertData: AlertData;
+
+  if (selectedMode === 'price') {
+    alertData = {
+      type: 'price',
+      value: alertPrice.toFixed(2),
+      description: `Alert when price reaches ${selectedCurrency.symbol}${alertPrice.toFixed(2)}`,
+    };
+
+    // Check if current price equals alert price
+    if (alertPrice.toFixed(2) === currentPrice.toFixed(2)) {
+      Alert.alert('Alert Triggered', `Price is already ${selectedCurrency.symbol}${alertPrice.toFixed(2)}!`);
+      return;
+    }
+  } else {
+    const targetPrice = currentPrice * (1 + percentageChange / 100);
+    alertData = {
+      type: 'percentage',
+      value: percentageChange.toFixed(2),
+      description: `Alert when price changes by ${percentageChange}% to ${selectedCurrency.symbol}${targetPrice.toFixed(2)}`,
+    };
+
+    // Check if current price equals target price for percentage
+    if (targetPrice.toFixed(2) === currentPrice.toFixed(2)) {
+      Alert.alert('Alert Triggered', `Price has already changed by ${percentageChange}% to ${selectedCurrency.symbol}${currentPrice.toFixed(2)}!`);
+      return;
+    }
+  }
+
+  // **Enhanced Duplicate Check**
+  const isDuplicate = alerts.some(
+    (alert) =>
+      alert.type === alertData.type &&
+      alert.value === alertData.value &&
+      alert.description === alertData.description
+  );
+
+  if (isDuplicate) {
+    Alert.alert('Duplicate Alert', 'This alert already exists.');
+    return;
+  }
+
+  // Add the new alert
+  setAlerts((prev) => [...prev, alertData]);
+
+  // Show confirmation
+  Alert.alert('Alert Created', alertData.description);
+};
+
   
   // Search currencies based on query
   const filteredCurrencies = currencies.filter((currency) =>
@@ -204,14 +223,22 @@ export default function PriceAlerts() {
       <View style={styles.alertsContainer}>
         <Text style={styles.alertsHeader}>Created Alerts:</Text>
         <FlatList
-          data={alerts}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.alertItem}>
-              <Text style={styles.alertDescription}>{item.description}</Text>
-            </View>
-          )}
-        />
+  data={alerts}
+  keyExtractor={(_, index) => index.toString()} // Generates a unique key using the index
+  renderItem={({ item, index }) => (
+    <View style={styles.alertItem}>
+      <Text style={styles.alertDescription}>{item.description}</Text>
+      <TouchableOpacity
+        style={styles.deleteButton}
+        onPress={() => handleDeleteAlert(index)} // Pass the index to handleDeleteAlert
+      >
+        <Ionicons name="trash" size={20} color="red" />
+      </TouchableOpacity>
+    </View>
+  )}
+/>
+
+
       </View>
     </View>
   );
@@ -342,5 +369,8 @@ const styles = StyleSheet.create({
   },
   alertDescription: {
     fontSize: 16,
+  },
+    deleteButton: {
+    padding: 5,
   },
 });
