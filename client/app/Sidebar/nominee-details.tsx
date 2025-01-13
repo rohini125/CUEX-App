@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router'; // Import router for navigation
+import axios from 'axios';
 
 export default function NomineeDetails() {
   const router = useRouter();
@@ -10,13 +11,38 @@ export default function NomineeDetails() {
   const [relationship, setRelationship] = useState("");
   const [contactNumber, setContactNumber] = useState("");
 
-  const handleSave = () => {
+  // const handleSave = () => {
+  //   if (!nomineeName || !relationship || !contactNumber) {
+  //     alert("Please fill in all fields.");
+  //     return;
+  //   }
+  //   alert("Nominee details saved successfully!");
+  //   router.push("/Sidebar/AccountSetting"); // Navigate to another page
+  // };
+
+  const handleSave = async () => {
     if (!nomineeName || !relationship || !contactNumber) {
       alert("Please fill in all fields.");
       return;
     }
-    alert("Nominee details saved successfully!");
-    router.push("/Sidebar/AccountSetting"); // Navigate to another page
+  
+    try {
+      const response = await axios.post('http://192.168.1.9/api/nominees', {
+        nomineeName,
+        relationship,
+        contactNumber,
+      });
+  
+      if (response.status === 201) {
+        alert("Nominee details saved successfully!");
+        router.push("/Sidebar/AccountSetting");
+      } else {
+        alert("Failed to save nominee details.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while saving nominee details.");
+    }
   };
 
   return (

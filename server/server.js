@@ -2,7 +2,10 @@
 import express from "express";
 import mongoose from "mongoose";
 // import userModel from './models/userModel'; // Ensure this path is correct
-import userRoute from "./routes/userRoute.js";
+// import userRoute from "./routes/userRoute.js";
+// const nomineeRoutes = require('./routes/nomineeRoutes.js');
+import nomineeRoutes from "./routes/nomineeRoutes.js"
+
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 import cors from "cors";
@@ -25,7 +28,11 @@ app.use(cors({
 // Middleware to parse JSON
 app.use(express.json());
 
-app.use("/users", userRoute);
+// app.use("/users", userRoute);
+
+// Routes
+app.use('/api/nominees', nomineeRoutes);
+
 // Connect to MongoDB
 connectDB();
 
