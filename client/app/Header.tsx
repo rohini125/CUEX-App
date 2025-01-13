@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-native-gesture-handler'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router'; // Import router for navigation
@@ -24,7 +25,8 @@ const Header: React.FC<HeaderProps> = ({ onProfilePress }) => {
         <TouchableOpacity style={styles.iconContainer}>
           <Feather name="bell" size={24} color="#4A4A4A" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
+        <TouchableOpacity style={styles.iconContainer}
+         onPress={() => router.push('/Sidebar/kyc-verification')}>
           <Feather name="help-circle" size={24} color="#4A4A4A" />
         </TouchableOpacity>
       </View>
