@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-
+import { useRouter } from 'expo-router'; // Import router for navigation
 type HeaderProps = {
   onProfilePress: () => void;  // Define the prop type for the function
 };
+ const router = useRouter(); // For navigation
 
 const Header: React.FC<HeaderProps> = ({ onProfilePress }) => {
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={onProfilePress} style={styles.iconContainer}>
+      <TouchableOpacity onPress={(onProfilePress)} style={styles.iconContainer}>
         <Image
           source={{
             uri: 'https://via.placeholder.com/40', // Replace with user's profile image

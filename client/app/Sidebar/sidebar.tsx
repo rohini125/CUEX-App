@@ -2,11 +2,14 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal, ScrollView, Animated, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { Dimensions } from 'react-native';
+import 'react-native-gesture-handler'
 
 type SidebarProps = {
   isOpen: boolean;
   onClose: () => void;
 };
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
@@ -44,9 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   return (
     <Modal visible={isOpen} transparent={true} animationType="fade" onRequestClose={onClose}>
       <View style={styles.modalOverlay}>
-        <Animated.View style={[styles.sidebar, { transform: [{ translateX: slideAnim }] }]}>
-
-
+        <Animated.View style={[styles.sidebar, { transform: [{ translateX: slideAnim }] }]}>          
           <ScrollView contentContainerStyle={styles.menuContainer}>
             <Text style={styles.sidebarTitle}>Menu</Text>
             <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/profile')}>
@@ -91,13 +92,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
+    color:"black",
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Dark overlay background
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
   sidebar: {
     backgroundColor: '#fff',
-    width: '80%', // Sidebar width (adjusted to fit better)
+    width: SCREEN_WIDTH * 0.8, // 80% of screen width
     height: '100%',
     padding: 16,
     shadowColor: '#000', // Shadow color
@@ -124,18 +126,18 @@ const styles = StyleSheet.create({
   profileName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#4A4A4A',
+    color: 'black',
   },
   profileEmail: {
     fontSize: 14,
-    color: '#7A7A7A',
+    color: 'black',
     marginTop: 5,
   },
   sidebarTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: '#4A4A4A',
+    color: 'black',
   },
   menuContainer: {
     paddingBottom: 20,
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 16,
-    color: '#4A4A4A',
+    color: 'black',
     marginLeft: 10,
   },
   closeButton: {
