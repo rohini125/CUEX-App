@@ -138,7 +138,8 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-nativ
 export default function VerificationPage() {
   const [otp, setOtp] = useState('');
   // const [isSubmitting, setIsSubmitting] = useState(false);
-  const [timer, setTimer] = useState(30); // Countdown timer in seconds
+  // const [timer, setTimer] = useState(20); // Countdown timer in seconds
+  const [timer, setTimer] = useState(120); // 2 minutes = 120 seconds
   const [serverOtp, setServerOtp] = useState(''); // Simulate OTP received from server
 
   const otpRefs = useRef<(TextInput | null)[]>([]); // Explicitly define type as array of TextInput or null
@@ -163,9 +164,9 @@ export default function VerificationPage() {
   }, [timer]);
 
   const handleResendOtp = async () => {
-    setTimer(30); // Reset the timer
+    setTimer(120); // Reset the timer
     setServerOtp('12345'); // Simulate new OTP from server (mocked for now)
-    alert('OTP sent successfully!');
+    // alert('OTP sent successfully!');
   };
 
   const handleVerify =()=>{
@@ -201,7 +202,7 @@ export default function VerificationPage() {
        Please wait for an SMS confirmation code and enter it.
       </Text>
       <View style={styles.otpContainer}>
-        {[...Array(5)].map((_, index) => (
+        {[...Array(6)].map((_, index) => (
           <TextInput
             key={index}
             ref={(ref) => (otpRefs.current[index] = ref)} // Setting the reference to otpRefs
@@ -226,11 +227,24 @@ export default function VerificationPage() {
       >
         <Text style={styles.verifyButtonText}>Verify OTP</Text>
         </TouchableOpacity>
+        {/* in second timer logic */}
+          {/* <Text style={styles.retryText}>
+            {timer > 0
+              ? `Didn't receive OTP? Retry in (00:${timer.toString().padStart(2, '0')})`
+              : "Didn't receive OTP?"}
+          </Text> */}
+
+          {/* in min timer logic */}
         <Text style={styles.retryText}>
-          {timer > 0
-            ? `Didn't receive OTP? Retry in (00:${timer.toString().padStart(2, '0')})`
-            : "Didn't receive OTP?"}
+            {timer > 0
+              ? `Didn't receive OTP? Retry in (${Math.floor(timer / 60)
+                  .toString()
+                  .padStart(2, '0')}:${(timer % 60)
+                  .toString()
+                  .padStart(2, '0')})`
+              : "Didn't receive OTP?"}
         </Text>
+
         {timer === 0 && (
         <TouchableOpacity 
           activeOpacity={0.7} 

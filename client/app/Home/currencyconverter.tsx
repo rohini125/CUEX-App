@@ -111,8 +111,9 @@ const CurrencyConverter = () => {
           </View>
 
           <View style={styles.row}>
-            <Text>Amount: </Text>
+            {/* <Text>Amount: </Text> */}
             <TextInput
+              placeholder='Amount'
               style={styles.input}
               keyboardType="numeric"
               value={amount}
@@ -120,14 +121,23 @@ const CurrencyConverter = () => {
             />
           </View>
 
-          <View style={styles.row}>
-            <Text>Converted Amount: </Text>
+          <Text style={{marginBottom:5}}>Converted Amount: </Text>
             <TextInput
+               placeholder='Converted Amount'
               style={styles.input}
               value={convertedAmount}
               editable={false}
             />
-          </View>
+
+          {/* <View style={styles.row}>
+            <Text>Converted Amount: </Text>
+            <TextInput
+               placeholder='Converted Amount'
+              style={styles.input}
+              value={convertedAmount}
+              editable={false}
+            />
+          </View> */}
 
           <View style={styles.rowButtons}>
             <TouchableOpacity style={[styles.button, styles.shadow]}>
@@ -211,12 +221,22 @@ const CurrencyConverter = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginVertical:15,
     padding: 20,
     justifyContent: 'center',
     backgroundColor: '#f9f9f9',
+    // backgroundColor: '#ffffff',
+    borderRadius: 10,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 1,
+    // borderWidth: 1,
+    borderColor: '#ddd',
+
   },
   header: {
-    fontSize: 24,
+    // fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
