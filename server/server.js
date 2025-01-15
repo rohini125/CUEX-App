@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 // import userModel from './models/userModel'; // Ensure this path is correct
 // import userRoute from "./routes/userRoute.js";
 // const nomineeRoutes = require('./routes/nomineeRoutes.js');
-import nomineeRoutes from "./routes/nomineeRoutes.js"
+import nomineeRoutes from "./routes/nomineeRoutes.js";
+import conversionRoutes from "./routes/conversionRoutes.js";
 
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
@@ -32,6 +33,9 @@ app.use(express.json());
 
 // Routes
 app.use('/api/nominees', nomineeRoutes);
+
+// currency conversion route
+app.use("/api", conversionRoutes);
 
 // Connect to MongoDB
 connectDB();
