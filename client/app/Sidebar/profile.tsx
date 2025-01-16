@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Modal,
   Image,
   ScrollView, Pressable,
   ActivityIndicator,
@@ -15,7 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import RNPickerSelect from 'react-native-picker-select';
-import AdditionalDetailsScreen from './additionaldetails';
+
 
 
 const Profile = () => {
@@ -96,10 +97,23 @@ const Profile = () => {
 
   
     // States for personal information
-    const [gender, setGender] = useState('Female');
-    const [age, setAge] = useState('19');
-    const [maritalStatus, setMaritalStatus] = useState('Single');
+    const [gender, setGender] = useState('gender');
+    const [age, setAge] = useState('');
+    const [maritalStatus, setMaritalStatus] = useState('Status');
     const [education, setEducation] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [currentField, setCurrentField] = useState('');
+  
+    const openModal = (field: 'Gender' | 'Marital Status') => {
+      setCurrentField(field);
+      setModalVisible(true);
+    };
+  
+    const handleSelection = (value: string) => {
+      if (currentField === 'Gender') setGender(value);
+      if (currentField === 'Marital Status') setMaritalStatus(value);
+      setModalVisible(false);
+    };
   
     // States for family members
     const [familyMembers, setFamilyMembers] = useState('Parents / In-laws');
@@ -107,7 +121,7 @@ const Profile = () => {
     // States for preferences
     const [domesticTravel, setDomesticTravel] = useState('I do not travel');
     const [internationalTravel, setInternationalTravel] = useState('I do not travel internationally');
-    const [personalInterests, setPersonalInterests] = useState('Others');
+    const [personalInterests, setPersonalInterests] = useState();
     const [movies, setMovies] = useState('I do not watch movies in theatres');
   
     const [hasChanges, setHasChanges] = useState(false);
@@ -162,17 +176,26 @@ const Profile = () => {
           <ActivityIndicator size="large" color="#6200ee" />
         </View>
       )}
+       <View style={styles.backButton}>
+        <View>
+      <TouchableOpacity onPress={() => router.push('/front')} >
+        <Ionicons name="arrow-back" size={24} color="#333" />
+      </TouchableOpacity>
+      </View>
+      <View>
+      <TouchableOpacity onPress={handleFinalSave} style={styles.finalSaveButton}>
+          <Text style={styles.finalSaveButtonText}>Save</Text>
+        </TouchableOpacity></View>
+        </View>
 
       <View style={styles.header}>
+       
   <View style={styles.profileContainer}>
         <TouchableOpacity onPress={pickImage}>
           <Image source={{ uri: profileImage }} style={styles.profileImage} />
           <Text style={styles.changePictureText}>Change Picture</Text>
         </TouchableOpacity>
         </View> 
-        <TouchableOpacity onPress={handleFinalSave} style={styles.finalSaveButton}>
-          <Text style={styles.finalSaveButtonText}>Save</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
@@ -247,19 +270,58 @@ const Profile = () => {
 </View>
 
       {/* Personal Information Section */}
+      <View style={styles.section}>
       <List.Section>
         <List.Subheader style={styles.subheaderTitle}>Personal Information</List.Subheader>
         <Divider />
 
-        <List.Item
+      <List.Item
           title="Gender"
           description={gender}
           right={() => (
-            <Pressable onPress={() => setGender(gender === 'Male' ? 'Female' : 'Male')}>
+            <TouchableOpacity onPress={() => openModal('Gender')}>
               <List.Icon icon="chevron-right" />
-            </Pressable>
+              </TouchableOpacity>
           )}
         />
+      <Divider />
+
+      <List.Item
+          title="Marital Status"
+          description={maritalStatus}
+          right={() => (
+            <TouchableOpacity onPress={() => openModal('Marital Status')}>
+              <List.Icon icon="chevron-right" />
+              </TouchableOpacity>
+          )}
+        />
+
+      <Modal visible={modalVisible} onDismiss={() => setModalVisible(false)}>
+        <View style={styles.modal}>
+          {(currentField === 'Gender'
+            ? ['Male', 'Female', 'Other']
+            : ['Single', 'Married', 'Divorced']
+          ).map((option) => (
+            <TouchableOpacity
+              key={option}
+              style={styles.option}
+              onPress={() => handleSelection(option)}
+            >
+              <RadioButton
+                value={option}
+                status={
+                  (currentField === 'Gender' && gender === option) ||
+                  (currentField === 'Marital Status' && maritalStatus === option)
+                    ? 'checked'
+                    : 'unchecked'
+                }
+              />
+              <Text style={styles.optionText}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </Modal>
+    
         <Divider />
         <List.Item
           title="Age"
@@ -274,16 +336,7 @@ const Profile = () => {
             />
           )}
         />
-        <Divider />
-        <List.Item
-          title="Marital Status"
-          description={maritalStatus}
-          right={() => (
-            <Pressable onPress={() => setMaritalStatus(maritalStatus === 'Single' ? 'Married' : 'Single')}>
-              <List.Icon icon="chevron-right" />
-            </Pressable>
-          )}
-        />
+        
         <Divider />
         <List.Item
           title="Education Qualification"
@@ -309,8 +362,10 @@ const Profile = () => {
         />
         <Divider />
       </List.Section>
+      </View>  
 
       {/* Preferences Section */}
+      <View style={styles.section}>
       <List.Section>
         <List.Subheader style={styles.subheaderTitle}>Preferences</List.Subheader>
         <Divider />
@@ -350,7 +405,6 @@ const Profile = () => {
             <TextInput
               style={styles.input}
               value={personalInterests}
-              onChangeText={setPersonalInterests}
               placeholder="Enter interests"
             />
           )}
@@ -366,18 +420,8 @@ const Profile = () => {
           )}
         />
         <Divider />
-      </List.Section>
-
-      {/* Save Changes Button */}
-      <Button
-        mode="contained"
-        style={styles.saveButton}
-        onPress={handleSaveChanges}
-        disabled={!hasChanges}
-      >
-        Save 
-      </Button>
-   
+      </List.Section>   
+      </View>
 
       <View style={styles.section}>
   <Text style={styles.sectionTitle}>Saved Addresses</Text>
@@ -433,14 +477,41 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f9f9f9',
   },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+    padding: 12,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: '#ccc',
+  },
+  label: { fontSize: 16, color: '#333' },
+  value: { fontSize: 16, color: '#555' },
+  modal: {
+    backgroundColor: '#fff',
+    padding: 20,
+    margin: 20,
+    borderRadius: 8,
+  },
+  option: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  optionText: { fontSize: 16, marginLeft: 8 },
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'center',
     marginBottom: 20,
+    marginTop:50
   },
   backButton: {
     marginRight: 10,
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
   },
 
   profileContainer: {
@@ -552,7 +623,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: 24,
   },
-  
   saveButton: {
     backgroundColor: '#28a745',
     padding: 7,
