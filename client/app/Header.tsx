@@ -1,32 +1,34 @@
 import React from 'react';
-import 'react-native-gesture-handler'
+import 'react-native-gesture-handler';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { useRouter } from 'expo-router'; // Import router for navigation
+import { useRouter } from 'expo-router';
+
 type HeaderProps = {
-  onProfilePress: () => void;  // Define the prop type for the function
+  onProfilePress: () => void;
 };
- const router = useRouter(); // For navigation
+
+const router = useRouter();
 
 const Header: React.FC<HeaderProps> = ({ onProfilePress }) => {
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={(onProfilePress)} style={styles.iconContainer}>
+      <TouchableOpacity onPress={onProfilePress} style={styles.iconContainer}>
+        {/* Profile image (no placeholder) */}
         <Image
-          source={{
-            uri: 'https://via.placeholder.com/40', // Replace with user's profile image
-          }}
+          source={{ uri: 'https://www.example.com/profile-image.jpg' }}  // Replace with actual dynamic image URL
           style={styles.profileImage}
         />
-        
       </TouchableOpacity>
       <Text style={styles.appName}>CUEX</Text>
       <View style={styles.rightIcons}>
         <TouchableOpacity style={styles.iconContainer}>
           <Feather name="bell" size={24} color="#4A4A4A" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}
-         onPress={() => router.push('/Sidebar/kyc-verification')}>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => router.push('/Sidebar/kyc-verification')}
+        >
           <Feather name="help-circle" size={24} color="#4A4A4A" />
         </TouchableOpacity>
       </View>
@@ -49,10 +51,11 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   profileImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderColor: '#4A4A4A',
+    width: 50,  // Make the image larger
+    height: 50, // Ensure proper aspect ratio
+    borderRadius: 25, // Make it a circle
+    borderWidth: 1, // Add a border for visibility
+    borderColor: '#4A4A4A', // Border color
   },
   appName: {
     fontSize: 20,

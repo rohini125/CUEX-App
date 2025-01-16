@@ -245,3 +245,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#6200ee',
   },
 });
+
