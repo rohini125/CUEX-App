@@ -227,30 +227,34 @@ const Profile = () => {
           keyboardType="email-address"
         />
         <View style={styles.inputContainer}>
-          <RNPickerSelect
-            onValueChange={(value) => setCountryCode(value)}
-            items={countryCodes}
-            placeholder={{ label: 'Select Country Code', value: null }}
-            value={countryCode}
-            style={{
-              inputIOS: styles.pickerInput,
-              inputAndroid: styles.pickerInput,
-            }}
-          />
-          <TextInput
-            style={[styles.input, styles.flexInput]}
-            value={mobile}
-            onChangeText={(text) => {
-              const formattedText = text.replace(/[^0-9]/g, ''); // Allow only numbers
-              if (formattedText.length <= 10) {
-                setMobile(formattedText);
-                updateUpiId(formattedText); // Update UPI ID dynamically
-              }
-            }}
-            placeholder="Enter phone number"
-            keyboardType="phone-pad"
-          />
-        </View>
+            <RNPickerSelect
+              onValueChange={(value) => setCountryCode(value)}
+              items={[
+                { label: '+91 (India)', value: '+91' },
+                { label: '+1 (USA)', value: '+1' },
+                { label: '+44 (UK)', value: '+44' },
+              ]}
+              placeholder={{ label: 'Select Country Code', value: null }}
+              value={countryCode}
+              style={{
+                inputIOS: styles.pickerInput,
+                inputAndroid: styles.pickerInput, // Ensure styles are defined for Android
+              }}
+            />
+            <TextInput
+              style={[styles.input, styles.flexInput]}
+              value={mobile}
+              onChangeText={(text) => {
+                const formattedText = text.replace(/[^0-9]/g, ''); // Allow only numbers
+                if (formattedText.length <= 10) {
+                  setMobile(formattedText);
+                  updateUpiId(formattedText); // Update UPI ID dynamically
+                }
+              }}
+              placeholder="Enter phone number"
+              keyboardType="phone-pad"
+            />
+          </View>
         <Text
   style={{
     borderWidth: 1,
@@ -585,6 +589,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#7a7a7a',
     marginBottom: 8,
+     justifyContent: 'space-between',
   }, 
   input: {
     borderWidth: 1,
@@ -598,6 +603,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    paddingHorizontal: 2,
     
   },
   pickerInput: {
