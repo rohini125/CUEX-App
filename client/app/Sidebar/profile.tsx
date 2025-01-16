@@ -32,6 +32,17 @@ const Profile = () => {
   const [showAddressInput, setShowAddressInput] = useState<boolean>(false);
   const router = useRouter();
   const [countryCode, setCountryCode] = useState('+91'); // Default to India
+  const [upiId, setUpiId] = useState<string>(''); // Dynamically generated UPI ID
+
+  
+  // Function to dynamically update UPI ID based on phone number
+  const updateUpiId = (phone: string) => {
+    if (phone.length === 10) {
+      setUpiId(`${phone}@upi`);
+    } else {
+      setUpiId('');
+    }
+  };
   
   const countryCodes = [
     { label: '+1 (USA)', value: '+1' },
@@ -198,76 +209,85 @@ const Profile = () => {
         </View> 
       </View>
 
-      <View style={styles.section}>
-  <Text style={styles.sectionTitle}>Basic Information</Text>
-  {isEditing ? (
-    <>
-      <TextInput
-        style={styles.input}
-        value={username}
-        onChangeText={setUsername}
-        placeholder="Enter username"
-      />
-      <TextInput
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-        placeholder="Enter email ID"
-        keyboardType="email-address"
-      />
-      <View style={styles.inputContainer}>
-        <RNPickerSelect
-          onValueChange={(value) => setCountryCode(value)}
-          items={countryCodes}
-          placeholder={{ label: 'Select Country Code', value: null }}
-          value={countryCode}
-          style={{
-            inputIOS: styles.pickerInput,
-            inputAndroid: styles.pickerInput,
-            inputWeb:styles.pickerInput,
-          }}
+  <View style={styles.section}>
+    <Text style={styles.sectionTitle}>Basic Information</Text>
+    {isEditing ? (
+      <>
+        <TextInput
+          style={styles.input}
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Enter username"
         />
         <TextInput
-          style={[styles.input, styles.flexInput]}
-          value={mobile}
-          onChangeText={(text) => {
-            if (text.length <= 10) {
-              setMobile(text.replace(/[^0-9]/g, '')); // Allows only numbers
-            }}}
-          placeholder="Enter phone number"
-          keyboardType="phone-pad"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Enter email ID"
+          keyboardType="email-address"
         />
-      </View>
-      <TextInput
-        style={styles.input}
-        value={idNumber}
-        onChangeText={setIdNumber}
-        placeholder="Enter ID number"
-      />
-      <TouchableOpacity
-        style={styles.saveButton}
-        onPress={() => setIsEditing(false)}
-      >
-        <Text style={styles.saveButtonText}>Done</Text>
-      </TouchableOpacity>
-    </>
-  ) : (
-    <>
-      <Text style={styles.detailText}>Username: {username}</Text>
-      <Text style={styles.detailText}>Email: {email}</Text>
-      <Text style={styles.detailText}>
-        Mobile: {countryCode} {mobile}
-      </Text>
-      <Text style={styles.detailText}>ID Number: {idNumber}</Text>
-      <TouchableOpacity
-        style={styles.editButton}
-        onPress={() => setIsEditing(true)}
-      >
-        <Text style={styles.editButtonText}>Edit</Text>
-      </TouchableOpacity>
-    </>
-  )}
-</View>
+        <View style={styles.inputContainer}>
+          <RNPickerSelect
+            onValueChange={(value) => setCountryCode(value)}
+            items={countryCodes}
+            placeholder={{ label: 'Select Country Code', value: null }}
+            value={countryCode}
+            style={{
+              inputIOS: styles.pickerInput,
+              inputAndroid: styles.pickerInput,
+            }}
+          />
+          <TextInput
+            style={[styles.input, styles.flexInput]}
+            value={mobile}
+            onChangeText={(text) => {
+              const formattedText = text.replace(/[^0-9]/g, ''); // Allow only numbers
+              if (formattedText.length <= 10) {
+                setMobile(formattedText);
+                updateUpiId(formattedText); // Update UPI ID dynamically
+              }
+            }}
+            placeholder="Enter phone number"
+            keyboardType="phone-pad"
+          />
+        </View>
+        <Text
+  style={{
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+    fontSize: 16,
+  }}
+>
+  {upiId ? `UPI ID: ${upiId}` : ''}
+</Text>
+
+        <TouchableOpacity
+          style={styles.saveButton}
+          onPress={() => setIsEditing(false)}
+        >
+          <Text style={styles.saveButtonText}>Done</Text>
+        </TouchableOpacity>
+      </>
+    ) : (
+      <>
+        <Text style={styles.detailText}>Username: {username}</Text>
+        <Text style={styles.detailText}>Email: {email}</Text>
+        <Text style={styles.detailText}>
+          Mobile: {countryCode} {mobile}
+        </Text>
+        <Text style={styles.detailText}>UPI ID: {upiId}</Text>
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => setIsEditing(true)}
+        >
+          <Text style={styles.editButtonText}>Edit</Text>
+        </TouchableOpacity>
+      </>
+    )}
+  </View>
 
       {/* Personal Information Section */}
       <View style={styles.section}>

@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const navigateAndClose = (route: `/Sidebar/profile` |`/Sidebar/AccountSetting`|`/Sidebar/price-alert`|  `/Sidebar/promotions` | `/Sidebar/settings` | `/Sidebar/help` | `/Sidebar/logout`) => {
+  const navigateAndClose = (route: `/Sidebar/profile` |`/Sidebar/AccountSetting`|`/Sidebar/price-alert`|  `/Sidebar/promotions` | `/Sidebar/settings` | `/Sidebar/help`|`/Sidebar/about` | `/Sidebar/logout`) => {
     router.push(route);
     onClose();
 };
@@ -73,6 +73,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/help')}>
               <Feather name="help-circle" size={20} color="#4A4A4A" />
               <Text style={styles.menuText}>Help & Support</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/about')}>
+              <Feather name="help-circle" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>About CUEX</Text>
             </TouchableOpacity>
       
             <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/logout')}>
