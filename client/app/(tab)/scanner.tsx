@@ -76,15 +76,150 @@
 
 // export default Scanner;
 
-import { View, Text } from 'react-native'
-import React from 'react'
+// import { View, Text } from 'react-native'
+// import React from 'react'
 
-const scanner = () => {
+// const scanner = () => {
+//   return (
+//     <View>
+//       <Text>scanner</Text>
+//     </View>
+//   )
+// }
+
+// export default scanner
+
+
+
+
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import { Feather,Ionicons ,MaterialCommunityIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+  verticalScale,
+} from 'react-native-size-matters';
+
+const QrCodeScanner = () => {
+  const router = useRouter();
+
+  const onclick = () => {
+    router.push('/front');
+  };
+
+  const onHelp = () => {
+    router.push('/Sidebar/help');
+  };
+
   return (
-    <View>
-      <Text>scanner</Text>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.subHeader}>
+          <TouchableOpacity onPress={onclick} style={styles.backBtn}>
+            <Ionicons name="arrow-back" size={24} color="#333" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Scan & Pay</Text>
+          <TouchableOpacity style={styles.backBtn} onPress={onHelp}>
+            <Feather name="help-circle" size={24} color="#4A4A4A" />
+          </TouchableOpacity>
+        </View>
+      </View>
 
-export default scanner
+      <View style={styles.content}>
+          <Ionicons name="camera" size={30} color="#333" style={{marginBottom:15}}/>
+        <Text style={styles.title}>Allow Camera Permission</Text>
+        <Text style={styles.description}>CuexPe needs permission to access camera to scan QR code.</Text>
+        <TouchableOpacity 
+          activeOpacity={0.7} 
+          style={styles.button}
+        >
+          <Text style={styles.Btntext}>Go to settings</Text>
+        </TouchableOpacity>
+        <View style={styles.options} >
+        <TouchableOpacity style={styles.backBtn}  activeOpacity={0.7}>
+          <Ionicons name="images" size={24} color="#333" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.backBtn}  activeOpacity={0.7} >
+          <MaterialCommunityIcons name="flash-off" size={24} color="#333" />
+        </TouchableOpacity>
+      </View>
+     </View>
+    </View>
+  );
+};
+
+export default QrCodeScanner;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // backgroundColor: 'rgba(0,0,0,.5)',
+    backgroundColor: '#fff',
+  },
+  header: {
+    width: '100%',
+    height: verticalScale(85),
+    backgroundColor: 'pink',
+    justifyContent: 'flex-end',
+  },
+  subHeader: {
+    width: '100%',
+    height: verticalScale(50),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: moderateScale(10),
+    paddingRight: moderateScale(15),
+  },
+  backBtn: {
+    width: scale(50),
+    height: scale(50),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backIcon: {
+    width: scale(24),
+    height: scale(24),
+    tintColor: 'white',
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',  // Centers the content vertically
+    alignItems: 'center',      // Centers the content horizontally
+    padding: 10,
+    backgroundColor: '#fff',   // Optional: Set a background color for the container
+  },
+  title: {
+    // color: 'white',
+    fontWeight:500,
+    fontSize: moderateScale(20),
+  },
+  description: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#666',             // Lighter color for the description
+  },
+  button :{
+    backgroundColor:'blue',
+    padding:8,
+    marginTop:10,
+    borderRadius:15,
+  },
+  Btntext:{
+    color:'white',
+    fontSize:12,
+  },
+  options: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginTop: moderateVerticalScale(30),
+  },
+});
