@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router'; // Import router for navigation
+import { useRouter } from 'expo-router';
 
-
-const HelpSupport = () => {
+const Help = () => {
   const [visibleAnswer, setVisibleAnswer] = useState<number | null>(null);
-  const router = useRouter(); // Use router for navigation
+  const router = useRouter();
 
   const toggleAnswer = (index: number) => {
     setVisibleAnswer(visibleAnswer === index ? null : index);
   };
-
   const faqs = [
     {
       question: 'How to transfer funds from banking app to CUEX wallet?',
@@ -65,102 +63,23 @@ const HelpSupport = () => {
     },
   ];
 
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Title */}
-      <View>
-      <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#333" />
-        </TouchableOpacity>
+      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+        <Ionicons name="arrow-back" size={24} color="#333" />
+      </TouchableOpacity>
       <Text style={styles.title}>Help & Support</Text>
-      </View>
-      {/* FAQs Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>TOP QUESTIONS</Text>
         {faqs.map((faq, index) => (
           <View key={index} style={styles.faqItem}>
-            {/* Question */}
             <TouchableOpacity onPress={() => toggleAnswer(index)}>
               <Text style={styles.question}>{index + 1}) {faq.question}</Text>
             </TouchableOpacity>
-            {/* Answer */}
-            {visibleAnswer === index && (
-              <Text style={styles.answer}>{faq.answer}</Text>
-            )}
+            {visibleAnswer === index && <Text style={styles.answer}>{faq.answer}</Text>}
           </View>
         ))}
-      </View>
-
-      {/* About Us Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>About Us</Text>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Company Overview</Text>
-          <Text style={styles.cardText}>
-            "At CUEX, we are redefining how people exchange and manage their money globally. 
-            Founded with the vision to create a seamless and secure currency exchange experience, 
-            we empower our users to transact across borders effortlessly."
-          </Text>
-        </View>
-
-        {/* Developer Section */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Meet Our Developers</Text>
-
-          {/* Developer Cards */}
-          <View style={styles.card}>
-            <View style={styles.developerCard}>
-              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>Parkale Sakshi</Text>
-              <Text style={styles.cardText}>
-                Role: Lead Developer{'\n'}
-                Expertise in React Native and backend services. John has led the architecture of CUEX to ensure a seamless experience.
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.card}>
-            <View style={styles.developerCard}>
-              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>Salunke Yash</Text>
-              <Text style={styles.cardText}>
-                Role: UI/UX Designer{'\n'}
-                Responsible for the sleek and user-friendly interface of CUEX, Jane ensures that the design is intuitive and engaging.
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.card}>
-            <View style={styles.developerCard}>
-              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>Navale Komal</Text>
-              <Text style={styles.cardText}>
-                Role: Security Specialist{'\n'}
-                Alice is focused on making CUEX a secure platform with top-notch encryption and fraud prevention mechanisms.
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.card}>
-            <View style={styles.developerCard}>
-              <Image source={require('../../assets/images/signup.jpg')}  style={styles.profilePic} />
-              <Text style={styles.cardTitle}>Kandekar Rohini</Text>
-              <Text style={styles.cardText}>
-                Role: QA Engineer{'\n'}
-                Michael ensures that the app is free from bugs and runs smoothly by rigorously testing all features.
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      {/* Contact Us Section */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Contact Us</Text>
-        <Text style={styles.contactText}>📧 Email: support@cuexapp.com</Text>
-        <Text style={styles.contactText}>📞 Phone: +91 8234 567 890</Text>
-        <Text style={styles.contactText}>🌐 Website: www.cuexapp.com</Text>
-        <Text style={styles.contactText}>📍 Address: 123 CUEX Center Maharastra India</Text>
       </View>
     </ScrollView>
   );
@@ -213,48 +132,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     paddingLeft: 10,
   },
-  card: {
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-    padding: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    alignItems: 'center', // Center the content within the card
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  cardText: {
-    fontSize: 14,
-    color: '#555',
-    lineHeight: 20,
-    textAlign: 'center',
-  },
-  contactText: {
-    fontSize: 14,
-    color: '#555',
-    lineHeight: 20,
-    marginBottom: 4,
-  },
-  developerCard: {
-    alignItems: 'center', // Center content in the developer card
-    justifyContent: 'center',
-  },
-  profilePic: {
-    width: 80,
-    height: 80,
-    borderRadius: 40, // Make the image circular
-    marginBottom: 16,
-  },
 });
 
-export default HelpSupport;
+export default Help;
+

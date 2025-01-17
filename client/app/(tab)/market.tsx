@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, RefreshControl, TextInput } from 'react-native';
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
+import Header from '../Header';
 
 // Define a map for currency codes to their symbols
 const currencySymbols: { [key: string]: string } = {
@@ -111,6 +112,8 @@ const Market = () => {
 
   return (
     <View style={styles.container}>
+      <Header />
+      
       <Text style={styles.title}>Live Currency Market</Text>
 
       {/* Base Currency Dropdown */}

@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Modal,
   Image,
+  ScrollView, Pressable,
   ActivityIndicator,
   Alert,
 } from 'react-native';
+import { List, Divider, RadioButton, Button } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import RNPickerSelect from 'react-native-picker-select';
+
 
 
 const Profile = () => {
@@ -28,6 +32,17 @@ const Profile = () => {
   const [showAddressInput, setShowAddressInput] = useState<boolean>(false);
   const router = useRouter();
   const [countryCode, setCountryCode] = useState('+91'); // Default to India
+  const [upiId, setUpiId] = useState<string>(''); // Dynamically generated UPI ID
+
+  
+  // Function to dynamically update UPI ID based on phone number
+  const updateUpiId = (phone: string) => {
+    if (phone.length === 10) {
+      setUpiId(`${phone}@upi`);
+    } else {
+      setUpiId('');
+    }
+  };
   
   const countryCodes = [
     { label: '+1 (USA)', value: '+1' },
@@ -91,97 +106,346 @@ const Profile = () => {
     }
   };
 
+  
+    // States for personal information
+    const [gender, setGender] = useState('gender');
+    const [age, setAge] = useState('');
+    const [maritalStatus, setMaritalStatus] = useState('Status');
+    const [education, setEducation] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [currentField, setCurrentField] = useState('');
+  
+    const openModal = (field: 'Gender' | 'Marital Status') => {
+      setCurrentField(field);
+      setModalVisible(true);
+    };
+  
+    const handleSelection = (value: string) => {
+      if (currentField === 'Gender') setGender(value);
+      if (currentField === 'Marital Status') setMaritalStatus(value);
+      setModalVisible(false);
+    };
+  
+    // States for family members
+    const [familyMembers, setFamilyMembers] = useState('Parents / In-laws');
+  
+    // States for preferences
+    const [domesticTravel, setDomesticTravel] = useState('I do not travel');
+    const [internationalTravel, setInternationalTravel] = useState('I do not travel internationally');
+    const [personalInterests, setPersonalInterests] = useState();
+    const [movies, setMovies] = useState('I do not watch movies in theatres');
+  
+    const [hasChanges, setHasChanges] = useState(false);
+  
+    // Track changes
+    useEffect(() => {
+      setHasChanges(true);
+    }, [gender, age, maritalStatus, education, familyMembers, domesticTravel, internationalTravel, personalInterests, movies]);
+  
+    const handleSaveChanges = () => {
+      const parsedAge = parseInt(age, 10);
+  
+      if (isNaN(parsedAge) || parsedAge < 1 || parsedAge > 120) {
+        Alert.alert('Error', 'Please enter a valid age.');
+        return;
+      }
+  
+      if (!education.trim()) {
+        Alert.alert('Error', 'Please enter your education qualification.');
+        return;
+      }
+  
+      console.log('Saved Data:', {
+        gender,
+        age: parsedAge,
+        maritalStatus,
+        education,
+        familyMembers,
+        preferences: {
+          domesticTravel,
+          internationalTravel,
+          personalInterests,
+          movies,
+        },
+      });
+  
+      Alert.alert('Success', 'Your changes have been saved!', [
+        {
+          text: 'OK',
+          onPress: () => router.push('/profile'),
+        },
+      ]);
+  
+      setHasChanges(false);
+    };
+
   return (
+    <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
     <View style={styles.container}>
       {loading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color="#6200ee" />
         </View>
       )}
+       <View style={styles.backButton}>
+        <View>
+      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} >
+        <Ionicons name="arrow-back" size={24} color="#333" />
+      </TouchableOpacity>
+      </View>
+      <View>
+      <TouchableOpacity onPress={handleFinalSave} style={styles.finalSaveButton}>
+          <Text style={styles.finalSaveButtonText}>Save</Text>
+        </TouchableOpacity></View>
+        </View>
 
       <View style={styles.header}>
+       
   <View style={styles.profileContainer}>
         <TouchableOpacity onPress={pickImage}>
           <Image source={{ uri: profileImage }} style={styles.profileImage} />
           <Text style={styles.changePictureText}>Change Picture</Text>
         </TouchableOpacity>
         </View> 
-        <TouchableOpacity onPress={handleFinalSave} style={styles.finalSaveButton}>
-          <Text style={styles.finalSaveButtonText}>Save</Text>
-        </TouchableOpacity>
       </View>
 
-      <View style={styles.section}>
-  <Text style={styles.sectionTitle}>Basic Information</Text>
-  {isEditing ? (
-    <>
-      <TextInput
-        style={styles.input}
-        value={username}
-        onChangeText={setUsername}
-        placeholder="Enter username"
-      />
-      <TextInput
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-        placeholder="Enter email ID"
-        keyboardType="email-address"
-      />
-      <View style={styles.inputContainer}>
-        <RNPickerSelect
-          onValueChange={(value) => setCountryCode(value)}
-          items={countryCodes}
-          placeholder={{ label: 'Select Country Code', value: null }}
-          value={countryCode}
-          style={{
-            inputIOS: styles.pickerInput,
-            inputAndroid: styles.pickerInput,
-            inputWeb:styles.pickerInput,
-          }}
+  <View style={styles.section}>
+    <Text style={styles.sectionTitle}>Basic Information</Text>
+    {isEditing ? (
+      <>
+        <TextInput
+          style={styles.input}
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Enter username"
         />
         <TextInput
-          style={[styles.input, styles.flexInput]}
-          value={mobile}
-          onChangeText={(text) => {
-            if (text.length <= 10) {
-              setMobile(text.replace(/[^0-9]/g, '')); // Allows only numbers
-            }}}
-          placeholder="Enter phone number"
-          keyboardType="phone-pad"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Enter email ID"
+          keyboardType="email-address"
         />
-      </View>
-      <TextInput
-        style={styles.input}
-        value={idNumber}
-        onChangeText={setIdNumber}
-        placeholder="Enter ID number"
-      />
-      <TouchableOpacity
-        style={styles.saveButton}
-        onPress={() => setIsEditing(false)}
-      >
-        <Text style={styles.saveButtonText}>Done</Text>
-      </TouchableOpacity>
-    </>
-  ) : (
-    <>
-      <Text style={styles.detailText}>Username: {username}</Text>
-      <Text style={styles.detailText}>Email: {email}</Text>
-      <Text style={styles.detailText}>
-        Mobile: {countryCode} {mobile}
-      </Text>
-      <Text style={styles.detailText}>ID Number: {idNumber}</Text>
-      <TouchableOpacity
-        style={styles.editButton}
-        onPress={() => setIsEditing(true)}
-      >
-        <Text style={styles.editButtonText}>Edit</Text>
-      </TouchableOpacity>
-    </>
-  )}
-</View>
+        <View style={styles.inputContainer}>
+            <RNPickerSelect
+              onValueChange={(value) => setCountryCode(value)}
+              items={[
+                { label: '+91 (India)', value: '+91' },
+                { label: '+1 (USA)', value: '+1' },
+                { label: '+44 (UK)', value: '+44' },
+              ]}
+              placeholder={{ label: 'Select Country Code', value: null }}
+              value={countryCode}
+              style={{
+                inputIOS: styles.pickerInput,
+                inputAndroid: styles.pickerInput, // Ensure styles are defined for Android
+              }}
+            />
+            <TextInput
+              style={[styles.input, styles.flexInput]}
+              value={mobile}
+              onChangeText={(text) => {
+                const formattedText = text.replace(/[^0-9]/g, ''); // Allow only numbers
+                if (formattedText.length <= 10) {
+                  setMobile(formattedText);
+                  updateUpiId(formattedText); // Update UPI ID dynamically
+                }
+              }}
+              placeholder="Enter phone number"
+              keyboardType="phone-pad"
+            />
+          </View>
+        <Text
+  style={{
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 10,
+    fontSize: 16,
+  }}
+>
+  {upiId ? `UPI ID: ${upiId}` : ''}
+</Text>
 
+        <TouchableOpacity
+          style={styles.saveButton}
+          onPress={() => setIsEditing(false)}
+        >
+          <Text style={styles.saveButtonText}>Done</Text>
+        </TouchableOpacity>
+      </>
+    ) : (
+      <>
+        <Text style={styles.detailText}>Username: {username}</Text>
+        <Text style={styles.detailText}>Email: {email}</Text>
+        <Text style={styles.detailText}>
+          Mobile: {countryCode} {mobile}
+        </Text>
+        <Text style={styles.detailText}>UPI ID: {upiId}</Text>
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => setIsEditing(true)}
+        >
+          <Text style={styles.editButtonText}>Edit</Text>
+        </TouchableOpacity>
+      </>
+    )}
+  </View>
+
+      {/* Personal Information Section */}
+      <View style={styles.section}>
+      <List.Section>
+        <List.Subheader style={styles.subheaderTitle}>Personal Information</List.Subheader>
+        <Divider />
+
+      <List.Item
+          title="Gender"
+          description={gender}
+          right={() => (
+            <TouchableOpacity onPress={() => openModal('Gender')}>
+              <List.Icon icon="chevron-right" />
+              </TouchableOpacity>
+          )}
+        />
+      <Divider />
+
+      <List.Item
+          title="Marital Status"
+          description={maritalStatus}
+          right={() => (
+            <TouchableOpacity onPress={() => openModal('Marital Status')}>
+              <List.Icon icon="chevron-right" />
+              </TouchableOpacity>
+          )}
+        />
+
+      <Modal visible={modalVisible} onDismiss={() => setModalVisible(false)}>
+        <View style={styles.modal}>
+          {(currentField === 'Gender'
+            ? ['Male', 'Female', 'Other']
+            : ['Single', 'Married', 'Divorced']
+          ).map((option) => (
+            <TouchableOpacity
+              key={option}
+              style={styles.option}
+              onPress={() => handleSelection(option)}
+            >
+              <RadioButton
+                value={option}
+                status={
+                  (currentField === 'Gender' && gender === option) ||
+                  (currentField === 'Marital Status' && maritalStatus === option)
+                    ? 'checked'
+                    : 'unchecked'
+                }
+              />
+              <Text style={styles.optionText}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </Modal>
+    
+        <Divider />
+        <List.Item
+          title="Age"
+          description={age}
+          right={() => (
+            <TextInput
+              style={styles.input}
+              keyboardType="numeric"
+              value={age}
+              onChangeText={setAge}
+              placeholder="Age"
+            />
+          )}
+        />
+        
+        <Divider />
+        <List.Item
+          title="Education Qualification"
+          description={education || 'Please tell us your education qualification'}
+          right={() => (
+            <TextInput
+              style={styles.input}
+              value={education}
+              onChangeText={setEducation}
+              placeholder="Education Qualification"
+            />
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="Family Members"
+          description={familyMembers}
+          right={() => (
+            <Pressable onPress={() => setFamilyMembers(familyMembers === 'Parents / In-laws' ? 'Friends' : 'Parents / In-laws')}>
+              <List.Icon icon="chevron-right" />
+            </Pressable>
+          )}
+        />
+        <Divider />
+      </List.Section>
+      </View>  
+
+      {/* Preferences Section */}
+      <View style={styles.section}>
+      <List.Section>
+        <List.Subheader style={styles.subheaderTitle}>Preferences</List.Subheader>
+        <Divider />
+
+        <List.Item
+          title="Domestic Travel"
+          description={domesticTravel}
+          right={() => (
+            <Pressable onPress={() => setDomesticTravel(domesticTravel === 'I do not travel' ? 'Travel often' : 'I do not travel')}>
+              <List.Icon icon="chevron-right" />
+            </Pressable>
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="International Travel"
+          description={internationalTravel}
+          right={() => (
+            <Pressable
+              onPress={() =>
+                setInternationalTravel(
+                  internationalTravel === 'I do not travel internationally'
+                    ? 'Travel frequently internationally'
+                    : 'I do not travel internationally'
+                )
+              }
+            >
+              <List.Icon icon="chevron-right" />
+            </Pressable>
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="Personal Interests"
+          description={personalInterests}
+          right={() => (
+            <TextInput
+              style={styles.input}
+              value={personalInterests}
+              placeholder="Enter interests"
+            />
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="Movies"
+          description={movies}
+          right={() => (
+            <Pressable onPress={() => setMovies(movies === 'I do not watch movies in theatres' ? 'Watch movies in theatres' : 'I do not watch movies in theatres')}>
+              <List.Icon icon="chevron-right" />
+            </Pressable>
+          )}
+        />
+        <Divider />
+      </List.Section>   
+      </View>
 
       <View style={styles.section}>
   <Text style={styles.sectionTitle}>Saved Addresses</Text>
@@ -227,6 +491,7 @@ const Profile = () => {
 </View>
 
     </View>
+    </ScrollView>
   );
 };
 
@@ -236,14 +501,41 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#f9f9f9',
   },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+    padding: 12,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: '#ccc',
+  },
+  label: { fontSize: 16, color: '#333' },
+  value: { fontSize: 16, color: '#555' },
+  modal: {
+    backgroundColor: '#fff',
+    padding: 20,
+    margin: 20,
+    borderRadius: 8,
+  },
+  option: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  optionText: { fontSize: 16, marginLeft: 8 },
+
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'center',
     marginBottom: 20,
+    marginTop:50
   },
   backButton: {
     marginRight: 10,
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
   },
 
   profileContainer: {
@@ -297,7 +589,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#7a7a7a',
     marginBottom: 8,
-  },
+     justifyContent: 'space-between',
+  }, 
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
@@ -310,6 +603,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    paddingHorizontal: 2,
     
   },
   pickerInput: {
@@ -341,11 +635,25 @@ const styles = StyleSheet.create({
   editButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+  }, subheader: {
+    fontSize: 14,
+    color: 'gray',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  subheaderTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  scrollContent: {
+    paddingBottom: 24,
   },
   saveButton: {
     backgroundColor: '#28a745',
-    padding: 10,
+    padding: 7,
     borderRadius: 8,
+    marginBottom: 16,
   },
   saveButtonText: {
     color: '#fff',
