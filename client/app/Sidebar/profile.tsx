@@ -189,7 +189,7 @@ const Profile = () => {
       )}
        <View style={styles.backButton}>
         <View>
-      <TouchableOpacity onPress={() => router.push('/front')} >
+      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} >
         <Ionicons name="arrow-back" size={24} color="#333" />
       </TouchableOpacity>
       </View>

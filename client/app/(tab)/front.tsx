@@ -18,9 +18,10 @@ const Home = () => {
   };
 
   return (
+    <View>  <Header  />
+    <menu/>
     <ScrollView style={styles.container}>
-      <View>
-      <Header  />
+      <View >
       <CurrencyConverter />
       </View>
       <View style={styles.Cardcontainer}>
@@ -92,6 +93,7 @@ const Home = () => {
         </View>
       </View>
     </ScrollView>
+    </View>
   );
 };
 

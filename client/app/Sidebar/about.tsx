@@ -8,7 +8,7 @@ const About = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/front')} style={styles.backButton}>
+      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
         <Ionicons name="arrow-back" size={24} color="#333" />
       </TouchableOpacity>
       <Text style={styles.title}>About Us</Text>
