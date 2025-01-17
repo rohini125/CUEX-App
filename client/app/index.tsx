@@ -89,7 +89,7 @@
 
 
 import React from "react";
-import { Text, View, StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground } from "react-native";
 import Mybutton from "@/components/Mybutton";
 import { useRouter } from "expo-router";
 import { BlurView } from "expo-blur";
