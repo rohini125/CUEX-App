@@ -5,7 +5,7 @@ import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import CurrencyConverter from '../Home/currencyconverter';
 import Header from '../Header';
-import Sidebar from '../Sidebar/sidebar'
+
 const Home = () => {
   const router = useRouter();
 
@@ -20,11 +20,8 @@ const Home = () => {
   return (
     <ScrollView style={styles.container}>
       <View>
-      <Header onProfilePress={handleProfilePress} />
-      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
-
+      <Header  />
       <CurrencyConverter />
-
       </View>
       <View style={styles.Cardcontainer}>
         <Text style={styles.title}>Transfer Money</Text>

@@ -1,73 +1,120 @@
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
-import 'react-native-gesture-handler';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 
-type HeaderProps = {
-  onProfilePress: () => void;
-};
+const Header = () => {
+  const navigation = useNavigation();
 
-const router = useRouter();
+  const handleProfilePress = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
 
-const Header: React.FC<HeaderProps> = ({ onProfilePress }) => {
   return (
-    <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={onProfilePress} style={styles.iconContainer}>
-        {/* Profile image (no placeholder) */}
-        <Image
-          source={{ uri: 'https://www.example.com/profile-image.jpg' }}  // Replace with actual dynamic image URL
-          style={styles.profileImage}
-        />
-      </TouchableOpacity>
-      <Text style={styles.appName}>CUEX</Text>
-      <View style={styles.rightIcons}>
-        <TouchableOpacity style={styles.iconContainer}>
-          <Feather name="bell" size={24} color="#4A4A4A" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => router.push('/Sidebar/kyc-verification')}
-        >
-          <Feather name="help-circle" size={24} color="#4A4A4A" />
-        </TouchableOpacity>
+    <View style={styles.header}>
+      <View style={styles.header2}>
+        <View style={styles.headerLeftView}>
+          <View>
+            <TouchableOpacity onPress={handleProfilePress}>
+              <Image
+                source={require('../assets/images/man.png')}
+                style={styles.user}
+              />
+            </TouchableOpacity>
+            <Image
+              source={require('../assets/images/flag.png')}
+              style={styles.flag}
+            />
+          </View>
+          <View style={{ marginLeft: moderateScale(10) }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={styles.home}>Home</Text>
+              <Image
+                source={require('../assets/images/down.png')}
+                style={styles.dropdown}
+              />
+            </View>
+            <Text style={styles.address}>125, StreetNo 2,pune, Maharashra</Text>
+          </View>
+        </View>
+        <View style={styles.headerRightView}>
+        
+          <Image
+            source={require('../assets/images/bell.png')}
+            style={[
+              styles.icons,
+              { marginLeft: moderateScale(15), marginRight: moderateScale(15) },
+            ]}
+          />
+          <Image
+            source={require('../assets/images/help.png')}
+            style={styles.icons}
+          />
+        </View>
       </View>
     </View>
   );
 };
 
+export default Header;
+
 const styles = StyleSheet.create({
-  headerContainer: {
+  header: {
+    width: '100%',
+    height: verticalScale(70),
+    padding:10,
+    backgroundColor: '#007bff',
+    justifyContent: 'flex-end',
+  },
+  header2: {
+    width: '100%',
+    height: verticalScale(50),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
+    paddingLeft: moderateScale(10),
+    paddingRight: moderateScale(10),
   },
-  profileImage: {
-    width: 50,  // Make the image larger
-    height: 50, // Ensure proper aspect ratio
-    borderRadius: 25, // Make it a circle
-    borderWidth: 1, // Add a border for visibility
-    borderColor: '#4A4A4A', // Border color
-  },
-  appName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#4A4A4A',
-  },
-  rightIcons: {
+  headerLeftView: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
-  iconContainer: {
-    marginLeft: 16,
+  user: {
+    width: scale(40),
+    height: scale(40),
+  },
+  flag: {
+    width: scale(20),
+    height: scale(20),
+    position: 'absolute',
+    right: -moderateScale(3),
+    bottom: moderateScale(0),
+    borderRadius: scale(10),
+    borderWidth: 1,
+    borderColor: 'white',
+  },
+  home: {
+    fontSize: moderateScale(18),
+    color: 'white',
+    fontWeight: '600',
+  },
+  dropdown: {
+    width: scale(16),
+    height: scale(16),
+    tintColor: 'white',
+    marginLeft: moderateScale(5),
+  },
+  address: {
+    color: 'white',
+    fontSize: moderateScale(12),
+    marginTop: moderateScale(2),
+  },
+  headerRightView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icons: {
+    width: scale(22),
+    height: scale(22),
+    tintColor: 'white',
   },
 });
-
-export default Header;
