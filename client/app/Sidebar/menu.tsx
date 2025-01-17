@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-nati
 import { useRouter } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 
-const MenuPage = () => {
+const menu = () => {
   const router = useRouter();
 
   // Function to handle navigation
@@ -13,7 +13,6 @@ const MenuPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Menu</Text>
 
       <ScrollView contentContainerStyle={styles.menuList}>
         {/* Profile */}
@@ -91,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MenuPage;
+export default menu;
