@@ -97,6 +97,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  StatusBar,
 } from 'react-native';
 import React from 'react';
 import { Feather,Ionicons ,MaterialCommunityIcons } from '@expo/vector-icons';
@@ -121,6 +122,7 @@ const QrCodeScanner = () => {
 
   return (
     <View style={styles.container}>
+      {/* <StatusBar backgroundColor="pink" barStyle="dark-content" /> */}
       <View style={styles.header}>
         <View style={styles.subHeader}>
           <TouchableOpacity onPress={onclick} style={styles.backBtn}>
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     height: verticalScale(85),
-    backgroundColor: 'pink',
+    backgroundColor: '#ADD8E6',
     justifyContent: 'flex-end',
   },
   subHeader: {
@@ -178,6 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: moderateScale(10),
     paddingRight: moderateScale(15),
+    marginBottom:20,
   },
   backBtn: {
     width: scale(50),
@@ -195,7 +198,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',  // Centers the content vertically
     alignItems: 'center',      // Centers the content horizontally
     padding: 10,
-    backgroundColor: '#fff',   // Optional: Set a background color for the container
+    backgroundColor: '#ADD8E6',   // Optional: Set a background color for the container
   },
   title: {
     // color: 'white',
@@ -208,7 +211,7 @@ const styles = StyleSheet.create({
     color: '#666',             // Lighter color for the description
   },
   button :{
-    backgroundColor:'blue',
+    backgroundColor:'#000000',
     padding:8,
     marginTop:10,
     borderRadius:15,

@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView ,StatusBar} from 'react-native';
 import React, { useState } from 'react';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
@@ -13,6 +13,7 @@ const Home = () => {
      
        
       <ScrollView style={styles.container}>
+        <StatusBar backgroundColor="#ADD8E6" barStyle="dark-content" />
         <Header/>
         <View >
         <CurrencyConverter />

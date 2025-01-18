@@ -113,10 +113,9 @@ const Market = () => {
   return (
     <View style={styles.container}>
       <Header />
-      
-      <Text style={styles.title}>Live Currency Market</Text>
-
+        <Text style={styles.title}>Live Currency Market</Text>
       {/* Base Currency Dropdown */}
+      {/* <View style={styles.select}> */}
       <Picker
         selectedValue={selectedCurrency}
         style={styles.picker}
@@ -124,9 +123,10 @@ const Market = () => {
       >
         {/* Render all currencies dynamically */}
         {allCurrencies.map((currency) => (
-          <Picker.Item key={currency} label={currency} value={currency} />
+          <Picker.Item key={currency} label={currency} value={currency}/>
         ))}
       </Picker>
+      {/* </View> */}
 
       {/* Search Bar */}
       <TextInput
@@ -164,28 +164,39 @@ const Market = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F9FA',
+    // backgroundColor: '#F8F9FA',
+    backgroundColor:'#ADD8E6',
     padding: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginTop:15,
     marginBottom: 16,
   },
+  // select:{
+  //     height:45,
+  //     backgroundColor:'#fff',
+  //     // borderColor:'blue',
+  //     // borderWidth:1,
+  //     borderRadius: 8,
+  //     marginBottom: 16,
+  // },
   picker: {
     height: 50,
     width: '100%',
     marginBottom: 16,
-    borderColor: '#ccc',
+    borderColor: '#777777',
     borderWidth: 1,
     borderRadius: 8,
     backgroundColor: '#fff',
   },
   searchBar: {
     height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
+    backgroundColor:'#fff',
+    // borderColor: '#777777',
+    // borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,
     marginBottom: 16,
@@ -196,7 +207,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#777777',
   },
   currency: {
     fontSize: 16,
