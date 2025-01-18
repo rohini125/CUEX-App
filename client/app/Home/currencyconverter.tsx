@@ -501,15 +501,17 @@ const CurrencyConverter = () => {
               onChangeText={(text) => setAmount(text)}
             />
           </View>
-
+          
           <Text style={{ marginBottom: 5 }}>Converted Amount: </Text>
+          <View style={styles.row}> 
+          {/* <Text style={{ marginBottom: 5 }}>Converted Amount: </Text> */}
           <TextInput
             placeholder="Converted Amount"
             style={styles.input}
             value={`${currencySymbols[toCurrency]} ${convertedAmount}  `} // Use toCurrency here for the symbol
             editable={false}
           />
-
+          </View>
           <View style={styles.rowButtons}>
             <TouchableOpacity
               style={[styles.button, styles.shadow]}
@@ -569,7 +571,6 @@ const CurrencyConverter = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
     marginBottom: 25,
     padding: 20,
     justifyContent: 'center',
@@ -581,10 +582,11 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
   },
   header: {
-    fontSize: 17,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
+    // marginTop:'auto',
   },
   row: {
     flexDirection: 'row',

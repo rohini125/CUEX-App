@@ -89,7 +89,7 @@
 
 
 import React from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, StatusBar } from "react-native";
 import Mybutton from "@/components/Mybutton";
 import { useRouter } from "expo-router";
 import { BlurView } from "expo-blur";
@@ -106,6 +106,7 @@ const index = () => {
       source={require("../assets/images/StaringPage.jpg")}
       style={styles.background}
     >
+      <StatusBar barStyle="dark-content"/>
       <BlurView intensity={10} style={styles.overlay}>
         <Animatable.Text 
           // animation type [fadeIn,bounce , zoomIn , slideInDown , pulse , shake]

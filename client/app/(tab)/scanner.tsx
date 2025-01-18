@@ -122,7 +122,7 @@ const QrCodeScanner = () => {
 
   return (
     <View style={styles.container}>
-      {/* <StatusBar backgroundColor="pink" barStyle="dark-content" /> */}
+      <StatusBar backgroundColor="#ADD8E6" barStyle="dark-content" />
       <View style={styles.header}>
         <View style={styles.subHeader}>
           <TouchableOpacity onPress={onclick} style={styles.backBtn}>
