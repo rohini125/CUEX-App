@@ -38,7 +38,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
               accessible
             />
           </TouchableOpacity>
-          <View style={{ marginLeft: moderateScale(10) }}>
+          <View style={{ marginLeft: moderateScale(76) }}>
             <Text style={styles.home}>CUEX</Text>
           </View>
         </View>
@@ -48,7 +48,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
           <TouchableOpacity onPress={() => navigate('/Sidebar/price-alert')}>
             <Image
               source={require('../assets/images/bell.png')}
-              style={[styles.icons, { marginHorizontal: moderateScale(15) }]}
+              style={[styles.icons, { marginHorizontal: moderateScale(20) }]}
               accessibilityLabel="Notifications"
               accessible
             />
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   home: {
     fontSize: moderateScale(18),
     color: 'black',
+    textAlign:'center',
     fontWeight: '600',
   },
   headerRightView: {
