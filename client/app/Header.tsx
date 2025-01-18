@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
-import menu from './Sidebar/Menu';
+import menu from './Sidebar/menu';
 
 interface CommonHeaderProps {
   onProfilePress?: () => void;
