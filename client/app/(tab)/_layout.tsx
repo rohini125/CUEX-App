@@ -32,7 +32,7 @@ const TabRoot = () =>{
                     options={{
                     title: " ",
                     tabBarIcon: ({ color }) => (
-                        <MaterialIcons name="qr-code-scanner" size={28} color={color} style={styles.scanner}/>
+                        <MaterialIcons name="qr-code-scanner" size={28} color={color}/>
                     ),
             }}/>
             {/* <Tabs.Screen 
