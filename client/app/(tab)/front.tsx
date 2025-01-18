@@ -9,10 +9,16 @@ import Header from '../Header';
 const Home = () => {
   const router = useRouter();
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const handleProfilePress = () => {
+    setIsSidebarOpen(true); // Open sidebar when profile is pressed
+  };
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false); // Close sidebar
+  };
+
   return (
-    <View> 
-       <Header  />
-  
+    <View>  <Header  />
     <ScrollView style={styles.container}>
       <View >
       <CurrencyConverter />
@@ -152,5 +158,4 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
-
 

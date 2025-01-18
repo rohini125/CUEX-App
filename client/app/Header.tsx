@@ -29,6 +29,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
       <View style={styles.header2}>
         {/* Left Section */}
         <View style={styles.headerLeftView}>
+  
           <TouchableOpacity onPress={() => navigate('/Sidebar/menu')}>
             <Image
               source={require('../assets/images/man.png')}
