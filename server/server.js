@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 // import userRoute from "./routes/userRoute.js";
 import nomineeRoutes from "./routes/nomineeRoutes.js";
 import conversionRoutes from "./routes/conversionRoutes.js";
-
+import upiPinRoutes from './routes/upiPinRoutes.js';
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 import cors from "cors";
@@ -35,6 +35,9 @@ app.use('/api/nominees', nomineeRoutes);
 
 // currency conversion route
 app.use("/api", conversionRoutes);
+
+// upi-pin Routes
+app.use('/api/upi-pin', upiPinRoutes);
 
 // Connect to MongoDB
 connectDB();
