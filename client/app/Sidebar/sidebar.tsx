@@ -5,13 +5,14 @@ import { useRouter } from 'expo-router';
 import { Dimensions } from 'react-native';
 import 'react-native-gesture-handler'
 
+const sidebar = () => {
 type SidebarProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
 
   const profile = {
@@ -39,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  const navigateAndClose = (route: `/Sidebar/profile` |`/Sidebar/AccountSetting`|`/Sidebar/price-alert`|  `/Sidebar/promotions` | `/Sidebar/settings` | `/Sidebar/help` | `/Sidebar/logout`) => {
+  const navigateAndClose = (route: `/Sidebar/profile` |`/Sidebar/AccountSetting`|`/Sidebar/price-alert`|  `/Sidebar/promotions` | `/Sidebar/settings` | `/Sidebar/help`|`/Sidebar/about` | `/Sidebar/logout`) => {
     router.push(route);
     onClose();
 };
@@ -74,6 +75,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               <Feather name="help-circle" size={20} color="#4A4A4A" />
               <Text style={styles.menuText}>Help & Support</Text>
             </TouchableOpacity>
+            
+            <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/about')}>
+              <Feather name="help-circle" size={20} color="#4A4A4A" />
+              <Text style={styles.menuText}>About CUEX</Text>
+            </TouchableOpacity>
       
             <TouchableOpacity style={styles.menuItem} onPress={() => navigateAndClose('/Sidebar/logout')}>
               <Feather name="log-out" size={20} color="#4A4A4A" />
@@ -88,6 +94,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     </Modal>
   );
 };
+}
 
 const styles = StyleSheet.create({
   modalOverlay: {
@@ -99,7 +106,7 @@ const styles = StyleSheet.create({
   },
   sidebar: {
     backgroundColor: '#fff',
-    width: SCREEN_WIDTH * 0.8, // 80% of screen width
+    width: '100%', 
     height: '100%',
     padding: 16,
     shadowColor: '#000', // Shadow color
@@ -159,4 +166,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Sidebar;
+export default sidebar;

@@ -5,26 +5,17 @@ import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import CurrencyConverter from '../Home/currencyconverter';
 import Header from '../Header';
-import Sidebar from '../Sidebar/sidebar'
+
 const Home = () => {
   const router = useRouter();
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const handleProfilePress = () => {
-    setIsSidebarOpen(true); // Open sidebar when profile is pressed
-  };
-  const handleCloseSidebar = () => {
-    setIsSidebarOpen(false); // Close sidebar
-  };
-
   return (
+    <View> 
+       <Header  />
+  
     <ScrollView style={styles.container}>
-      <View>
-      <Header onProfilePress={handleProfilePress} />
-      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
-
+      <View >
       <CurrencyConverter />
-
       </View>
       <View style={styles.Cardcontainer}>
         <Text style={styles.title}>Transfer Money</Text>
@@ -95,6 +86,7 @@ const Home = () => {
         </View>
       </View>
     </ScrollView>
+    </View>
   );
 };
 

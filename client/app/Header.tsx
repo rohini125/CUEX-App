@@ -1,68 +1,107 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useRouter } from 'expo-router'; // Import router for navigation
-type HeaderProps = {
-  onProfilePress: () => void;  // Define the prop type for the function
-};
- const router = useRouter(); // For navigation
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
+import menu from './Sidebar/Menu';
 
-const Header: React.FC<HeaderProps> = ({ onProfilePress }) => {
+interface CommonHeaderProps {
+  onProfilePress?: () => void;
+  onNotificationPress?: () => void;
+  onHelpPress?: () => void;
+}
+
+const CommonHeader: React.FC<CommonHeaderProps> = () => {
+  const router = useRouter(); // Initialize the router
+
+  // Navigate to the provided route
+  const navigate = (route: `/Sidebar/menu` | `/Sidebar/price-alert` | `/Sidebar/help`) => {
+    router.push(route);
+  };
+
   return (
-    <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={(onProfilePress)} style={styles.iconContainer}>
-        <Image
-          source={{
-            uri: 'https://via.placeholder.com/40', // Replace with user's profile image
-          }}
-          style={styles.profileImage}
-        />
-        
-      </TouchableOpacity>
-      <Text style={styles.appName}>CUEX</Text>
-      <View style={styles.rightIcons}>
-        <TouchableOpacity style={styles.iconContainer}>
-          <Feather name="bell" size={24} color="#4A4A4A" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
-          <Feather name="help-circle" size={24} color="#4A4A4A" />
-        </TouchableOpacity>
+    <View style={styles.header}>
+      <View style={styles.header2}>
+        {/* Left Section */}
+        <View style={styles.headerLeftView}>
+          <TouchableOpacity onPress={() => navigate('/Sidebar/menu')}>
+            <Image
+              source={require('../assets/images/man.png')}
+              style={styles.user}
+              accessibilityLabel="User Profile Image"
+              accessible
+            />
+          </TouchableOpacity>
+          <View style={{ marginLeft: moderateScale(10) }}>
+            <Text style={styles.home}>CUEX</Text>
+          </View>
+        </View>
+
+        {/* Right Section */}
+        <View style={styles.headerRightView}>
+          <TouchableOpacity onPress={() => navigate('/Sidebar/price-alert')}>
+            <Image
+              source={require('../assets/images/bell.png')}
+              style={[styles.icons, { marginHorizontal: moderateScale(15) }]}
+              accessibilityLabel="Notifications"
+              accessible
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigate('/Sidebar/help')}>
+            <Image
+              source={require('../assets/images/help.png')}
+              style={styles.icons}
+              accessibilityLabel="Help"
+              accessible
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 };
 
+export default CommonHeader;
+
 const styles = StyleSheet.create({
-  headerContainer: {
+  header: {
+    width: '100%',
+    height: verticalScale(50),
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
+  },
+  header2: {
+    width: '100%',
+    height: verticalScale(50),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
+    paddingHorizontal: moderateScale(10),
   },
-  profileImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderColor: '#4A4A4A',
-  },
-  appName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#4A4A4A',
-  },
-  rightIcons: {
+  headerLeftView: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
-  iconContainer: {
-    marginLeft: 16,
+  user: {
+    width: scale(40),
+    height: scale(40),
+  },
+  home: {
+    fontSize: moderateScale(18),
+    color: 'black',
+    fontWeight: '600',
+  },
+  headerRightView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icons: {
+    width: scale(22),
+    height: scale(22),
+    tintColor: 'black',
   },
 });
-
-export default Header;
