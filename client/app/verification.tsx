@@ -16,7 +16,7 @@ export default function VerificationPage() {
 
   useEffect(() => {
     // Simulate API call to get OTP (mock OTP)
-    setTimeout(() => setServerOtp('12345'), 2000); // Mock server OTP
+    setTimeout(() => setServerOtp('123456'), 2000); // Mock server OTP
   }, []);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function VerificationPage() {
 
   const handleResendOtp = async () => {
     setTimer(120); // Reset the timer
-    setServerOtp('12345'); // Simulate new OTP from server (mocked for now)
+    setServerOtp('123456'); // Simulate new OTP from server (mocked for now)
     // alert('OTP sent successfully!');
   };
 

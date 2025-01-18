@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
-// import menu from './Sidebar/Menu';
+import menu from './Sidebar/Menu';
 
 interface CommonHeaderProps {
   onProfilePress?: () => void;
@@ -29,6 +29,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
       <View style={styles.header2}>
         {/* Left Section */}
         <View style={styles.headerLeftView}>
+  
           <TouchableOpacity onPress={() => navigate('/Sidebar/menu')}>
             <Image
               source={require('../assets/images/man.png')}
@@ -72,8 +73,7 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     height: verticalScale(50),
-    // backgroundColor: 'white',
-    backgroundColor: '#ADD8E6',
+    backgroundColor: 'white',
     justifyContent: 'flex-end',
   },
   header2: {

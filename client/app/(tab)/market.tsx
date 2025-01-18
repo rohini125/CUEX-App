@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, RefreshControl, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, RefreshControl, TextInput, StatusBar } from 'react-native';
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
 import Header from '../Header';
@@ -111,9 +111,16 @@ const Market = () => {
   };
 
   return (
+
+    <View style={{ flex: 1 }}>
+    {/* Full-Width Header */}
+    <View >
+      <Header/>
+    </View>
     <View style={styles.container}>
-      <Header />
-        <Text style={styles.title}>Live Currency Market</Text>
+      
+      <Text style={styles.title}>Live Currency Market</Text>
+
       {/* Base Currency Dropdown */}
       {/* <View style={styles.select}> */}
       <Picker
@@ -157,6 +164,7 @@ const Market = () => {
           }
         />
       )}
+    </View>
     </View>
   );
 };

@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView ,StatusBar} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet,StatusBar} from 'react-native';
 import React, { useState } from 'react';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
@@ -9,15 +9,23 @@ import Header from '../Header';
 const Home = () => {
   const router = useRouter();
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const handleProfilePress = () => {
+    setIsSidebarOpen(true); // Open sidebar when profile is pressed
+  };
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false); // Close sidebar
+  };
+
   return (
-     
-       
-      <ScrollView style={styles.container}>
-        <StatusBar backgroundColor="#ADD8E6" barStyle="dark-content" />
-        <Header/>
-        <View >
-        <CurrencyConverter />
-        </View>
+     <View style={{flex:1}}>
+      <StatusBar backgroundColor="white" barStyle="dark-content"  />
+       <Header  />
+  
+      <View style={styles.container}>
+        {/* <View> */}
+          <CurrencyConverter />
+        {/* </View> */}
         <View style={styles.Cardcontainer}>
           <Text style={styles.title}>Transfer Money</Text>
           <View style={styles.iconContainer}>
@@ -52,51 +60,56 @@ const Home = () => {
               </Link>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.iconBox}
-              activeOpacity={0.7}
-            >
-              <Link href="/MoneyTransfer/ToSelf">
-                <View style={styles.iconTextWrapper}>
-                  <View style={styles.iconBackground}>
-                    <FontAwesome5 name="wallet" size={18} color="white" />
+              <TouchableOpacity
+                style={styles.iconBox}
+                activeOpacity={0.7}
+              >
+                <Link href="/MoneyTransfer/ToSelf">
+                  <View style={styles.iconTextWrapper}>
+                    <View style={styles.iconBackground}>
+                      <FontAwesome5 name="wallet" size={18} color="white" />
+                    </View>
+                    <Text style={styles.iconText} numberOfLines={2}>
+                      To Self Account
+                    </Text>
                   </View>
-                  <Text style={styles.iconText} numberOfLines={2}>
-                    To Self Account
-                  </Text>
-                </View>
-              </Link>
-            </TouchableOpacity>
+                </Link>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.iconBox}
-              activeOpacity={0.7}
-            >
-              <Link href="/MoneyTransfer/CheckBalance">
-                <View style={styles.iconTextWrapper}>
-                  <View style={styles.iconBackground}>
-                    <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
+              <TouchableOpacity
+                style={styles.iconBox}
+                activeOpacity={0.7}
+              >
+                <Link href="/MoneyTransfer/CheckBalance">
+                  <View style={styles.iconTextWrapper}>
+                    <View style={styles.iconBackground}>
+                      <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
+                    </View>
+                    <Text style={styles.iconText} numberOfLines={2}>
+                      Check Balance
+                    </Text>
                   </View>
-                  <Text style={styles.iconText} numberOfLines={2}>
-                    Check Balance
-                  </Text>
-                </View>
-              </Link>
-            </TouchableOpacity>
+                </Link>
+              </TouchableOpacity>
 
+            </View>
           </View>
         </View>
-      </ScrollView>
+      </View>
     
   );
 };
 
+export default Home;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width:'100%',
     backgroundColor: '#F8F9FA',
     padding: 16,
   },
+
   Cardcontainer: {
   
     // justifyContent: 'center',
@@ -152,6 +165,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
 
 

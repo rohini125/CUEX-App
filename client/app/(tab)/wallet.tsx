@@ -11,6 +11,7 @@ import {
   Alert,
 } from "react-native";
 import React, { useState } from "react";
+import Header from '../Header';
 
 // Define a type for currency object
 interface Currency {
@@ -79,6 +80,11 @@ const Wallet = () => {
   };
 
   return (
+    <View style={{ flex: 1 }}>
+    {/* Full-Width Header */}
+    <View >
+      <Header/>
+    </View>
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>My Wallet</Text>
@@ -125,6 +131,7 @@ const Wallet = () => {
         />
       </View>
     </ScrollView>
+    </View>
   );
 };
 
