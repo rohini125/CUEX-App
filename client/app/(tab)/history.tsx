@@ -1,8 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import Header from '../Header';
 
 const History = () => {
   return (
+    <View style={{ flex: 1 }}>
+    {/* Full-Width Header */}
+    <View >
+      <Header/>
+    </View>
     <ScrollView style={styles.container}>
       {/* Filters */}
       <View style={styles.filters}>
@@ -60,6 +66,7 @@ const History = () => {
         <Text style={styles.rowText}>Sends</Text>
       </View>
     </ScrollView>
+    </View>
   );
 };
 

@@ -18,7 +18,13 @@ const Home = () => {
   };
 
   return (
-    <View>  <Header  />
+
+    <View style={{ flex: 1 }}>
+    {/* Full-Width Header */}
+    <View >
+      <Header/>
+    </View>
+
     <ScrollView style={styles.container}>
       <View >
       <CurrencyConverter />
@@ -99,9 +105,11 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width:'100%',
     backgroundColor: '#F8F9FA',
     padding: 16,
   },
+
   Cardcontainer: {
   
     // justifyContent: 'center',

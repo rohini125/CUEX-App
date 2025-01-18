@@ -111,8 +111,14 @@ const Market = () => {
   };
 
   return (
+
+    <View style={{ flex: 1 }}>
+    {/* Full-Width Header */}
+    <View >
+      <Header/>
+    </View>
     <View style={styles.container}>
-      <Header />
+   
       
       <Text style={styles.title}>Live Currency Market</Text>
 
@@ -157,6 +163,7 @@ const Market = () => {
           }
         />
       )}
+    </View>
     </View>
   );
 };
