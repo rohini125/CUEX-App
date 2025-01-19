@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet,StatusBar} from 'react-native';
 import React, { useState } from 'react';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
@@ -18,89 +18,87 @@ const Home = () => {
   };
 
   return (
-
-    <View style={{ flex: 1 }}>
-    {/* Full-Width Header */}
-    <View >
-      <Header/>
-    </View>
-
-    <ScrollView style={styles.container}>
-      <View >
-      <CurrencyConverter />
-      </View>
-      <View style={styles.Cardcontainer}>
-        <Text style={styles.title}>Transfer Money</Text>
-        <View style={styles.iconContainer}>
-          <TouchableOpacity
-            style={styles.iconBox}
-            activeOpacity={0.7}
-          > 
-            <Link href="/MoneyTransfer/ToMobileNo">
-              <View style={styles.iconTextWrapper}>
-                <View style={styles.iconBackground}>
-                  <FontAwesome5 name="mobile-alt" size={18} color="white" />
+     <View style={{flex:1}}>
+      <StatusBar backgroundColor="white" barStyle="dark-content"  />
+       <Header  />
+  
+      <View style={styles.container}>
+          <CurrencyConverter />
+        <View style={styles.Cardcontainer}>
+          <Text style={styles.title}>Transfer Money</Text>
+          <View style={styles.iconContainer}> 
+            <TouchableOpacity
+              style={styles.iconBox}
+              activeOpacity={0.7}
+            > 
+              <Link href="/MoneyTransfer/ToMobileNo">
+                <View style={styles.iconTextWrapper}>
+                  <View style={styles.iconBackground}>
+                    <FontAwesome5 name="mobile-alt" size={18} color="white" />
+                  </View>
+                  <Text style={styles.iconText} numberOfLines={2}>
+                    To Mobile Number
+                  </Text>
                 </View>
-                <Text style={styles.iconText} numberOfLines={2}>
-                  To Mobile Number
-                </Text>
-              </View>
-            </Link>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.iconBox}
-            activeOpacity={0.7}
-          >
-            <Link href="/MoneyTransfer/ToBank">
-              <View style={styles.iconTextWrapper}>
-                <View style={styles.iconBackground}>
-                  <MaterialIcons name="account-balance" size={18} color="white" />
+              </Link>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconBox}
+              activeOpacity={0.7}
+            >
+              <Link href="/MoneyTransfer/ToBank">
+                <View style={styles.iconTextWrapper}>
+                  <View style={styles.iconBackground}>
+                    <MaterialIcons name="account-balance" size={18} color="white" />
+                  </View>
+                  <Text style={styles.iconText} numberOfLines={2}>
+                    To Bank/UPI ID
+                  </Text>
                 </View>
-                <Text style={styles.iconText} numberOfLines={2}>
-                  To Bank/UPI ID
-                </Text>
-              </View>
-            </Link>
-          </TouchableOpacity>
+              </Link>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.iconBox}
-            activeOpacity={0.7}
-          >
-            <Link href="/MoneyTransfer/ToSelf">
-              <View style={styles.iconTextWrapper}>
-                <View style={styles.iconBackground}>
-                  <FontAwesome5 name="wallet" size={18} color="white" />
-                </View>
-                <Text style={styles.iconText} numberOfLines={2}>
-                  To Self Account
-                </Text>
-              </View>
-            </Link>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconBox}
+                activeOpacity={0.7}
+              >
+                <Link href="/MoneyTransfer/ToSelf">
+                  <View style={styles.iconTextWrapper}>
+                    <View style={styles.iconBackground}>
+                      <FontAwesome5 name="wallet" size={18} color="white" />
+                    </View>
+                    <Text style={styles.iconText} numberOfLines={2}>
+                      To Self Account
+                    </Text>
+                  </View>
+                </Link>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.iconBox}
-            activeOpacity={0.7}
-          >
-            <Link href="/MoneyTransfer/CheckBalance">
-              <View style={styles.iconTextWrapper}>
-                <View style={styles.iconBackground}>
-                  <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
-                </View>
-                <Text style={styles.iconText} numberOfLines={2}>
-                  Check Balance
-                </Text>
-              </View>
-            </Link>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconBox}
+                activeOpacity={0.7}
+              >
+                <Link href="/MoneyTransfer/CheckBalance">
+                  <View style={styles.iconTextWrapper}>
+                    <View style={styles.iconBackground}>
+                      <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
+                    </View>
+                    <Text style={styles.iconText} numberOfLines={2}>
+                      Check Balance
+                    </Text>
+                  </View>
+                </Link>
+              </TouchableOpacity>
 
+            </View>
+          </View>
         </View>
       </View>
-    </ScrollView>
-    </View>
+    
   );
 };
+
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: 'bold',
     marginTop: 10,
     // marginVertical:10,
@@ -165,5 +163,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+
 

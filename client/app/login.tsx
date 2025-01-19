@@ -1,60 +1,4 @@
 
-// import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-// import Mybutton from "@/components/Mybutton";
-// import { Link, useRouter } from 'expo-router';
-
-// const Login = () => {
-//   const router = useRouter();
-
-//   const onLogin = () => {
-//     router.navigate('/verification');
-//   };
-
-//   const onSignUp = () => {
-//     router.navigate('/signup');
-//   };
-
-//   return (
-//     <ScrollView style={styles.container}>
-//       <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" />
-//       <View style={{ padding: 20, gap: 20 }}>
-//         <TextInput placeholder="Enter Your Email / Mobile no" style={styles.input} />
-//         <TextInput placeholder="Enter Your Password" style={styles.input} secureTextEntry />
-
-//           <Mybutton title={"Login"} onPress={onLogin} />
-//           <Text style={{ textAlign: 'center' }}>
-//           Don't have an account?{' '}
-//             <Text style={styles.link} onPress={onSignUp}>
-//               Signup
-//             </Text>
-//         </Text>
-//       </View>
-//     </ScrollView>
-//   );
-// };
-
-// export default Login;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   image: {
-//     width: "100%",
-//     height: 400,
-//   },
-//   input: {
-//     borderWidth: 1,
-//     height: 50,
-//     paddingHorizontal: 20,
-//     borderRadius: 10,
-//   },
-//   link: {
-//     color: 'blue',
-//     textDecorationLine: 'underline',
-//   },
-// });
-
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Modal} from 'react-native';
@@ -294,3 +238,278 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
+// import React, { useState } from 'react';
+// import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Modal} from 'react-native';
+// import Mybutton from "@/components/Mybutton";
+// import {useRouter } from 'expo-router';
+// import axios from 'axios';
+
+// const Login = () => {
+//   const router = useRouter();
+//   const [modalVisible, setModalVisible] = useState(false);
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [resetSuccess, setResetSuccess] = useState(false);
+//   const [error, setError] = useState<string | null>(null); // Ensure error type is defined
+
+//   const onLogin = async () => {
+//     try {
+//       const response = await axios.post('https://192.168.245.190/api/login', { email, password });
+//       if (response.data.success) {
+//         router.navigate('/verification');
+//       } else {
+//         setError(response.data.message || 'Login failed');
+//       }
+//     } catch (err: unknown) {
+//       if (err instanceof Error) {
+//         setError(err.message);
+//       } else {
+//         setError('An unknown error occurred');
+//       }
+//     }
+//   };
+
+//   const onSignUp = () => {
+//     router.navigate('/signup');
+//   };
+
+//   const onForgotPassword = () => {
+//     setModalVisible(true);
+//   };
+
+//   const onResetPassword = async () => {
+//     try {
+//       const response = await axios.post('https://your-backend-url/api/reset-password', { email });
+//       if (response.data.success) {
+//         setResetSuccess(true);
+
+//       } else {
+//         setError(response.data.message || 'Failed to send reset link');
+//       }
+//     } catch (err: unknown) {
+//       if (err instanceof Error) {
+//         setError(err.message);
+//       } else {
+//         setError('An unknown error occurred');
+//       }
+//     }
+//   };
+
+//   const onCloseModal = () => {
+//     setModalVisible(false);
+//     setResetSuccess(false);
+//     setError(null);
+//   };
+
+//   return (
+//     <ScrollView style={styles.container}>
+//       <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" />
+//       <View style={{ padding: 20, gap: 20 }}>
+//         <TextInput 
+//           placeholder="Enter Your Email / Mobile no" 
+//           style={styles.input} 
+//           value={email}
+//           onChangeText={setEmail}
+//         />
+//         <TextInput 
+//           placeholder="Enter Your Password" 
+//           style={styles.input} 
+//           secureTextEntry 
+//           value={password}
+//           onChangeText={setPassword}
+//         />
+//         <Text style={styles.forgotPassword} onPress={onForgotPassword}>Forgot Password?</Text>
+//         <Mybutton title={"Login"} onPress={onLogin} />
+//         {error && <Text style={styles.errorText}>{error}</Text>}  {/* Display error messages */}
+//         <Text style={{ textAlign: 'center' }}>
+//           Don't have an account?{' '}
+//           <Text style={styles.link} onPress={onSignUp}>
+//             Signup
+//           </Text>
+//         </Text>
+//       </View>
+//       <Modal
+//         animationType="slide"
+//         transparent={true}
+//         visible={modalVisible}
+//         onRequestClose={onCloseModal}
+//       >
+//         <View style={styles.modalBackground}>
+//           <View style={styles.modalContainer}>
+//             <TouchableOpacity style={styles.closeButton} onPress={onCloseModal}>
+//               <Text style={styles.closeButtonText}>X</Text>
+//             </TouchableOpacity>
+
+//             {!resetSuccess ? (
+//               <>
+//                 <Text style={styles.modalHeader}>Forgot Password ?</Text>
+//                 <Text style={styles.modalDescription}>
+//                   Enter the email address associated with your account, and we'll email you a link to reset your password.
+//                 </Text>
+//                 <Text style={styles.label}>Email</Text>
+//                 <TextInput
+//                   style={styles.modalInput}
+//                   placeholder="Enter your email"
+//                   keyboardType="email-address"
+//                   value={email}
+//                   onChangeText={setEmail}
+//                 />
+//                 <TouchableOpacity style={styles.modalButton} onPress={onResetPassword}>
+//                   <Text style={styles.modalButtonText}>SEND RESET LINK</Text>
+//                 </TouchableOpacity>
+//                 <TouchableOpacity style={styles.modalButtonCancel} onPress={onCloseModal}>
+//                   <Text style={styles.modalButtonTextCancel}>CANCEL</Text>
+//                 </TouchableOpacity>
+//               </>
+//             ) : (
+//               <>
+//                 <View style={styles.successContainer}>
+//                   <View style={styles.checkCircle}>
+//                     <Text style={styles.checkCircleText}>✓</Text>
+//                   </View>
+//                   <Text style={styles.successMessage}>Email sent successfully!</Text>
+//                   <Text style={styles.emailConfirmation}>
+//                     A link to reset your password has been sent to {email}
+//                   </Text>
+//                 </View>
+//                 <TouchableOpacity style={styles.modalButtonCancel} onPress={onCloseModal}>
+//                   <Text style={styles.modalButtonTextCancel}>CLOSE</Text>
+//                 </TouchableOpacity>
+//               </>
+//             )}
+//           </View>
+//         </View>
+//       </Modal>
+//     </ScrollView>
+//   );
+// };
+
+// export default Login;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+//   image: {
+//     width: "100%",
+//     height: 400,
+//   },
+//   label: {
+//     fontSize: 16,
+//     marginBottom: 10,
+//   },
+//   input: {
+//     borderWidth: 1,
+//     height: 50,
+//     paddingHorizontal: 20,
+//     borderRadius: 10,
+//   },
+//   link: {
+//     color: 'blue',
+//     textDecorationLine: 'underline',
+//   },
+//   forgotPassword: {
+//     color: 'blue',
+//     fontSize: 14,
+//     textAlign: 'center',
+//   },
+//   modalBackground: {
+//     flex: 1,
+//     justifyContent: 'flex-end',
+//     alignItems: 'center',
+//     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+//   },
+//   modalContainer: {
+//     width: '100%',
+//     backgroundColor: '#fff',
+//     padding: 20,
+//     borderTopLeftRadius: 20,
+//     borderTopRightRadius: 20,
+//   },
+//   closeButton: {
+//     position: 'absolute',
+//     top: 10,
+//     right: 10,
+//     padding: 10,
+//   },
+//   closeButtonText: {
+//     fontSize: 18,
+//     color: '#333',
+//   },
+//   modalHeader: {
+//     fontSize: 18,
+//     fontWeight: 'bold',
+//     marginBottom: 15,
+//   },
+//   modalDescription: {
+//     fontSize: 14,
+//     marginBottom: 15,
+//     color: '#555',
+//   },
+//   modalInput: {
+//     height: 50,
+//     borderColor: '#ddd',
+//     borderWidth: 1,
+//     borderRadius: 10,
+//     paddingHorizontal: 10,
+//     marginBottom: 20,
+//   },
+//   modalButton: {
+//     backgroundColor: '#007bff',
+//     paddingVertical: 12,
+//     borderRadius: 50,
+//     alignItems: 'center',
+//     marginBottom: 10,
+//   },
+//   modalButtonText: {
+//     color: '#fff',
+//     fontSize: 16,
+//     fontWeight: 'bold',
+//   },
+//   modalButtonCancel: {
+//     backgroundColor: '#fff',
+//     paddingVertical: 12,
+//     borderRadius: 50,
+//     alignItems: 'center',
+//     marginBottom: 10,
+//   },
+//   modalButtonTextCancel: {
+//     color: '#007bff',
+//     fontSize: 16,
+//     fontWeight: 'bold',
+//   },
+//   successContainer: {
+//     alignItems: 'center',
+//     marginBottom: 20,
+//   },
+//   checkCircle: {
+//     width: 50,
+//     height: 50,
+//     borderRadius: 25,
+//     backgroundColor: '#28a745',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     marginBottom: 10,
+//   },
+//   checkCircleText: {
+//     fontSize: 24,
+//     color: '#fff',
+//   },
+//   successMessage: {
+//     fontSize: 16,
+//     fontWeight: 'bold',
+//     color: '#28a745',
+//   },
+//   emailConfirmation: {
+//     fontSize: 14,
+//     color: '#555',
+//     marginTop: 20,
+//   },
+//   errorText: {
+//     color: 'red',
+//     textAlign: 'center',
+//     marginTop: 10,
+//   },
+// });

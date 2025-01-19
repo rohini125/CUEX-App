@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
-import menu from './Sidebar/menu';
+import menu from './Sidebar/Menu';
 
 interface CommonHeaderProps {
   onProfilePress?: () => void;
@@ -72,11 +72,9 @@ export default CommonHeader;
 const styles = StyleSheet.create({
   header: {
     width: '100%',
-    height: 70, // Adjust the height as needed
-    backgroundColor: '#007BFF', // Header background color
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 16,
+    height: verticalScale(50),
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
   },
   header2: {
     width: '100%',

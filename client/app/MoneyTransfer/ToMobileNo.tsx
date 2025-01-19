@@ -40,30 +40,32 @@ const ToMobilePay = () => {
         </TouchableOpacity>
         <Text style={styles.headerText}>Send Money to Mobile Number</Text>
       </View>
+       
+      <View style={styles.Content}>
+          {/* Mobile Number Input */}
+          <TextInput
+            placeholder="Enter Mobile Number"
+            keyboardType="numeric"
+            maxLength={10}
+            style={styles.input}
+            value={mobileNumber}
+            onChangeText={setMobileNumber}
+          />
 
-      {/* Mobile Number Input */}
-      <TextInput
-        placeholder="Enter Mobile Number"
-        keyboardType="numeric"
-        maxLength={10}
-        style={styles.input}
-        value={mobileNumber}
-        onChangeText={setMobileNumber}
-      />
+          {/* Amount Input */}
+          <TextInput
+            placeholder="Enter Amount"
+            keyboardType="numeric"
+            style={styles.input}
+            value={amount}
+            onChangeText={setAmount}
+          />
 
-      {/* Amount Input */}
-      <TextInput
-        placeholder="Enter Amount"
-        keyboardType="numeric"
-        style={styles.input}
-        value={amount}
-        onChangeText={setAmount}
-      />
-
-      {/* Confirm Button */}
-      <TouchableOpacity style={styles.button} onPress={handleConfirm}>
-        <Text style={styles.buttonText}>Confirm</Text>
-      </TouchableOpacity>
+          {/* Confirm Button */}
+          <TouchableOpacity style={styles.button} onPress={handleConfirm}>
+            <Text style={styles.buttonText}>Confirm</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
@@ -75,6 +77,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#f9f9f9',
+  },
+  Content:{
+    flex:1,
+    justifyContent:'center',
   },
   header: {
     flexDirection: 'row',
