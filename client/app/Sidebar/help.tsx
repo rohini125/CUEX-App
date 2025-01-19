@@ -1,138 +1,163 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+// Define the type of each help option
+interface HelpOption {
+  id: string;
+  title: string;
+  icon: any; // You can replace `any` with ImageSourcePropType for stricter type checking
+}
 
-const Help = () => {
-  const [visibleAnswer, setVisibleAnswer] = useState<number | null>(null);
+const help = () => {
+  const helpOptions: HelpOption[] = [
+    { id: '1', title: 'Payment Issues', icon: require('../../assets/images/payment_issues.png') },
+    { id: '2', title: 'Profile & Payments', icon: require('../../assets/images/profile_payments.png') },
+    { id: '3', title: 'Money Transfer', icon: require('../../assets/images/money_transfer.png') },
+    { id: '4', title: 'Recharge & Bill Payments', icon: require('../../assets/images/recharge_bills.png') },
+    { id: '5', title: 'Rewards & Refer and Earn', icon: require('../../assets/images/rewards.png') },
+    { id: '6', title: 'Others', icon: require('../../assets/images/others.png') },
+  ];
   const router = useRouter();
 
-  const toggleAnswer = (index: number) => {
-    setVisibleAnswer(visibleAnswer === index ? null : index);
-  };
-  const faqs = [
-    {
-      question: 'How to transfer funds from banking app to CUEX wallet?',
-      answer:
-        'You can transfer funds by linking your bank account to the CUEX wallet in the app settings. Go to "Add Funds" and follow the instructions.',
-    },
-    {
-      question: 'How can I complete my KYC?',
-      answer:
-        'Complete your KYC by uploading your government-issued ID and address proof under the "Profile" section of the app.',
-    },
-    {
-      question: 'How do I reset my password?',
-      answer:
-        'To reset your password, go to the login page and click on "Forgot Password." Follow the steps to reset it.',
-    },
-    {
-      question: 'How to transfer funds to another person?',
-      answer:
-        'You can transfer funds by selecting "Send Money" in the app and entering the recipient’s wallet ID or email.',
-    },
-    {
-      question: 'How to convert one currency to another?',
-      answer:
-        'Use the "Currency Converter" feature in the app. Select the currencies, enter the amount, and confirm the exchange.',
-    },
-    {
-      question: 'How to withdraw my funds to a bank account?',
-      answer:
-        'To withdraw funds, go to the "Withdraw Funds" section in the app, enter your bank details, and follow the steps.',
-    },
-    {
-      question: 'How much amount can I transfer or withdraw in a day?',
-      answer:
-        'The daily limit depends on your account tier. Please check the "Limits & Fees" section in the app for details.',
-    },
-    {
-      question: 'What should I do if I lose my device?',
-      answer:
-        'Immediately log in to your account from another device and change your password. Contact support to secure your account.',
-    },
-    {
-      question: 'How do I update my account details?',
-      answer:
-        'Go to the "Profile" section in the app to update your personal details like email, phone number, and address.',
-    },
-    {
-      question: 'How can I check my transaction history?',
-      answer:
-        'Navigate to the "Transaction History" section in the app to view all past transactions.',
-    },
-  ];
-
+  // Specify the type of item in renderItem
+  const renderHelpOption = ({ item }: { item: HelpOption }) => (
+    <TouchableOpacity style={styles.optionContainer}>
+      <Image source={item.icon} style={styles.icon} />
+      <Text style={styles.optionText}>{item.title}</Text>
+    </TouchableOpacity>
+  );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+    <View style={styles.container}>
+      {/* Header */}
+       {/* Back Button */}
+       <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
         <Ionicons name="arrow-back" size={24} color="#333" />
       </TouchableOpacity>
-      <Text style={styles.title}>Help & Support</Text>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>TOP QUESTIONS</Text>
-        {faqs.map((faq, index) => (
-          <View key={index} style={styles.faqItem}>
-            <TouchableOpacity onPress={() => toggleAnswer(index)}>
-              <Text style={styles.question}>{index + 1}) {faq.question}</Text>
-            </TouchableOpacity>
-            {visibleAnswer === index && <Text style={styles.answer}>{faq.answer}</Text>}
-          </View>
-        ))}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Help</Text>
       </View>
-    </ScrollView>
+
+     
+      {/* Help Options */}
+      <Text style={styles.subTitle}>Need Help?</Text>
+      <FlatList
+        data={helpOptions}
+        renderItem={renderHelpOption}
+        keyExtractor={(item) => item.id}
+        numColumns={3}  // Display 3 columns
+        contentContainerStyle={styles.optionsGrid}
+      />
+
+      {/* Call Us Section */}
+      <View style={styles.assistanceContainer}>
+        <Text style={styles.assistanceText}>Need further assistance?</Text>
+        <Text style={styles.subText}>We are here to help you!</Text>
+        <TouchableOpacity style={styles.callButton}>
+          <Text style={styles.callButtonText}>Call Us</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
+const { width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    padding: 16,
+    flex: 1,
     backgroundColor: '#f9f9f9',
+    paddingHorizontal: 16,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#6200ee',
+    paddingHorizontal: 16,
+  },
+  headerTitle: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+ 
   backButton: {
     marginRight: 10,
+    padding: 10,
   },
-  title: {
-    fontSize: 24,
+  imageSection: {
+    marginVertical: 16, // Adds spacing below the header
+    alignItems: 'center', // Center the image horizontally
+  },
+  headerImage: {
+    width: '100%', // Makes the image span the width of the screen
+    height: 200, // Adjust height as needed
+  },
+  subTitle: {
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginVertical: 16,
     color: '#333',
-    textAlign: 'center',
   },
-  section: {
-    backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-    marginBottom: 16,
+  optionsGrid: {
+    alignItems: 'center',
+    flexWrap: 'wrap', // Ensure that items wrap when there are more columns
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    marginBottom: 10,
-    color: '#007BFF',
-    textAlign: 'center',
+  optionContainer: {
+    width: width / 3 - 20, // Set width of each option to fit 3 columns with margin
+    alignItems: 'center',
+    margin:5,
+    marginBottom:50
+
   },
-  faqItem: {
-    marginBottom: 16,
-  },
-  question: {
-    fontSize: 16,
-    color: '#007BFF',
+  icon: {
+    width: 60,
+    height: 60,
     marginBottom: 8,
   },
-  answer: {
+  optionText: {
     fontSize: 14,
-    color: '#555',
-    marginTop: 4,
-    paddingLeft: 10,
+    fontWeight: '600',
+    color: '#333',
+    textAlign: 'center', // Ensure text is centered
+    flexWrap: 'wrap', // Allow the text to wrap if it's too long
+    marginTop: 8, // Add some spacing between the image and the text
+    width: '100%', // Ensure text occupies the full width of the container
+  },
+  assistanceContainer: {
+    marginTop: 20,
+    padding: 16,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+  },
+  assistanceText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  subText: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 16,
+  },
+  callButton: {
+    backgroundColor: '#6200ee',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  callButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 14,
   },
 });
 
-export default Help;
-
+export default help;

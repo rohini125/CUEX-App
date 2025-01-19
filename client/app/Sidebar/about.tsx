@@ -28,12 +28,15 @@ const About = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Back Button */}
+   {/* Back Button */}
+   <View style={styles.header}>
       <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#333" />
+        <Ionicons name="arrow-back" size={24} color="#fff" />
       </TouchableOpacity>
       {/* About Section */}
-      <Text style={styles.title}>About Us</Text>
+     
+              <Text style={styles.headerTitle}>About Us</Text>
+            </View>
       <View style={styles.section}>
         <Text style={styles.cardTitle}>Company Overview</Text>
         <Text style={styles.cardText}>
@@ -108,6 +111,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#333',
     textAlign: 'center',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#6200ee',
+    paddingHorizontal: 16,
+  },
+  headerTitle: {
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
   },
   section: {
     backgroundColor: '#fff',
