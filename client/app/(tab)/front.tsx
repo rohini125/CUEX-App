@@ -23,12 +23,10 @@ const Home = () => {
        <Header  />
   
       <View style={styles.container}>
-        {/* <View> */}
           <CurrencyConverter />
-        {/* </View> */}
         <View style={styles.Cardcontainer}>
           <Text style={styles.title}>Transfer Money</Text>
-          <View style={styles.iconContainer}>
+          <View style={styles.iconContainer}> 
             <TouchableOpacity
               style={styles.iconBox}
               activeOpacity={0.7}
