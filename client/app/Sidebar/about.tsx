@@ -1,16 +1,38 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image,TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
 const About = () => {
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData({ ...formData, [field]: value });
+  };
+  
+
+  const handleSubmit = () => {
+    if (formData.name && formData.email && formData.subject && formData.message) {
+      Alert.alert('Form Submitted', 'Thank you for contacting us!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } else {
+      Alert.alert('Error', 'Please fill in all required fields.');
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {/* Back Button */}
       <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
         <Ionicons name="arrow-back" size={24} color="#333" />
       </TouchableOpacity>
+      {/* About Section */}
       <Text style={styles.title}>About Us</Text>
       <View style={styles.section}>
         <Text style={styles.cardTitle}>Company Overview</Text>
@@ -29,12 +51,42 @@ const About = () => {
           </View>
         ))}
       </View>
+      {/* Contact Form */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Contact Us</Text>
-        <Text style={styles.contactText}>📧 Email: support@cuexapp.com</Text>
-        <Text style={styles.contactText}>📞 Phone: +91 8234 567 890</Text>
-        <Text style={styles.contactText}>🌐 Website: www.cuexapp.com</Text>
-        <Text style={styles.contactText}>📍 Address: 123 CUEX Center Maharastra India</Text>
+        <Text style={styles.label}>Your Name (required)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your name"
+          value={formData.name}
+          onChangeText={(value) => handleInputChange('name', value)}
+        />
+        <Text style={styles.label}>Your Email (required)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your email"
+          value={formData.email}
+          onChangeText={(value) => handleInputChange('email', value)}
+          keyboardType="email-address"
+        />
+        <Text style={styles.label}>Subject</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the subject"
+          value={formData.subject}
+          onChangeText={(value) => handleInputChange('subject', value)}
+        />
+        <Text style={styles.label}>Your Message</Text>
+        <TextInput
+          style={[styles.input, styles.textArea]}
+          placeholder="Enter your message"
+          value={formData.message}
+          onChangeText={(value) => handleInputChange('message', value)}
+          multiline
+        />
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -48,6 +100,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginRight: 10,
+    padding: 10,
   },
   title: {
     fontSize: 24,
@@ -92,10 +145,35 @@ const styles = StyleSheet.create({
     color: '#555',
     textAlign: 'center',
   },
-  contactText: {
-    fontSize: 14,
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
     color: '#555',
-    marginBottom: 4,
+  },
+  input: {
+    height: 40,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 4,
+    paddingHorizontal: 10,
+    marginBottom: 16,
+    backgroundColor: '#f9f9f9',
+  },
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  button: {
+    backgroundColor: '#C2185B',
+    paddingVertical: 12,
+    borderRadius: 4,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   profilePic: {
     width: 80,

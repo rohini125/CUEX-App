@@ -20,7 +20,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
   const router = useRouter(); // Initialize the router
 
   // Navigate to the provided route
-  const navigate = (route: `/Sidebar/menu` | `/Sidebar/price-alert` | `/Sidebar/help`) => {
+  const navigate = (route: `/Sidebar/menu` | `/Sidebar/notification` | `/Sidebar/help`) => {
     router.push(route);
   };
 
@@ -45,7 +45,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
 
         {/* Right Section */}
         <View style={styles.headerRightView}>
-          <TouchableOpacity onPress={() => navigate('/Sidebar/price-alert')}>
+          <TouchableOpacity onPress={() => navigate('/Sidebar/notification')}>
             <Image
               source={require('../assets/images/bell.png')}
               style={[styles.icons, { marginHorizontal: moderateScale(20) }]}
