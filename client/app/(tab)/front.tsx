@@ -9,17 +9,17 @@ import Header from '../Header';
 const Home = () => {
   const router = useRouter();
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const handleProfilePress = () => {
-    setIsSidebarOpen(true); // Open sidebar when profile is pressed
-  };
-  const handleCloseSidebar = () => {
-    setIsSidebarOpen(false); // Close sidebar
-  };
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // const handleProfilePress = () => {
+  //   setIsSidebarOpen(true); // Open sidebar when profile is pressed
+  // };
+  // const handleCloseSidebar = () => {
+  //   setIsSidebarOpen(false); // Close sidebar
+  // };
 
   return (
      <View style={{flex:1}}>
-      <StatusBar backgroundColor="white" barStyle="dark-content"  />
+      <StatusBar backgroundColor="#ADD8E6" barStyle="dark-content"  />
        <Header  />
   
       <View style={styles.container}>
@@ -34,7 +34,7 @@ const Home = () => {
               <Link href="/MoneyTransfer/ToMobileNo">
                 <View style={styles.iconTextWrapper}>
                   <View style={styles.iconBackground}>
-                    <FontAwesome5 name="mobile-alt" size={18} color="white" />
+                    <FontAwesome5 name="mobile-alt" size={18} color="black" />
                   </View>
                   <Text style={styles.iconText} numberOfLines={2}>
                     To Mobile Number
@@ -49,7 +49,7 @@ const Home = () => {
               <Link href="/MoneyTransfer/ToBank">
                 <View style={styles.iconTextWrapper}>
                   <View style={styles.iconBackground}>
-                    <MaterialIcons name="account-balance" size={18} color="white" />
+                    <MaterialIcons name="account-balance" size={18} color="black" />
                   </View>
                   <Text style={styles.iconText} numberOfLines={2}>
                     To Bank/UPI ID
@@ -65,7 +65,7 @@ const Home = () => {
                 <Link href="/MoneyTransfer/ToSelf">
                   <View style={styles.iconTextWrapper}>
                     <View style={styles.iconBackground}>
-                      <FontAwesome5 name="wallet" size={18} color="white" />
+                      <FontAwesome5 name="wallet" size={18} color="black" />
                     </View>
                     <Text style={styles.iconText} numberOfLines={2}>
                       To Self Account
@@ -81,7 +81,7 @@ const Home = () => {
                 <Link href="/MoneyTransfer/CheckBalance">
                   <View style={styles.iconTextWrapper}>
                     <View style={styles.iconBackground}>
-                      <FontAwesome5 name="hand-holding-usd" size={18} color="white" />
+                      <FontAwesome5 name="hand-holding-usd" size={18} color="black" />
                     </View>
                     <Text style={styles.iconText} numberOfLines={2}>
                       Check Balance
@@ -105,15 +105,15 @@ const styles = StyleSheet.create({
     flex: 1,
     width:'100%',
     // backgroundColor: '#F8F9FA',
-    backgroundColor: 'white',
+    backgroundColor: '#ADD8E6',
     padding: 16,
   },
 
   Cardcontainer: {
   
     // justifyContent: 'center',
-    backgroundColor: '#f9f9f9',
-    // backgroundColor: '#ffffff',
+    // backgroundColor: '#f9f9f9',
+    backgroundColor: '#E6F2FA',
     borderRadius: 5,
     // shadowOpacity: 0.3,
     // shadowRadius: 8,
@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
   iconBackground: {
     width: 40,
     height: 40,
-    backgroundColor: '#333333',
+    // backgroundColor: '#333333',
+    backgroundColor:'white',
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',

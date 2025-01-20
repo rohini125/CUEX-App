@@ -122,18 +122,29 @@ const Market = () => {
       <Text style={styles.title}>Live Currency Market</Text>
 
       {/* Base Currency Dropdown */}
-      {/* <View style={styles.select}> */}
-      <Picker
+      
+      <View style={styles.pickerWrapper}>
+        <Picker
+          selectedValue={selectedCurrency}
+          style={styles.picker}
+          onValueChange={(itemValue: string) => setSelectedCurrency(itemValue)} 
+        >
+          {allCurrencies.map((currency) => (
+            <Picker.Item key={currency} label={currency} value={currency} />
+          ))}
+        </Picker>
+      </View>
+
+      {/* <Picker
         selectedValue={selectedCurrency}
         style={styles.picker}
         onValueChange={(itemValue: string) => setSelectedCurrency(itemValue)} // Ensure correct type here
-      >
+      > */}
         {/* Render all currencies dynamically */}
-        {allCurrencies.map((currency) => (
+        {/* {allCurrencies.map((currency) => (
           <Picker.Item key={currency} label={currency} value={currency}/>
         ))}
-      </Picker>
-      {/* </View> */}
+      </Picker> */}
 
       {/* Search Bar */}
       <TextInput
@@ -183,23 +194,27 @@ const styles = StyleSheet.create({
     marginTop:15,
     marginBottom: 16,
   },
-  // select:{
-  //     height:45,
-  //     backgroundColor:'#fff',
-  //     // borderColor:'blue',
-  //     // borderWidth:1,
-  //     borderRadius: 8,
-  //     marginBottom: 16,
-  // },
+  pickerWrapper: {
+    // borderColor: '#777777',
+    // borderWidth: 1,
+    borderRadius: 8,
+    overflow: 'hidden', // Ensure borderRadius works properly
+    backgroundColor: '#fff',
+    marginBottom: 14,
+  },
   picker: {
     height: 50,
     width: '100%',
-    marginBottom: 16,
-    borderColor: '#777777',
-    borderWidth: 1,
-    borderRadius: 8,
-    backgroundColor: '#fff',
   },
+  // picker: {
+  //   height: 50,
+  //   width: '100%',
+  //   marginBottom: 14,
+  //   borderColor: '#777777',
+  //   borderWidth: 1,
+  //   borderRadius: 8,
+  //   backgroundColor: '#fff',
+  // },
   searchBar: {
     height: 40,
     backgroundColor:'#fff',
@@ -213,16 +228,16 @@ const styles = StyleSheet.create({
   rateItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 8,
+    padding: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#777777',
   },
   currency: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
   },
   rate: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
   },
 });
