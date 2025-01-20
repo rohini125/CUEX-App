@@ -1,16 +1,19 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  firstName: { type: String, required: false },
-  lastName: { type: String, required: false },
-  email: { type: String, required: false, unique: false },
-  password: { type: String, required: false },
-  confirmPassword:{ type:String ,required:false},
-  contactNo: { type: Number, required: false },
-  identificationType: { type: String, required: false },
-  identificationNumber: { type: String, required: false },
-}, { timestamps: true });
+  name: { type: String, required: true },
+  emailOrPhone: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  otp: { type: String },
+  otpExpiry: { type: Date },
+  upiPin: { type: String }, // Store hashed UPI PIN
+  isUpiPinSet: { type: Boolean, default: false }, // Default to false
+  refreshToken: { type: String, default: null }, // Field to store JWT token
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
+},
+  {timestamps: true,}
+);
 
-const userModel = mongoose.model('registerData', userSchema);
+export default mongoose.model('User', userSchema);
 
-export default userModel;
