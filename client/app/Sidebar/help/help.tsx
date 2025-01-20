@@ -82,6 +82,7 @@ const help = () => {
       </View>
 
       {/* Help Options */}
+      <View style={styles.section}>
       <Text style={styles.subTitle}>Need Help?</Text>
       <FlatList
         data={helpOptions}
@@ -90,6 +91,7 @@ const help = () => {
         numColumns={2} // Display 2 columns
         contentContainerStyle={styles.optionsGrid}
       />
+      </View>
 
       {/* Call Us Section */}
       <View style={styles.assistanceContainer}>
@@ -109,15 +111,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9f9f9',
-    paddingHorizontal: 16,
   },
+ 
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 16,
     backgroundColor: '#6200ee',
     paddingHorizontal: 16,
-    marginBottom: 10,
+    marginBottom:10
   },
   headerTitle: {
     fontSize: 18,
@@ -133,6 +135,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginVertical: 16,
     color: '#333',
+    marginLeft:20
+  },
+  section: {
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    marginBottom: 16,
+    margin:10
   },
   optionsGrid: {
     alignItems: 'center',
@@ -159,16 +173,18 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   assistanceContainer: {
-    marginTop: 20,
-    padding: 16,
     backgroundColor: '#fff',
-    borderRadius: 8,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+  padding: 16,
+  borderRadius: 8,
+  shadowColor: '#000',
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  elevation: 2,
+  alignItems: 'center',
+  marginBottom: 16,
+  margin:10
   },
+ 
   assistanceText: {
     fontSize: 16,
     fontWeight: 'bold',

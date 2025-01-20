@@ -34,9 +34,8 @@ const About = () => {
         <Ionicons name="arrow-back" size={24} color="#fff" />
       </TouchableOpacity>
       {/* About Section */}
-     
-              <Text style={styles.headerTitle}>About Us</Text>
-            </View>
+        <Text style={styles.headerTitle}>About Us</Text>
+    </View>
       <View style={styles.section}>
         <Text style={styles.cardTitle}>Company Overview</Text>
         <Text style={styles.cardText}>
@@ -98,9 +97,8 @@ const About = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 16,
     backgroundColor: '#f9f9f9',
-    width:'100%'
+    
   },
   backButton: {
     marginRight: 10,
