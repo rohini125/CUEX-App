@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
-import menu from './Sidebar/Menu';
 
 interface CommonHeaderProps {
   onProfilePress?: () => void;
@@ -73,7 +72,8 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     height: verticalScale(50),
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
+    backgroundColor:'#ADD8E6',
     justifyContent: 'flex-end',
   },
   header2: {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   home: {
     fontSize: moderateScale(18),
-    color: 'black',
+    color: 'white',
     textAlign:'center',
     fontWeight: '600',
 
@@ -109,6 +109,6 @@ const styles = StyleSheet.create({
   icons: {
     width: scale(22),
     height: scale(22),
-    tintColor: 'black',
+    tintColor: 'white',
   },
 });
