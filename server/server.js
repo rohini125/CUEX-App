@@ -8,6 +8,7 @@ import conversionRoutes from "./routes/conversionRoutes.js";
 import nomineeRoutes from "./routes/nomineeRoutes.js";
 import kycRoutes from './routes/kycRoutes.js';
 import upiPinRoutes from './routes/upiPinRoutes.js';
+import historyRoute from './routes/historyRoute.js';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 
@@ -45,6 +46,8 @@ app.use('/api/kyc', kycRoutes);
 // upi-pin Routes
 app.use('/api/upi-pin', upiPinRoutes);
 
+// History Routes
+app.use('/history', historyRoute);
 
 // Connect to MongoDB
 connectDB();
