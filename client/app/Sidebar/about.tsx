@@ -100,13 +100,14 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 16,
     backgroundColor: '#f9f9f9',
+    width:'100%'
   },
   backButton: {
     marginRight: 10,
     padding: 10,
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 20,
     color: '#333',
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     backgroundColor: '#6200ee',
     paddingHorizontal: 16,
+    marginBottom:10
   },
   headerTitle: {
     fontSize: 18,
@@ -154,6 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
+    marginTop:10
   },
   cardText: {
     fontSize: 14,

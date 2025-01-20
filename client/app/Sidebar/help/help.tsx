@@ -43,10 +43,9 @@ const help = () => {
            <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
              <Ionicons name="arrow-back" size={24} color="#fff" />
            </TouchableOpacity>
-           {/* About Section */}
-          
-                   <Text style={styles.headerTitle}>Help</Text>
-                 </View>
+           {/* Help Section */}
+            <Text style={styles.headerTitle}>Help</Text>
+         </View>
 
       {/* Help Options */}
       <Text style={styles.subTitle}>Need Help?</Text>
@@ -54,7 +53,7 @@ const help = () => {
         data={helpOptions}
         renderItem={renderHelpOption}
         keyExtractor={(item) => item.id}
-        numColumns={3} // Display 3 columns
+        numColumns={2} // Display 3 columns
         contentContainerStyle={styles.optionsGrid}
       />
 
@@ -84,6 +83,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     backgroundColor: '#6200ee',
     paddingHorizontal: 16,
+    marginBottom:10
   },
   headerTitle: {
     fontSize: 18,
@@ -114,15 +114,16 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap', // Ensure that items wrap when there are more columns
   },
   optionContainer: {
-    width: width / 3 - 20, // Set width of each option to fit 3 columns with margin
+    width: width / 2 - 20, // Set width of each option to fit 3 columns with margin
     alignItems: 'center',
     margin: 5,
-    marginBottom: 50,
+    marginBottom:40
+
   },
   icon: {
     width: 60,
     height: 60,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   optionText: {
     fontSize: 14,
