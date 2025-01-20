@@ -571,10 +571,11 @@ const CurrencyConverter = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 25,
+    marginBottom: 20,
     padding: 20,
     justifyContent: 'center',
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
+    backgroundColor:'#E6F2FA',
     borderRadius: 10,
     shadowOpacity: 0.3,
     shadowRadius: 8,
@@ -608,7 +609,8 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: '#007bff',
+    // backgroundColor: '#007bff',
+    backgroundColor:'#000000',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
