@@ -114,7 +114,7 @@ const Market = () => {
 
     <View style={{ flex: 1 }}>
     {/* Full-Width Header */}
-    <View >
+    <View>
       <Header/>
     </View>
     <View style={styles.container}>
