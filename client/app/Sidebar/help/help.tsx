@@ -21,20 +21,43 @@ const help = () => {
   ];
   const router = useRouter();
 
-  // Specify the type of item in renderItem
   const renderHelpOption = ({ item }: { item: HelpOption }) => (
     <TouchableOpacity
       style={styles.optionContainer}
-      onPress={() => {
-        if (item.id === '1') {
-          router.push('./payment_issue');
-        }
-      }}
+      onPress={() => handleOptionClick(item.id)}
     >
       <Image source={item.icon} style={styles.icon} />
       <Text style={styles.optionText}>{item.title}</Text>
     </TouchableOpacity>
   );
+  
+  // Function to handle onClick events for images
+  const handleOptionClick = (id: string) => {
+    switch (id) {
+      case '1':
+        router.push('./payment_issue');
+        break;
+      case '2':
+        router.push('./profile_payments');
+        break;
+      case '3':
+        router.push('./money_transfer');
+        break;
+      case '4':
+        router.push('./recharge_bills');
+        break;
+      case '5':
+        router.push('./rewards');
+        break;
+      case '6':
+        router.push('./others');
+        break;
+      default:
+        console.log('Unknown option selected');
+        break;
+    }
+  };
+  
 
   return (
     <View style={styles.container}>
