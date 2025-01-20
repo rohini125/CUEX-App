@@ -13,62 +13,73 @@ interface HelpOption {
 const help = () => {
   const helpOptions: HelpOption[] = [
     { id: '1', title: 'Payment Issues', icon: require('../../../assets/images/payment_issues.png') },
-    { id: '2', title: 'Profile & Payments', icon: require('../../../assets/images/profile_payments.png') },
+    { id: '2', title: 'Profile Issues', icon: require('../../../assets/images/profile_payments.png') },
     { id: '3', title: 'Money Transfer', icon: require('../../../assets/images/money_transfer.png') },
     { id: '4', title: 'Recharge & Bill Payments', icon: require('../../../assets/images/recharge_bills.png') },
     { id: '5', title: 'Rewards & Refer and Earn', icon: require('../../../assets/images/rewards.png') },
     { id: '6', title: 'Others', icon: require('../../../assets/images/others.png') },
   ];
+
   const router = useRouter();
 
-  const renderHelpOption = ({ item }: { item: HelpOption }) => (
-    <TouchableOpacity
-      style={styles.optionContainer}
-      onPress={() => handleOptionClick(item.id)}
-    >
-      <Image source={item.icon} style={styles.icon} />
-      <Text style={styles.optionText}>{item.title}</Text>
-    </TouchableOpacity>
-  );
-  
-  // Function to handle onClick events for images
-  const handleOptionClick = (id: string) => {
-    switch (id) {
-      case '1':
-        router.push('./payment_issue');
-        break;
-      case '2':
-        router.push('./profile_payments');
-        break;
-      case '3':
-        router.push('./money_transfer');
-        break;
-      case '4':
-        router.push('./recharge_bills');
-        break;
-      case '5':
-        router.push('./rewards');
-        break;
-      case '6':
-        router.push('./others');
-        break;
-      default:
-        console.log('Unknown option selected');
-        break;
-    }
+  // Define separate functions for each option's action
+  const handlePaymentIssuesClick = () => {
+    router.push('./payment_issue');
   };
-  
+
+  const handleProfilePaymentsClick = () => {
+    router.push('./profile_issues');
+  };
+
+  const handleMoneyTransferClick = () => {
+    router.push('./money_transfer');
+  };
+
+  const handleRechargeBillsClick = () => {
+    router.push('./recharge_bills');
+  };
+
+  const handleRewardsClick = () => {
+    router.push('./rewards');
+  };
+
+  const handleOthersClick = () => {
+    router.push('./others');
+  };
+
+  // Render individual help option
+  const renderHelpOption = ({ item }: { item: HelpOption }) => {
+    // Map the item's id to the corresponding function
+    const clickHandlers: { [key: string]: () => void } = {
+      '1': handlePaymentIssuesClick,
+      '2': handleProfilePaymentsClick,
+      '3': handleMoneyTransferClick,
+      '4': handleRechargeBillsClick,
+      '5': handleRewardsClick,
+      '6': handleOthersClick,
+    };
+
+    return (
+      <TouchableOpacity
+        style={styles.optionContainer}
+        onPress={clickHandlers[item.id]}
+      >
+        <Image source={item.icon} style={styles.icon} />
+        <Text style={styles.optionText}>{item.title}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View style={styles.container}>
       {/* Back Button */}
-        <View style={styles.header}>
-           <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-             <Ionicons name="arrow-back" size={24} color="#fff" />
-           </TouchableOpacity>
-           {/* Help Section */}
-            <Text style={styles.headerTitle}>Help</Text>
-         </View>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+        {/* Help Section */}
+        <Text style={styles.headerTitle}>Help</Text>
+      </View>
 
       {/* Help Options */}
       <Text style={styles.subTitle}>Need Help?</Text>
@@ -76,7 +87,7 @@ const help = () => {
         data={helpOptions}
         renderItem={renderHelpOption}
         keyExtractor={(item) => item.id}
-        numColumns={2} // Display 3 columns
+        numColumns={2} // Display 2 columns
         contentContainerStyle={styles.optionsGrid}
       />
 
@@ -106,7 +117,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     backgroundColor: '#6200ee',
     paddingHorizontal: 16,
-    marginBottom:10
+    marginBottom: 10,
   },
   headerTitle: {
     fontSize: 18,
@@ -117,31 +128,21 @@ const styles = StyleSheet.create({
     marginRight: 10,
     padding: 10,
   },
-  imageSection: {
-    marginVertical: 16, // Adds spacing below the header
-    alignItems: 'center', // Center the image horizontally
-  },
-  headerImage: {
-    width: '100%', // Makes the image span the width of the screen
-    height: 200, // Adjust height as needed
-  },
   subTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 16,
-    marginRight:10,
     color: '#333',
   },
   optionsGrid: {
     alignItems: 'center',
-    flexWrap: 'wrap', // Ensure that items wrap when there are more columns
+    flexWrap: 'wrap',
   },
   optionContainer: {
-    width: width / 2 - 20, // Set width of each option to fit 3 columns with margin
+    width: width / 2 - 20,
     alignItems: 'center',
     margin: 5,
-    marginBottom:40
-
+    marginBottom: 40,
   },
   icon: {
     width: 60,
@@ -152,10 +153,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#333',
-    textAlign: 'center', // Ensure text is centered
-    flexWrap: 'wrap', // Allow the text to wrap if it's too long
-    marginTop: 8, // Add some spacing between the image and the text
-    width: '100%', // Ensure text occupies the full width of the container
+    textAlign: 'center',
+    flexWrap: 'wrap',
+    marginTop: 8,
+    width: '100%',
   },
   assistanceContainer: {
     marginTop: 20,

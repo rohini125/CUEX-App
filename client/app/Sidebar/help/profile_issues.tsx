@@ -4,50 +4,50 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 // Define the type for the issues object
-type IssueKey = 'Failed Transactions' | 'Delayed Refunds' | 'Card Declined';
+type IssueKey = 'Profile Not Updating' | 'Avatar Upload Error' | 'Invalid Information';
 
 const issues: Record<IssueKey, { description: string; steps: string[] }> = {
-  'Failed Transactions': {
-    description: 'Transactions might fail due to network issues, server downtime, or incorrect details.',
+  'Profile Not Updating': {
+    description: 'Profile updates may fail due to poor network or validation errors.',
     steps: [
-      'Check your internet connection.',
-      'Ensure your payment details are correct.',
-      'Try again after some time.',
+      'Ensure you have a stable internet connection.',
+      'Check if all required fields are filled out correctly.',
+      'Log out and log back in to refresh your profile settings.',
       'Contact support if the issue persists.',
     ],
   },
-  'Delayed Refunds': {
-    description: 'Refunds may take time due to processing delays or bank-related issues.',
+  'Avatar Upload Error': {
+    description: 'Issues with uploading an avatar could be caused by file size or format restrictions.',
     steps: [
-      'Verify the refund timeline from the merchant.',
-      'Check with your bank for pending transactions.',
-      'Ensure you’ve used the correct account for the refund.',
-      'Contact support if the refund is not received within the promised time.',
+      'Ensure the file size is below the allowed limit (e.g., 2MB).',
+      'Check if the file is in a supported format (e.g., JPG or PNG).',
+      'Try uploading a different image.',
+      'Contact support if the issue persists.',
     ],
   },
-  'Card Declined': {
-    description: 'Your card might be declined due to insufficient balance, incorrect details, or restrictions.',
+  'Invalid Information': {
+    description: 'Invalid information errors occur when required fields are missing or contain incorrect data.',
     steps: [
-      'Check your card details.',
-      'Ensure sufficient funds are available.',
-      'Contact your bank to lift any restrictions.',
-      'Try another card if possible.',
+      'Double-check all required fields for accuracy.',
+      'Ensure the email and phone number are in the correct format.',
+      'Clear any special characters in name fields.',
+      'Contact support if you need further clarification.',
     ],
   },
 };
 
-const PaymentIssues = () => {
+const ProfileIssues = () => {
   const [selectedIssue, setSelectedIssue] = useState<IssueKey | null>(null);
-  const router = useRouter(); 
+  const router = useRouter();
+
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        {/* Back Button */}
-        <TouchableOpacity onPress={() => router.push('/Sidebar/help/help')} style={styles.backButton}>
+        <TouchableOpacity onPress={() => router.push('/')} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Payment Issues</Text>
+        <Text style={styles.headerTitle}>Profile Issues</Text>
       </View>
 
       {/* Common Issues List */}
@@ -64,11 +64,11 @@ const PaymentIssues = () => {
               >
                 <Image
                   source={
-                    issueKey === 'Failed Transactions'
-                      ? require('../../../assets/images/failed_transaction.png')
-                      : issueKey === 'Delayed Refunds'
-                      ? require('../../../assets/images/delayed_refund.png')
-                      : require('../../../assets/images/card_declined.png')
+                    issueKey === 'Profile Not Updating'
+                      ? require('../../../assets/images/profile_update.png')
+                      : issueKey === 'Avatar Upload Error'
+                      ? require('../../../assets/images/avatar_error.png')
+                      : require('../../../assets/images/invalid_info.png')
                   }
                   style={styles.issueIcon}
                 />
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PaymentIssues;
+export default ProfileIssues;
