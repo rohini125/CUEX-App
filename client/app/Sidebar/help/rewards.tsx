@@ -14,7 +14,6 @@ const ReferAndEarnHelp = () => {
     <ScrollView style={styles.container}>
       <Text style={styles.title}>Refer and Earn - Help</Text>
 
-      {/* Frequently Asked Questions Section */}
       <Text style={styles.sectionTitle}>Frequently Asked Questions</Text>
 
       <View style={styles.faqItem}>
@@ -41,7 +40,6 @@ const ReferAndEarnHelp = () => {
         </Text>
       </View>
 
-      {/* Troubleshooting Issues Section */}
       <Text style={styles.sectionTitle}>Troubleshooting Issues</Text>
 
       <View style={styles.faqItem}>
@@ -60,7 +58,6 @@ const ReferAndEarnHelp = () => {
         </Text>
       </View>
 
-      {/* Need Further Assistance Section */}
       <Text style={styles.sectionTitle}>Need Further Assistance?</Text>
       <TouchableOpacity onPress={handleContactSupport} style={styles.contactButton}>
         <Text style={styles.contactText}>Email Support</Text>
