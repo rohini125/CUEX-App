@@ -42,7 +42,7 @@ const TabRoot = () =>{
                                     borderRadius: 30,
                                     // borderColor:'black',
                                     // borderWidth: 0.5,
-                                    marginBottom:10,
+                                    marginBottom:20,
                                     justifyContent:'center',
                                     alignItems:'center',
                                 }}
