@@ -38,14 +38,15 @@ const help = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       {/* Back Button */}
-      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#333" />
-      </TouchableOpacity>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Help</Text>
-      </View>
+        <View style={styles.header}>
+           <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+             <Ionicons name="arrow-back" size={24} color="#fff" />
+           </TouchableOpacity>
+           {/* About Section */}
+          
+                   <Text style={styles.headerTitle}>Help</Text>
+                 </View>
 
       {/* Help Options */}
       <Text style={styles.subTitle}>Need Help?</Text>
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 16,
+    marginRight:10,
     color: '#333',
   },
   optionsGrid: {
