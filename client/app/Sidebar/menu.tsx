@@ -40,7 +40,7 @@ const menu = () => {
         </TouchableOpacity>
 
         {/* Help */}
-        <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('/Sidebar/help')}>
+        <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('/Sidebar/help/help')}>
           <Feather name="help-circle" size={20} color="#4A4A4A" />
           <Text style={styles.menuText}>Help & Support</Text>
         </TouchableOpacity>

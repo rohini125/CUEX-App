@@ -20,7 +20,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
   const router = useRouter(); // Initialize the router
 
   // Navigate to the provided route
-  const navigate = (route: `/Sidebar/menu` | `/Sidebar/price-alert` | `/Sidebar/help`) => {
+  const navigate = (route: `/Sidebar/menu` | `/Sidebar/notification` | `/Sidebar/help`) => {
     router.push(route);
   };
 
@@ -38,17 +38,17 @@ const CommonHeader: React.FC<CommonHeaderProps> = () => {
               accessible
             />
           </TouchableOpacity>
-          <View style={{ marginLeft: moderateScale(10) }}>
+          <View style={{ marginLeft: moderateScale(76) }}>
             <Text style={styles.home}>CUEX</Text>
           </View>
         </View>
 
         {/* Right Section */}
         <View style={styles.headerRightView}>
-          <TouchableOpacity onPress={() => navigate('/Sidebar/price-alert')}>
+          <TouchableOpacity onPress={() => navigate('/Sidebar/notification')}>
             <Image
               source={require('../assets/images/bell.png')}
-              style={[styles.icons, { marginHorizontal: moderateScale(15) }]}
+              style={[styles.icons, { marginHorizontal: moderateScale(20) }]}
               accessibilityLabel="Notifications"
               accessible
             />
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   home: {
     fontSize: moderateScale(18),
     color: 'black',
+    textAlign:'center',
     fontWeight: '600',
   },
   headerRightView: {
