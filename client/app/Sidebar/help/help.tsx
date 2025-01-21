@@ -76,7 +76,7 @@ const help = () => {
       {/* Back Button */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#fff" />
+          <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         {/* Help Section */}
         <Text style={styles.headerTitle}>Help</Text>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    color: '#fff',
+    color: 'black',
     fontWeight: 'bold',
   },
   backButton: {

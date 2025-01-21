@@ -45,7 +45,7 @@ const PaymentIssues = () => {
       <View style={styles.header}>
         {/* Back Button */}
       <TouchableOpacity onPress={() => router.push('/Sidebar/help/help')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#fff" />
+        <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
         <Text style={styles.headerTitle}>Payment Issues</Text>
       </View>
@@ -100,7 +100,7 @@ const PaymentIssues = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
   header: {
     flexDirection: 'row',

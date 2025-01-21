@@ -44,7 +44,7 @@ const ProfileIssues = () => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push('/')} style={styles.backButton}>
+        <TouchableOpacity onPress={() => router.push('/Sidebar/help/help')} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Profile Issues</Text>
