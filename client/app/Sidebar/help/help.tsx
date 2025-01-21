@@ -98,7 +98,7 @@ const help = () => {
       <View style={styles.assistanceContainer}>
         <Text style={styles.assistanceText}>Need further assistance?</Text>
         <Text style={styles.subText}>We are here to help you!</Text>
-        <TouchableOpacity style={styles.callButton}>
+        <TouchableOpacity style={styles.callButton} onPress={() => router.push('/Sidebar/contact')}>
           <Text style={styles.callButtonText}>Call Us</Text>
         </TouchableOpacity>
       </View>
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 16,
-    backgroundColor: '##ADD8E6',
+    backgroundColor: '#ADD8E6',
     paddingHorizontal: 16,
     marginBottom:10
   },
