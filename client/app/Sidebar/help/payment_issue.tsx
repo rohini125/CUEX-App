@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 16,
-    backgroundColor: '#6200ee',
+    backgroundColor: '#ADD8E6',
     paddingHorizontal: 16,
   },
   headerTitle: {
