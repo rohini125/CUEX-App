@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity,
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-const About = () => {
+const contact = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
@@ -28,31 +28,6 @@ const About = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-   {/* Back Button */}
-   <View style={styles.header}>
-      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#fff" />
-      </TouchableOpacity>
-      {/* About Section */}
-        <Text style={styles.headerTitle}>About Us</Text>
-    </View>
-      <View style={styles.section}>
-        <Text style={styles.cardTitle}>Company Overview</Text>
-        <Text style={styles.cardText}>
-          "At CUEX, we are redefining how people exchange and manage their money globally..."
-        </Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Meet Our Developers</Text>
-        {/* Developer Cards */}
-        {['Parkale Sakshi', 'Salunke Yash', 'Navale Komal', 'Kandekar Rohini'].map((name, index) => (
-          <View key={index} style={styles.card}>
-            <Image source={require('../../assets/images/signup.jpg')} style={styles.profilePic} />
-            <Text style={styles.cardTitle}>{name}</Text>
-            <Text style={styles.cardText}>Role: Developer Role Here</Text>
-          </View>
-        ))}
-      </View>
       {/* Contact Form */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Contact Us</Text>
@@ -199,4 +174,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default About;
+export default contact;

@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   home: {
     fontSize: moderateScale(18),
-    color: 'white',
+    color: 'black',
     textAlign:'center',
     fontWeight: '600',
 
@@ -109,6 +109,6 @@ const styles = StyleSheet.create({
   icons: {
     width: scale(22),
     height: scale(22),
-    tintColor: 'white',
+    tintColor: 'black',
   },
 });

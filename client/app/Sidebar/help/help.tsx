@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { ScrollView } from 'react-native-gesture-handler';
 
 // Define the type of each help option
 interface HelpOption {
@@ -71,7 +72,7 @@ const help = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* Back Button */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
@@ -101,7 +102,7 @@ const help = () => {
           <Text style={styles.callButtonText}>Call Us</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -110,14 +111,14 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
  
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 16,
-    backgroundColor: '#6200ee',
+    backgroundColor: '##ADD8E6',
     paddingHorizontal: 16,
     marginBottom:10
   },
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     marginLeft:20
   },
   section: {
-    backgroundColor: '#fff',
+    backgroundColor: '#E6F2FA',
     padding: 16,
     borderRadius: 8,
     shadowColor: '#000',
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   assistanceContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#E6F2FA',
   padding: 16,
   borderRadius: 8,
   shadowColor: '#000',
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   callButton: {
-    backgroundColor: '#6200ee',
+    backgroundColor: 'black',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
