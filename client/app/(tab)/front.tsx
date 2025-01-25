@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // backgroundColor: '#f9f9f9',
     backgroundColor: '#E6F2FA',
-    borderRadius: 5,
+    borderRadius: 10,
     // shadowOpacity: 0.3,
     // shadowRadius: 8,
     elevation: 1,
     // borderWidth: 1,
     borderColor: '#ddd',
-
+    marginBottom:8,
   },
   title: {
     fontSize: 17,

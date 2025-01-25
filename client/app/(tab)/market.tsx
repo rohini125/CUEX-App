@@ -6,43 +6,9 @@ import Header from '../Header';
 
 // Define a map for currency codes to their symbols
 const currencySymbols: { [key: string]: string } = {
-  USD: '$',
-  EUR: '€',
-  INR: '₹',
-  GBP: '£',
-  AUD: 'A$',
-  JPY: '¥',
-  CAD: 'C$',
-  CHF: 'CHF',
-  NZD: 'NZ$',
-  CNY: '¥',
-  AED: 'د.إ',
-  ARS: 'AR$',
-  BDT: '৳',
-  BRL: 'R$',
-  CLP: '$',
-  COP: '$',
-  CZK: 'Kč',
-  DKK: 'kr',
-  HUF: 'Ft',
-  IDR: 'Rp',
-  ILS: '₪',
-  KRW: '₩',
-  MXN: '$',
-  MYR: 'RM',
-  NOK: 'kr',
-  PHP: '₱',
-  PLN: 'zł',
-  RON: 'lei',
-  RUB: '₽',
-  SAR: 'ر.س',
-  SEK: 'kr',
-  SGD: 'S$',
-  THB: '฿',
-  TRY: '₺',
-  TWD: 'NT$',
-  ZAR: 'R',
-  // Add more as needed
+  INR: '₹', USD: '$', EUR: '€', GBP: '£', JPY: '¥', AUD: 'A$', CAD: 'C$', CHF: 'Fr.', CNY: '¥', SEK: 'kr', NZD: 'NZ$', SGD: 'S$', ZAR: 'R', MXN: '$', BRL: 'R$', RUB: '₽', KRW: '₩', AED: 'د.إ', HKD: 'HK$', MYR: 'RM', THB: '฿', IDR: 'Rp', PHP: '₱', VND: '₫', COP: '$', ARS: '$', CLP: '$', PEN: 'S/', TRY: '₺', NOK: 'kr', DKK: 'kr',  PLN: 'zł', HUF: 'Ft', CZK: 'Kč', ILS: '₪', KES: 'KSh', EGP: '£', PKR: '₨', LKR: 'Rs', BDT: '৳', QAR: 'ر.ق', 
+  OMR: 'ر.ع.', KWD: 'د.ك', BHD: 'د.ب', SAR: 'ر.س', KZT: '₸', UAH: '₴', LBP: 'ل.ل', JOD: 'د.ا', IQD: 'ع.د', TND: 'د.ت', MAD: 'د.م.', DZD: 'د.ج', TWD: 'NT$', MNT: '₮', RON: 'lei', BGN: 'лв', RSD: 'дин.', HRK: 'kn', MKD: 'ден', AZN: '₼', GEL: 'ლ', AMD: 'դր.', BYN: 'Br', TMT: 'T', UZS: 'лв', TJS: 'SM', KGS: 'сом', MZN: 'MT', ANG: 'ƒ', PYG: '₲', GHS: '₵', NGN: '₦', KHR: '៛', LAK: '₭', MMK: 'Ks', BOB: 'Bs.', CUP: '₱', MDL: 'lei', RWF: 'Fr', UGX: 'USh', AFN: '؋', AOA: 'Kz', 
+  AWG: 'Afl.', BAM: 'KM', BBD: '$', BIF: 'Fr', BND: '$', BSD: '$', BTN: 'Nu.', BWP: 'P', BZD: 'BZ$', CDF: 'Fr', CRC: '₡',  CVE: '$', DJF: 'Fdj', DOP: '$', ERN: 'Nakfa', ETB: 'ታብ', FJD: '$', FKP: '£', FOK: 'kr', GGP: '£', GIP: '£', GNF: 'Fr', GTQ: 'Q', GYD: '$', HNL: 'L', HTG: 'G', IMP: '£', IRR: '﷼', ISK: 'kr', JMD: '$', KID: '$', KMF: 'Fr', KYD: '$', LRD: '$', LSL: 'M', LYD: 'ل.د', MGA: 'Ar', MOP: 'MOP', MRU: 'MRU', MUR: '₨', MVR: 'Rf', MWK: 'MK',
 };
 
 const Market = () => {
@@ -135,17 +101,6 @@ const Market = () => {
         </Picker>
       </View>
 
-      {/* <Picker
-        selectedValue={selectedCurrency}
-        style={styles.picker}
-        onValueChange={(itemValue: string) => setSelectedCurrency(itemValue)} // Ensure correct type here
-      > */}
-        {/* Render all currencies dynamically */}
-        {/* {allCurrencies.map((currency) => (
-          <Picker.Item key={currency} label={currency} value={currency}/>
-        ))}
-      </Picker> */}
-
       {/* Search Bar */}
       <TextInput
         style={styles.searchBar}
@@ -197,7 +152,7 @@ const styles = StyleSheet.create({
   pickerWrapper: {
     // borderColor: '#777777',
     // borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 14,
     overflow: 'hidden', // Ensure borderRadius works properly
     backgroundColor: '#fff',
     marginBottom: 14,
