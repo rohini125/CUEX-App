@@ -1,7 +1,7 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Modal} from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Modal, StatusBar} from 'react-native';
 import Mybutton from "@/components/Mybutton";
 import {useRouter } from 'expo-router';
 
@@ -36,18 +36,18 @@ const Login = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" />
+
+      <StatusBar backgroundColor={'#ADD8e6'} barStyle={'dark-content'}/>
       <View style={{ padding: 20, gap: 20 }}>
+        <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" />
         <TextInput placeholder="Enter Your Email / Mobile no" style={styles.input} />
         <TextInput placeholder="Enter Your Password" style={styles.input} secureTextEntry />
 
-            {/* <TouchableOpacity onPress={onForgotPassword}>
             <Text style={styles.forgotPassword} onPress={onForgotPassword}>Forgot Password?</Text>
-            </TouchableOpacity> */}
-
-            <Text style={styles.forgotPassword} onPress={onForgotPassword}>Forgot Password?</Text>
-
-          <Mybutton title={"Login"} onPress={onLogin} />
+          
+          <TouchableOpacity activeOpacity={0.7} style={styles.signInButton} onPress={onLogin}>
+            <Text style={styles.signInButtonText}>Sign In</Text>
+          </TouchableOpacity>
           <Text style={{ textAlign: 'center' }}>
           Don't have an account?{' '}
             <Text style={styles.link} onPress={onSignUp}>
@@ -118,20 +118,32 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#ADD8E6',
   },
   image: {
     width: "100%",
-    height: 400,
+    height: 300,
   },
   label: {
     fontSize: 16,
     marginBottom: 10,
   },
   input: {
-    borderWidth: 1,
+    // borderWidth: 1,
     height: 50,
     paddingHorizontal: 20,
     borderRadius: 10,
+    backgroundColor:'#fff',
+  },
+  signInButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    alignItems: 'center',
+    paddingVertical: 15,
+  },
+  signInButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
   link: {
     color: 'blue',
@@ -239,6 +251,8 @@ const styles = StyleSheet.create({
 });
 
 
+///////////////////////////////////// With Backend ////////////////////////////////////////////////////////////////
+
 
 // import React, { useState } from 'react';
 // import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Modal} from 'react-native';
@@ -305,8 +319,9 @@ const styles = StyleSheet.create({
 
 //   return (
 //     <ScrollView style={styles.container}>
-//       <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" />
+//       {/* <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" /> */}
 //       <View style={{ padding: 20, gap: 20 }}>
+//         <Image source={require("@/assets/images/login.jpg")} style={styles.image} resizeMode="cover" />
 //         <TextInput 
 //           placeholder="Enter Your Email / Mobile no" 
 //           style={styles.input} 
@@ -321,7 +336,11 @@ const styles = StyleSheet.create({
 //           onChangeText={setPassword}
 //         />
 //         <Text style={styles.forgotPassword} onPress={onForgotPassword}>Forgot Password?</Text>
-//         <Mybutton title={"Login"} onPress={onLogin} />
+
+//        <TouchableOpacity activeOpacity={0.7} style={styles.signInButton} onPress={onLogin}>
+//         <Text style={styles.signInButtonText}>Sign In</Text>
+//         </TouchableOpacity> 
+//         {/* <Mybutton title={"Login"} onPress={onLogin} /> */}
 //         {error && <Text style={styles.errorText}>{error}</Text>}  {/* Display error messages */}
 //         <Text style={{ textAlign: 'center' }}>
 //           Don't have an account?{' '}
@@ -391,10 +410,11 @@ const styles = StyleSheet.create({
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
+
 //   },
 //   image: {
 //     width: "100%",
-//     height: 400,
+//     height: 300,
 //   },
 //   label: {
 //     fontSize: 16,
@@ -406,6 +426,16 @@ const styles = StyleSheet.create({
 //     paddingHorizontal: 20,
 //     borderRadius: 10,
 //   },
+// signInButton: {
+//   backgroundColor: 'blue',
+//   borderRadius: 10,
+//   alignItems: 'center',
+//   paddingVertical: 15,
+// },
+// signInButtonText: {
+//   color: 'white',
+//   fontSize: 16,
+// },
 //   link: {
 //     color: 'blue',
 //     textDecorationLine: 'underline',
