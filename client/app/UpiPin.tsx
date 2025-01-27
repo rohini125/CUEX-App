@@ -109,7 +109,7 @@ const SetUPIPinPage = () => {
     if (pin === confirmPin && pin.length === 4) {
       try {
         // Call API to save the UPI PIN in the backend (example API call)
-        const response = await axios.post('https://your-api-endpoint.com/set-upi-pin', {
+        const response = await axios.post('http://192.168.1.16:7000/api/upi-pin/set-pin', {
           pin: pin,
         });
 

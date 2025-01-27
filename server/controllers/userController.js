@@ -38,18 +38,24 @@ export const registerUser = async (req, res) => {
   try {
     const { name, emailOrPhone, password, confirmPassword } = req.body;
 
+    // Input validations
     if (!name || !emailOrPhone || !password || !confirmPassword) {
       return res.status(400).json({ message: 'All fields are required.' });
     }
     if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Passwords do not match.' });
     }
-
-    const existingUser = await User.findOne({ emailOrPhone });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User already exists.' });
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters long.' });
     }
 
+    // Check if user already exists
+    const existingUser = await User.findOne({ emailOrPhone });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User with this email or phone already exists.' });
+    }
+
+    // Hash password and save user
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       name,
@@ -58,9 +64,9 @@ export const registerUser = async (req, res) => {
     });
 
     await newUser.save();
-    res.status(201).json({ message: 'User registered successfully.' });
+    res.status(201).json({ success: true, message: 'User registered successfully.' });
   } catch (error) {
-    res.status(500).json({ message: 'Server error.', error });
+    res.status(500).json({ success: false, message: 'Server error.', error });
   }
 };
 
