@@ -131,7 +131,7 @@ const handleCreateAlert = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-              <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
+              <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
                 <Ionicons name="arrow-back" size={24} color="black" />
               </TouchableOpacity>
             {/* Header */}
