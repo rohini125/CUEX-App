@@ -46,6 +46,7 @@ const LogoutPage = () => {
 
     return (
         <View style={styles.container}>
+            <View style={styles.card}>
             <Text style={styles.header}>Logout</Text>
             <Text style={styles.subText}>Are you sure you want to log out of your account?</Text>
             <TouchableOpacity
@@ -57,6 +58,7 @@ const LogoutPage = () => {
                     {isLoggingOut ? 'Logging Out...' : 'Log Out'}
                 </Text>
             </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#ADD8E6',
         padding: 20,
     },
     header: {
@@ -75,6 +77,17 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: '#333',
     },
+    card: {
+        backgroundColor: "#E6F2FA",
+        borderRadius: 12,
+        padding: 16,
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 2 },
+        elevation: 2,
+        margin: 20,
+      },
     subText: {
         fontSize: 16,
         textAlign: 'center',

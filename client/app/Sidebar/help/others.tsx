@@ -46,7 +46,7 @@ const OtherIssues = () => {
       <View style={styles.header}>
         {/* Back Button */}
         <TouchableOpacity onPress={() => router.push('/Sidebar/help/help')} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#fff" />
+          <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Other Issues</Text>
       </View>
@@ -101,18 +101,18 @@ const OtherIssues = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 16,
-    backgroundColor: '#6200ee',
+    backgroundColor: '#ADD8E6',
     paddingHorizontal: 16,
   },
   headerTitle: {
-    fontSize: 18,
-    color: '#fff',
+    fontSize: 25,
+    color: 'black',
     fontWeight: 'bold',
   },
   backButton: {
@@ -121,6 +121,8 @@ const styles = StyleSheet.create({
   },
   issuesList: {
     padding: 16,
+    backgroundColor:'#E6F2FA',
+    margin:20
   },
   issueContainer: {
     marginBottom: 16,

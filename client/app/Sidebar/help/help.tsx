@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 25,
     color: 'black',
     fontWeight: 'bold',
   },
