@@ -55,14 +55,14 @@ export default function AccountDelete() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: "#ADD8E6",
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
   },
   card: {
     width: "90%",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#E6F2FA",
     borderRadius: 12,
     padding: 24,
     shadowColor: "#000",

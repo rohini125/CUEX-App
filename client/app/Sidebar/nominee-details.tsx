@@ -136,9 +136,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   label: {
-    fontSize: 14,
-    color: "#6B7280", // Gray text
+    fontSize: 16,
+    color: "black", // Gray text
     marginBottom: 8,
+    fontWeight:'bold'
   },
   input: {
     backgroundColor: "#F3F4F6", // Light gray input background
