@@ -272,7 +272,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ADD8E6',
   },
   backButton: {
-    marginBottom: 16,
+    marginRight: 10,
+    padding: 10,
   },
   header: {
     flexDirection: 'row',
@@ -288,8 +289,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   card: {
-    backgroundColor: '#fff',
-    padding: 16,
+    backgroundColor: '#E6F2FA',
+    padding: 20,
+    margin:20,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -319,7 +321,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   verifyButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: 'black',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
@@ -330,7 +332,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   verifyOtpButton: {
-    backgroundColor: '#28a745',
+    backgroundColor: 'black',
     paddingVertical: 8,
     borderRadius: 8,
     marginTop: 10,
@@ -340,7 +342,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   uploadButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: 'black',
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 8,
@@ -359,7 +361,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   submitButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: 'black',
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',

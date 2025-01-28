@@ -10,11 +10,11 @@ export default function AccountDetails() {
     <ScrollView contentContainerStyle={styles.container}>
          {/* Back Button */}
    <View style={styles.header}>
-      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+      <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
         <Ionicons name="arrow-back" size={24} color="#black" />
       </TouchableOpacity>
       {/* About Section */}
-        <Text style={styles.headerTitle}>About Us</Text>
+        <Text style={styles.headerTitle}>Account Details</Text>
     </View>
       {/* Profile Section */}
       <View style={styles.profileSection}>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 25,
     color: 'black',
     fontWeight: 'bold',
   },
