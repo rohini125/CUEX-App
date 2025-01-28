@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    color: '#fff',
+    color: 'black',
     fontWeight: 'bold',
   },
   backButton: {

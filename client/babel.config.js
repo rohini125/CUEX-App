@@ -1,5 +1,4 @@
 module.exports = {
-    presets: ['babel-preset-expo'],
-    plugins: [],
-  };
-  
+  presets: ['babel-preset-expo'],
+  plugins: [],
+};

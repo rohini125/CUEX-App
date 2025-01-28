@@ -24,6 +24,8 @@ const contact = () => {
     } else {
       Alert.alert('Error', 'Please fill in all required fields.');
     }
+     // Navigate to the help page
+  router.push('/Sidebar/help/help'); // Replace '/help' with the actual path of your Help page
   };
 
   return (
@@ -107,7 +109,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-    marginBottom: 16,
+    margin: 16,
+    marginTop:100
   },
   sectionTitle: {
     fontSize: 20,

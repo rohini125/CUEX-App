@@ -130,11 +130,12 @@ const KYCVerification = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
       <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#333" />
+        <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.header}>KYC Verification</Text>
-
+      <Text style={styles.headerTitle}>KYC Verification</Text>
+      </View>
       <View style={styles.card}>
         <Text style={styles.label}>Document Type:</Text>
         <RNPickerSelect
@@ -268,16 +269,23 @@ const pickerSelectStyles = StyleSheet.create({
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 16,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
   backButton: {
     marginBottom: 16,
   },
   header: {
-    fontSize: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    marginBottom:10
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
     fontWeight: 'bold',
-    marginBottom: 16,
   },
   card: {
     backgroundColor: '#fff',

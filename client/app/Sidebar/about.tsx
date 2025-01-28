@@ -125,14 +125,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   section: {
-    backgroundColor: '#E6F2FA',
+    backgroundColor: 'white',
     padding: 16,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-    marginBottom: 16,
+    margin: 16,
   },
   sectionTitle: {
     fontSize: 20,

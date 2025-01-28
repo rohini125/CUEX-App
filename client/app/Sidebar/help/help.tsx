@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { ScrollView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 
 // Define the type of each help option
 interface HelpOption {
@@ -72,8 +72,10 @@ const help = () => {
   };
 
   return (
+    <GestureHandlerRootView>
     <ScrollView style={styles.container}>
       {/* Back Button */}
+      
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="black" />
@@ -103,6 +105,7 @@ const help = () => {
         </TouchableOpacity>
       </View>
     </ScrollView>
+  </GestureHandlerRootView> 
   );
 };
 
