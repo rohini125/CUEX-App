@@ -120,6 +120,8 @@ const styles = StyleSheet.create({
   },
   issuesList: {
     padding: 16,
+    backgroundColor:'#E6F2FA',
+    margin:20
   },
   issueContainer: {
     marginBottom: 16,
