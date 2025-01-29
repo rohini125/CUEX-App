@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import twilio from 'twilio';
 
+
 dotenv.config();
 
 // Utility functions to generate tokens
@@ -26,7 +27,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail', // Use your email provider
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    pass: process.env.OTP_EMAIL_PASS,
   },
 });
 
@@ -39,15 +40,15 @@ export const registerUser = async (req, res) => {
     const { name, emailOrPhone, password, confirmPassword } = req.body;
 
     // Input validations
-    if (!name || !emailOrPhone || !password || !confirmPassword) {
-      return res.status(400).json({ message: 'All fields are required.' });
-    }
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: 'Passwords do not match.' });
-    }
-    if (password.length < 6) {
-      return res.status(400).json({ message: 'Password must be at least 6 characters long.' });
-    }
+    // if (!name || !emailOrPhone || !password || !confirmPassword) {
+    //   return res.status(400).json({ message: 'All fields are required.' });
+    // }
+    // if (password !== confirmPassword) {
+    //   return res.status(400).json({ message: 'Passwords do not match.' });
+    // }
+    // if (password.length < 6) {
+    //   return res.status(400).json({ message: 'Password must be at least 6 characters long.' });
+    // }
 
     // Check if user already exists
     const existingUser = await User.findOne({ emailOrPhone });
