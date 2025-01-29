@@ -89,7 +89,7 @@
 
 
 import React from "react";
-import { StyleSheet, ImageBackground, StatusBar } from "react-native";
+import { StyleSheet, ImageBackground, StatusBar , TouchableOpacity, Text } from "react-native";
 import Mybutton from "@/components/Mybutton";
 import { useRouter } from "expo-router";
 import { BlurView } from "expo-blur";
@@ -118,7 +118,10 @@ const index = () => {
         >
           Welcome to CUEX App
         </Animatable.Text>
-        <Mybutton title={"Get Started"} onPress={onContinue} />
+        <TouchableOpacity activeOpacity={0.7} style={styles.GetStartBtn} onPress={onContinue}>
+          <Text style={styles.GetStartText}>Get Started</Text>
+        </TouchableOpacity>
+        {/* <Mybutton title={"Get Started"} onPress={onContinue} /> */}
       </BlurView>
     </ImageBackground>
   );
@@ -144,5 +147,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     marginBottom: 20,
+  },
+  GetStartBtn: {
+    backgroundColor: 'blue',
+    borderRadius: 10,
+    alignItems: 'center',
+    padding: 15,
+  },
+  GetStartText: {
+    color: 'white',
+    fontSize: 16,
   },
 });

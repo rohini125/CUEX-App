@@ -138,28 +138,30 @@ const SetUPIPinPage = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Set Your UPI PIN</Text>
-      <TextInput
-        style={styles.input}
-        secureTextEntry
-        placeholder="Enter 4-digit PIN"
-        maxLength={4}
-        keyboardType="numeric"
-        value={pin}
-        onChangeText={(input) => handlePinChange(input, setPin)}
-      />
-      <TextInput
-        style={styles.input}
-        secureTextEntry
-        placeholder="Confirm UPI PIN"
-        maxLength={4}
-        keyboardType="numeric"
-        value={confirmPin}
-        onChangeText={(input) => handlePinChange(input, setConfirmPin)}
-      />
-      <TouchableOpacity  activeOpacity={0.7} style={styles.button} onPress={handleSetPin}>
-        <Text style={styles.buttonText}>Set PIN</Text>
-      </TouchableOpacity>
+      <View style={styles.Content}>
+        <Text style={styles.header}>Set Your UPI PIN</Text>
+          <TextInput
+            style={styles.input}
+            secureTextEntry
+            placeholder="Enter 4-digit PIN"
+            maxLength={4}
+            keyboardType="numeric"
+            value={pin}
+            onChangeText={(input) => handlePinChange(input, setPin)}
+          />
+          <TextInput
+            style={styles.input}
+            secureTextEntry
+            placeholder="Confirm UPI PIN"
+            maxLength={4}
+            keyboardType="numeric"
+            value={confirmPin}
+            onChangeText={(input) => handlePinChange(input, setConfirmPin)}
+          />
+          <TouchableOpacity  activeOpacity={0.7} style={styles.button} onPress={handleSetPin}>
+            <Text style={styles.buttonText}>Set PIN</Text>
+          </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -170,23 +172,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    backgroundColor:'#ADD8E6',
+  },
+  Content:{
+    backgroundColor:'#E6F2FA',
+    padding:28,
+    borderRadius:10,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 1,
+    borderColor: '#ddd',
+    width:'100%',
   },
   header: {
-    fontSize: 28,
+    fontSize: 26,
+    textAlign:'center',
     fontWeight: "bold",
     marginBottom: 20,
   },
   input: {
-    width: "80%",
     padding: 12,
-    borderWidth: 1,
-    borderColor: "#ccc",
+    // borderWidth: 1,
+    // borderColor: "#ccc",
     borderRadius: 50,
-    marginBottom: 20,
+    marginBottom: 15,
     textAlign: "center",
+    backgroundColor:'#fff',
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "black",
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 30,
@@ -200,3 +214,4 @@ const styles = StyleSheet.create({
 });
 
 export default SetUPIPinPage;
+

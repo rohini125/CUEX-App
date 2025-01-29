@@ -67,63 +67,65 @@ export default function VerificationPage() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>OTP</Text>
-      <Text style={styles.description}>
-       Please wait for an SMS confirmation code and enter it.
-      </Text>
-      <View style={styles.otpContainer}>
-        {[...Array(6)].map((_, index) => (
-          <TextInput
-            key={index}
-            ref={(ref) => (otpRefs.current[index] = ref)} // Setting the reference to otpRefs
-            style={styles.otpBox}
-            keyboardType="numeric"
-            maxLength={1}
-            value={otp[index] || ''}
-            onChangeText={(value) => handleChangeOtp(value, index)}
-            onKeyPress={({ nativeEvent }) => {
-              if (nativeEvent.key === 'Backspace') {
-                handleDeleteOtp(index);
-              }
-            }}
-          />
-        ))}
-      </View>
-      <TouchableOpacity
-          activeOpacity={0.7} 
-          style={styles.verifyButton}
-          onPress={handleVerify}
+      <View style={styles.Content}>
+          <Text style={styles.header}>OTP</Text>
+          <Text style={styles.description}>
+          Please wait for an SMS confirmation code and enter it.
+          </Text>
+          <View style={styles.otpContainer}>
+            {[...Array(6)].map((_, index) => (
+              <TextInput
+                key={index}
+                ref={(ref) => (otpRefs.current[index] = ref)} // Setting the reference to otpRefs
+                style={styles.otpBox}
+                keyboardType="numeric"
+                maxLength={1}
+                value={otp[index] || ''}
+                onChangeText={(value) => handleChangeOtp(value, index)}
+                onKeyPress={({ nativeEvent }) => {
+                  if (nativeEvent.key === 'Backspace') {
+                    handleDeleteOtp(index);
+                  }
+                }}
+              />
+            ))}
+          </View>
+          <TouchableOpacity
+              activeOpacity={0.7} 
+              style={styles.verifyButton}
+              onPress={handleVerify}
 
-      >
-        <Text style={styles.verifyButtonText}>Verify OTP</Text>
-        </TouchableOpacity>
-        {/* in second timer logic */}
-          {/* <Text style={styles.retryText}>
-            {timer > 0
-              ? `Didn't receive OTP? Retry in (00:${timer.toString().padStart(2, '0')})`
-              : "Didn't receive OTP?"}
-          </Text> */}
+          >
+            <Text style={styles.verifyButtonText}>Verify OTP</Text>
+            </TouchableOpacity>
+            {/* in second timer logic */}
+              {/* <Text style={styles.retryText}>
+                {timer > 0
+                  ? `Didn't receive OTP? Retry in (00:${timer.toString().padStart(2, '0')})`
+                  : "Didn't receive OTP?"}
+              </Text> */}
 
-          {/* in min timer logic */}
-        <Text style={styles.retryText}>
-            {timer > 0
-              ? `Didn't receive OTP? Retry in (${Math.floor(timer / 60)
-                  .toString()
-                  .padStart(2, '0')}:${(timer % 60)
-                  .toString()
-                  .padStart(2, '0')})`
-              : "Didn't receive OTP?"}
-        </Text>
+              {/* in min timer logic */}
+            <Text style={styles.retryText}>
+                {timer > 0
+                  ? `Didn't receive OTP? Retry in (${Math.floor(timer / 60)
+                      .toString()
+                      .padStart(2, '0')}:${(timer % 60)
+                      .toString()
+                      .padStart(2, '0')})`
+                  : "Didn't receive OTP?"}
+            </Text>
 
-        {timer === 0 && (
-        <TouchableOpacity 
-          activeOpacity={0.7} 
-          style={styles.resendButton} 
-          onPress={handleResendOtp}
-        >
-          <Text style={styles.resendButtonText}>Resend OTP</Text>
-        </TouchableOpacity>
-      )}
+            {timer === 0 && (
+            <TouchableOpacity 
+              activeOpacity={0.7} 
+              style={styles.resendButton} 
+              onPress={handleResendOtp}
+            >
+              <Text style={styles.resendButtonText}>Resend OTP</Text>
+            </TouchableOpacity>
+          )}
+        </View>
     </View>
   );
 }
@@ -132,8 +134,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
+    backgroundColor:'#ADD8E6',
     justifyContent: 'center',
+  },
+  Content:{
+    backgroundColor:'#E6F2FA',
+    padding:28,
+    borderRadius:10,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 1,
+    borderColor: '#ddd',
   },
   header: {
     fontSize: 22,
@@ -143,7 +155,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color: 'gray',
+    color: '#333333',
     textAlign: 'center',
     marginBottom: 32,
   },
@@ -153,8 +165,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   otpBox: {
-    borderWidth: 1,
-    borderColor: '#ccc',
+    // borderWidth: 1,
+    // borderColor: '#ccc',
+    backgroundColor:'#fff',
     width: 40,
     height: 50,
     marginHorizontal: 6,
@@ -163,10 +176,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   verifyButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'black',
     paddingVertical: 12,
     marginBottom: 12,
-    borderRadius:50,
+    borderRadius:10,
   },
   verifyButtonText:{
     color: '#fff',
@@ -184,7 +197,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'blue',
+    borderColor: 'black',
     borderRadius: 8,
   },
   resendButtonText: {
