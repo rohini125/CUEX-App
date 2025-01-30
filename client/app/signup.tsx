@@ -312,6 +312,14 @@
 //   },
 // });
 
+
+
+
+
+
+
+
+
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
@@ -328,6 +336,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const API_URL = 'http://192.168.52.190:9000/api/auth/signup';
+  
 
   const onPhone = () => {
     router.navigate('/login'); 
@@ -444,6 +453,22 @@ const styles = StyleSheet.create({
   signUpButtonText: { color: 'white', fontSize: 16 },
   link: { color: 'blue', textDecorationLine: 'underline' },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import React, { useState } from 'react';
 // import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
