@@ -321,7 +321,7 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert ,StatusBar} from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons'; // Importing Ionicons for the eye icon
 import axios from 'axios'; // Importing axios for API requests
@@ -363,7 +363,8 @@ const SignUp = () => {
 
       if (response.status === 201 || response.data.success) {
         Alert.alert('Success', response.data.message || 'Signup successful!');
-        router.navigate('/UpiPin');
+        // router.navigate('/UpiPin');
+        router.navigate('/login');
       } else {
         Alert.alert('Error', response.data.message || 'Something went wrong.');
       }
@@ -376,6 +377,7 @@ const SignUp = () => {
 
   return (
     <ScrollView style={styles.container}>
+         {/* <StatusBar backgroundColor={'#ADD8E6'} barStyle={'dark-content'}/> */}
       <View style={{ padding: 20, gap: 20 }}>
         <Image source={require("@/assets/images/signup.jpg")} style={styles.image} resizeMode="cover" />
         <TextInput
@@ -437,38 +439,29 @@ const SignUp = () => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1 , backgroundColor: "#ADD8E6",},
   image: { width: '100%', height: 250 },
-  input: { borderWidth: 1, height: 50, paddingHorizontal: 20, borderRadius: 10 },
+  input: { 
+    // borderWidth: 1,
+    backgroundColor:'#fff',
+    height: 50, 
+    paddingHorizontal: 20, 
+    borderRadius: 10 
+    },
   inputWrapper: { position: 'relative' },
   inputWithIcon: {
-    borderWidth: 1,
+    // borderWidth: 1,
+    backgroundColor:'#fff',
     height: 50,
     paddingHorizontal: 20,
     borderRadius: 10,
     paddingRight: 50, // Space for eye icon
   },
   iconWrapper: { position: 'absolute', right: 15, top: 12 },
-  signUpButton: { backgroundColor: 'blue', borderRadius: 10, alignItems: 'center', paddingVertical: 15 },
+  signUpButton: { backgroundColor: 'black', borderRadius: 10, alignItems: 'center', paddingVertical: 15 },
   signUpButtonText: { color: 'white', fontSize: 16 },
   link: { color: 'blue', textDecorationLine: 'underline' },
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState } from 'react';
 // import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
