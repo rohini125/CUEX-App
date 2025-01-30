@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   headerLeftView: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop:20
   },
   user: {
     width: scale(40),
