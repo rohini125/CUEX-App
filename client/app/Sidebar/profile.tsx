@@ -190,7 +190,7 @@ const Profile = () => {
        <View style={styles.backButton}>
         <View>
       <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} >
-        <Ionicons name="arrow-back" size={24} color="#333" />
+        <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
       </View>
       <View>
@@ -499,7 +499,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
   row: {
     flexDirection: 'row',
@@ -510,8 +510,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: '#ccc',
   },
-  label: { fontSize: 16, color: '#333' },
-  value: { fontSize: 16, color: '#555' },
+  label: {
+     fontSize: 16, 
+     color: '#333'
+     },
+  value: {
+     fontSize: 16, 
+     color: '#555'
+     },
   modal: {
     backgroundColor: '#fff',
     padding: 20,
@@ -523,7 +529,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
   },
-  optionText: { fontSize: 16, marginLeft: 8 },
+  optionText: { 
+    fontSize: 16,
+     marginLeft: 8
+     },
 
   header: {
     flexDirection: 'row',
@@ -548,11 +557,11 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     borderWidth: 2,
-    borderColor: '#6200ee',
+    borderColor: 'black',
     marginBottom: 8, // Adds spacing between the image and the text
   },
   changePictureText: {
-    color: '#6200ee',
+    color: 'black',
     fontWeight: 'bold',
     fontSize: 14,
     textAlign: 'center', // Ensures the text is aligned with the image
@@ -562,7 +571,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
-    backgroundColor: '#28a745',
+    backgroundColor: 'black',
     position: 'absolute',
     right: 10, // Align save button to the right
     top: '50%',
@@ -573,21 +582,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   section: {
-    backgroundColor: '#fff',
+    backgroundColor: '#E6F2FA',
     padding: 16,
     borderRadius: 8,
     marginBottom: 10,
     elevation: 3,
   },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#4a4a4a',
+    color: 'black',
     marginBottom: 8,
   },
   detailText: {
-    fontSize: 14,
-    color: '#7a7a7a',
+    fontSize: 16,
+    color: 'black',
     marginBottom: 8,
      justifyContent: 'space-between',
   }, 
@@ -619,7 +628,6 @@ const styles = StyleSheet.create({
   },
   flexInput: {
     flex: 0.5,
-
     borderColor: '#ddd',
     padding: 10,
     borderRadius: 5,
@@ -630,27 +638,29 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 8,
-    backgroundColor: '#6200ee',
+    backgroundColor: 'black',
   },
   editButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-  }, subheader: {
+  }, 
+  subheader: {
     fontSize: 14,
     color: 'gray',
     textAlign: 'center',
     marginBottom: 16,
   },
   subheaderTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     marginTop: 8,
+    color:'black'
   },
   scrollContent: {
     paddingBottom: 24,
   },
   saveButton: {
-    backgroundColor: '#28a745',
+    backgroundColor: 'black',
     padding: 7,
     borderRadius: 8,
     marginBottom: 16,
@@ -660,7 +670,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   cancelButton: {
-    backgroundColor: '#dc3545',
+    backgroundColor: 'black',
     padding: 10,
     borderRadius: 8,
     marginTop: 10,
@@ -679,7 +689,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   addAddressText: {
-    color: '#6200ee',
+    color: 'black',
     fontWeight: 'bold',
   },
   addressInputContainer: {

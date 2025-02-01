@@ -64,17 +64,19 @@ const menu = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ADD8E6',
     padding: 16,
   },
   header: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#ADD8E6',
     marginBottom: 16,
   },
   menuList: {
-    paddingBottom: 20,
+    padding: 20,
+    margin:10,
+    backgroundColor:'#E6F2FA'
   },
   menuItem: {
     flexDirection: 'row',
