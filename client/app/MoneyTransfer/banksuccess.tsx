@@ -23,7 +23,7 @@ const BankSuccess = () => {
       </Text>
 
       {/* Back Button */}
-      <TouchableOpacity style={styles.button} onPress={() => router.push('/front')}>
+      <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => router.push('/front')}>
         <Text style={styles.buttonText}> Done </Text>
       </TouchableOpacity>
     </View>

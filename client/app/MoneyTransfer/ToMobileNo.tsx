@@ -62,7 +62,7 @@ const ToMobilePay = () => {
           />
 
           {/* Confirm Button */}
-          <TouchableOpacity style={styles.button} onPress={handleConfirm}>
+          <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={handleConfirm}>
             <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
         </View>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
   Content:{
     flex:1,
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
+    // borderWidth: 1,
+   backgroundColor: '#fff',
     borderRadius: 10,
     height: 50,
     paddingHorizontal: 15,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#000000',
     borderRadius: 10,
     alignItems: 'center',
     paddingVertical: 15,
