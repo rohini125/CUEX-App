@@ -8,6 +8,7 @@ import conversionRoutes from "./routes/conversionRoutes.js";
 import nomineeRoutes from "./routes/nomineeRoutes.js";
 import kycRoutes from './routes/kycRoutes.js';
 import upiPinRoutes from './routes/upiPinRoutes.js';
+import contactRoute  from "./routes/contactRoute.js";
 import historyRoute from './routes/historyRoute.js';
 import cookieParser from 'cookie-parser';
 dotenv.config();
@@ -30,6 +31,10 @@ app.use(cookieParser());
 
 // Middleware to parse JSON
 app.use(express.json());
+
+
+// contact routes
+app.use("/newuser", contactRoute);
 
 //user routes
 app.use('/api/auth', userRoute);

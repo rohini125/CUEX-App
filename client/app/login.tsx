@@ -713,7 +713,7 @@ const Login = () => {
   const [otp, setOtp] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = 'http://192.168.1.16:7000/api/auth';
+  const API_URL = 'http://192.168.43.102:7000/api/auth';
 
   const onLogin = async () => {
     if (!emailOrPhone || !password) {

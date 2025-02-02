@@ -13,7 +13,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const API_URL = 'http://192.168.1.16:7000/api/auth/signup';
+  const API_URL = 'http://192.168.43.102:7000/api/auth/signup';
 
   const onPhone = () => {
     router.navigate('/login');
