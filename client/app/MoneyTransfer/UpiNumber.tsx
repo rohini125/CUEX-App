@@ -42,7 +42,7 @@ const UpiNumber = () => {
       />
 
       {/* Confirm Button */}
-      <TouchableOpacity style={styles.button} onPress={handleConfirm}>
+      <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={handleConfirm}>
         <Text style={styles.buttonText}>Confirm</Text>
       </TouchableOpacity>
     </View>
@@ -56,13 +56,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
+    // backgroundColor: '#f9f9f9',
+    backgroundColor:'#ADD8E6',
     padding: 20,
   },
   heading: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#222',
     marginBottom: 20,
   },
   input: {
@@ -79,7 +80,8 @@ const styles = StyleSheet.create({
   button: {
     width: '100%',
     height: 50,
-    backgroundColor: '#007BFF',
+    // backgroundColor: '#007BFF',
+    backgroundColor:'#000000',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,

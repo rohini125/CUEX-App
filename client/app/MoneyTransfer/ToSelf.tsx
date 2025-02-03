@@ -1,86 +1,3 @@
-// import React, { useState } from "react";
-// import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-// import { useRouter } from "expo-router";
-
-// const SelfTransaction = () => {
-//   const router = useRouter();
-//   const [amount, setAmount] = useState(""); // amount is a string initially
-//   const [description, setDescription] = useState("");
-
-//   const handleTransaction = () => {
-//     const numericAmount = Number(amount); // Convert the string to a number
-
-//     if (!numericAmount || isNaN(numericAmount) || numericAmount <= 0) {
-//       Alert.alert("Invalid Input", "Please enter a valid amount.");
-//       return;
-//     }
-
-//     // Simulate a transaction (you can replace this with your API logic)
-//     Alert.alert(
-//       "Transaction Successful",
-//       `You transferred ₹${numericAmount} to your account.\n\nDescription: ${
-//         description || "No description provided"
-//       }`,
-//       [
-//         {
-//           text: "OK",
-//           onPress: () => router.push("/"), // Redirect to homepage
-//         },
-//       ]
-//     );
-    
-//     // Reset the input fields
-//     setAmount("");
-//     setDescription("");
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Self Account Transaction</Text>
-//       <TextInput
-//         style={styles.input}
-//         placeholder="Enter Amount"
-//         keyboardType="numeric" // Ensures numeric keyboard on mobile
-//         value={amount}
-//         onChangeText={setAmount} // Update state with text input
-//       />
-//       <TextInput
-//         style={styles.input}
-//         placeholder="Add Description (Optional)"
-//         value={description}
-//         onChangeText={setDescription} // Update description state
-//       />
-//       <Button title="Transfer" onPress={handleTransaction} color="#4CAF50" />
-//     </View>
-//   );
-// };
-
-// export default SelfTransaction;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     padding: 16,
-//     backgroundColor: "#f9f9f9",
-//   },
-//   title: {
-//     fontSize: 20,
-//     fontWeight: "bold",
-//     marginBottom: 20,
-//   },
-//   input: {
-//     width: "90%",
-//     height: 50,
-//     borderWidth: 1,
-//     borderColor: "#ddd",
-//     borderRadius: 5,
-//     paddingHorizontal: 10,
-//     marginBottom: 15,
-//     backgroundColor: "#fff",
-//   },
-// });
 
 
 
@@ -134,13 +51,14 @@ const SelfAccountPage = () => {
 
   return (
     <View style={styles.container}>
-      {/* Back Arrow */}
-      <TouchableOpacity style={styles.backButton} onPress={() => router.push('/front')}>
-        <AntDesign name="arrowleft" size={24} color="black" />
-      </TouchableOpacity>
+      <View style={styles.header}>
+        {/* Back Arrow */}
+        <TouchableOpacity style={styles.backButton} onPress={() => router.push('/front')}>
+          <AntDesign name="arrowleft" size={24} color="black" />
+        </TouchableOpacity>
 
-      <Text style={styles.pageTitle}>Self Account</Text>
-
+        <Text style={styles.headerText}>Self Account</Text>
+      </View>
       {/* Add Bank Account Section */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Add Bank Account</Text>
@@ -209,21 +127,23 @@ const SelfAccountPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ADD8E6',
     paddingTop: 40,
     paddingHorizontal: 16,
   },
-  backButton: {
-    position: 'absolute',
-    top: 20,
-    left: 10,
-    padding: 10,
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 30,
   },
-  pageTitle: {
-    fontSize: 24,
+  backButton: {
+    marginRight: 10,
+  },
+  headerText: {
+    fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 10,
+    color: '#222',
+    marginLeft:10,
   },
   section: {
     marginVertical: 15,
@@ -231,17 +151,19 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
+    textAlign:'center',
+    alignItems:'center',
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
+    // borderWidth: 1,
+    backgroundColor: '#fff',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#000000',
     padding: 12,
     borderRadius: 5,
     alignItems: 'center',

@@ -428,7 +428,7 @@ const SignUp = () => {
         <Text style={{ textAlign: 'center' }}>
           Already a member?{' '}
           <Text style={styles.link} onPress={onPhone}>
-            Login
+            Sign In
           </Text>
         </Text>
       </View>
