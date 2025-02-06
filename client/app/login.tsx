@@ -255,7 +255,7 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Modal, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, Modal, Alert, ActivityIndicator, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import axios from 'axios';
 
@@ -301,6 +301,7 @@ const Login = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <StatusBar backgroundColor="#ADD8E6" barStyle="dark-content"  />
       <View style={{ padding: 20, gap: 20 }}>
         <Image source={require('@/assets/images/login.jpg')} style={styles.image} resizeMode="cover" />
         <TextInput placeholder="Enter Your Email / Mobile no" style={styles.input} value={emailOrPhone} onChangeText={setEmailOrPhone} />
