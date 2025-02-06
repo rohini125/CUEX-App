@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   headerTitle: {
-    fontSize: 18,
-    color: '#fff',
+    fontSize: 25,
+    color: 'black',
     fontWeight: 'bold',
   },
   backButton: {
@@ -120,6 +120,8 @@ const styles = StyleSheet.create({
   },
   issuesList: {
     padding: 16,
+    backgroundColor:'#E6F2FA',
+    margin:20
   },
   issueContainer: {
     marginBottom: 16,

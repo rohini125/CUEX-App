@@ -1,109 +1,110 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { useRouter } from 'expo-router'; // Import useRouter for navigation
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export default function LogoutScreen() {
-  const [emailOrNumber, setEmailOrNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter(); // UseRouter hook for navigation
+// Define RootParamList with route names and params
+export type RootParamList = {
+    Login: undefined;
+    Home: undefined;
+    Profile: undefined;
+};
 
-  const confirmLogout = () => {
-    Alert.alert(
-      'Confirm Logout', // Title
-      'Are you sure you want to logout?', // Message
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel', // iOS-specific: Makes it a cancel-style button
-        },
-        {
-          text: 'Confirm',
-          onPress: handleLogout, // Call the logout function
-        },
-      ]
+type LogoutScreenNavigationProp = NativeStackNavigationProp<RootParamList, 'Login'>;
+
+const LogoutPage = () => {
+    const navigation = useNavigation<LogoutScreenNavigationProp>();
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+    const handleLogout = () => {
+        Alert.alert(
+            'Confirm Logout',
+            'Are you sure you want to log out?',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Logout',
+                    onPress: () => {
+                        setIsLoggingOut(true);
+
+                        // Simulate API call or AsyncStorage clearance
+                        setTimeout(() => {
+                            setIsLoggingOut(false);
+                            navigation.reset({
+                                index: 0,
+                                routes: [{ name: 'Login' }], // Redirect to Login screen
+                            });
+                        }, 1000);
+                    },
+                },
+            ]
+        );
+    };
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.card}>
+            <Text style={styles.header}>Logout</Text>
+            <Text style={styles.subText}>Are you sure you want to log out of your account?</Text>
+            <TouchableOpacity
+                style={styles.logoutButton}
+                onPress={handleLogout}
+                disabled={isLoggingOut}
+            >
+                <Text style={styles.logoutButtonText}>
+                    {isLoggingOut ? 'Logging Out...' : 'Log Out'}
+                </Text>
+            </TouchableOpacity>
+            </View>
+        </View>
     );
-  };
-
-  const handleLogout = () => {
-    // Perform logout logic
-    Alert.alert('Logged Out', 'You have been logged out successfully.', [
-      {
-        text: 'OK',
-        onPress: () => {
-          // Clear fields after logout
-          setEmailOrNumber('');
-          setPassword('');
-
-          // Redirect to the login page
-          router.push('/login'); // Navigate to the login screen
-        },
-      },
-    ]);
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>LOGOUT</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Enter Email or Phone Number"
-        value={emailOrNumber}
-        onChangeText={setEmailOrNumber}
-        placeholderTextColor="#888"
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        placeholderTextColor="#888"
-        secureTextEntry
-      />
-
-      <TouchableOpacity style={styles.button} onPress={confirmLogout}>
-        <Text style={styles.buttonText}>LOGOUT</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f8f8f8',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 30,
-  },
-  input: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#ADD8E6',
-    borderRadius: 8,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    color: '#000',
-    fontSize: 16,
-  },
-  button: {
-    height: 50,
-    width: '100%',
-    backgroundColor: '#1E90FF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-    marginVertical: 10,
-  },
-  buttonText: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold',
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ADD8E6',
+        padding: 20,
+    },
+    header: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
+    },
+    card: {
+        backgroundColor: "#E6F2FA",
+        borderRadius: 12,
+        padding: 16,
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 2 },
+        elevation: 2,
+        margin: 20,
+      },
+    subText: {
+        fontSize: 16,
+        textAlign: 'center',
+        color: '#555',
+        marginBottom: 40,
+    },
+    logoutButton: {
+        backgroundColor: '#d9534f',
+        paddingVertical: 15,
+        paddingHorizontal: 40,
+        borderRadius: 10,
+    },
+    logoutButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
 });
+
+export default LogoutPage;

@@ -22,7 +22,7 @@ const UpiNumberSuccess = () => {
       <Text style={styles.details}>Date and Time: {dateTime}</Text>
 
       {/* Done Button */}
-      <TouchableOpacity style={styles.button} onPress={() => router.push('/front')}>
+      <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => router.push('/front')}>
         <Text style={styles.buttonText}>Done</Text>
       </TouchableOpacity>
     </View>

@@ -14,26 +14,30 @@ const promotions = [
 const PromotionsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredPromotions = promotions.filter(promotion =>
-    promotion.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    promotion.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
+  const filteredPromotions = (promotions || []).filter(promotion => {
+    const title = String(promotion.title || ''); // Convert to string
+    const description = String(promotion.description || ''); // Convert to string
+    const query = String(searchQuery || ''); // Convert to string
+    return title.toLowerCase().includes(query.toLowerCase()) ||
+           description.toLowerCase().includes(query.toLowerCase());
+  });
+  
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
       <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#333" />
+        <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>Promotions</Text>
+      <Text style={styles.headerTitle}>Promotions</Text>
+      </View><View style={styles.card}>
         <TextInput
           style={styles.searchBar}
           placeholder="Search Promotions..."
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
-      </View>
+    
 
       {/* Carousel Section */}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.carouselContainer}>
@@ -58,37 +62,40 @@ const PromotionsPage = () => {
           </View>
         )}
       />
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    backgroundColor: '#fff', 
-    padding: 10 
+  container: {
+    flexGrow: 1,
+    backgroundColor:'#ADD8E6'
   },
-  header:  {     
-  flexDirection: 'row',
-  marginBottom: 20 ,
-  alignItems: 'center', // Vertically centers the arrow and text
-},
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    marginBottom:10,
+  
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
+    fontWeight: 'bold',
+  },
   backButton: {
     marginRight: 10,
+    padding: 10,
   },
-  title: {
-     fontSize: 24,
-      fontWeight: 'bold',
-       marginBottom: 10,
-       flex: 1, // Ensures the title takes up the remaining space
-    textAlign: 'center', // Centers the text between the arrow and search bar
-       },
   searchBar: {
     height: 40,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 8,
-    paddingHorizontal: 10,
+    paddingHorizontal: 50,
     backgroundColor: '#f9f9f9',
   },
   carouselContainer: { 
@@ -115,6 +122,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     alignItems: 'center',
+  },
+  card: {
+    backgroundColor: "#E6F2FA",
+    borderRadius: 12,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
+    margin: 20,
   },
   promotionImage: { width: '100%', height: 100, borderRadius: 8 },
   promotionTitle: { fontSize: 16, fontWeight: 'bold', marginTop: 10 },

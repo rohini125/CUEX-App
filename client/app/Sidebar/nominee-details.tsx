@@ -47,12 +47,13 @@ export default function NomineeDetails() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
         <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#333" />
+          <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
       {/* Header */}
-      <Text style={styles.header}>Nominee Details</Text>
-
+      <Text style={styles.headerTitle}>Nominee Details</Text>
+      </View>
       {/* Card Container */}
       <View style={styles.card}>
         {/* Nominee Name */}
@@ -101,21 +102,27 @@ export default function NomineeDetails() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "#F9FAFB", // Light gray background
-    padding: 16,
+    backgroundColor:'#ADD8E6'
   },
   header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#4F46E5", // Indigo color
-    textAlign: "center",
-    marginBottom: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    marginBottom:10
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
+    fontWeight: 'bold',
   },
   backButton: {
     marginRight: 10,
+    padding: 10,
   },
   card: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#E6F2FA",
     borderRadius: 12,
     padding: 16,
     shadowColor: "#000",
@@ -123,15 +130,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: { width: 0, height: 2 },
     elevation: 2,
-    marginBottom: 20,
+    margin: 20,
   },
   inputGroup: {
     marginBottom: 12,
   },
   label: {
-    fontSize: 14,
-    color: "#6B7280", // Gray text
+    fontSize: 16,
+    color: "black", // Gray text
     marginBottom: 8,
+    fontWeight:'bold'
   },
   input: {
     backgroundColor: "#F3F4F6", // Light gray input background
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
     borderColor: "#D1D5DB", // Light border
   },
   button: {
-    backgroundColor: "#4F46E5", // Indigo color
+    backgroundColor: "black", // Indigo color
     borderRadius: 24,
     paddingVertical: 14,
     shadowColor: "#4F46E5",

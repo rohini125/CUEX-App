@@ -130,11 +130,14 @@ const handleCreateAlert = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#333" />
-      </TouchableOpacity>
-      <Text style={styles.header}>Create Price Alerts</Text>
-
+      <View style={styles.header}>
+              <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+                <Ionicons name="arrow-back" size={24} color="black" />
+              </TouchableOpacity>
+            {/* Header */}
+            <Text style={styles.headerTitle}> Price Alerts</Text>
+            </View>
+    <View style={styles.card}>
       {/* Currency Search Bar */}
       <TextInput
         style={styles.searchBar}
@@ -234,11 +237,14 @@ const handleCreateAlert = () => {
       >
         <Ionicons name="trash" size={20} color="red" />
       </TouchableOpacity>
+      
     </View>
+    
   )}
 />
 
 
+      </View>
       </View>
     </View>
   );
@@ -246,27 +252,44 @@ const handleCreateAlert = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#f9f9f9',
+    flexGrow: 1,
+    backgroundColor:'#ADD8E6'
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    marginBottom:10
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
+    fontWeight: 'bold',
   },
   backButton: {
     marginRight: 10,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#007BFF',
-    textAlign: 'center',
-    marginBottom: 20,
+    padding: 10,
   },
   searchBar: {
     height: 40,
-    borderColor: '#ddd',
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
     paddingLeft: 10,
     marginBottom: 20,
+  },
+  card: {
+    backgroundColor: "#E6F2FA",
+    borderRadius: 12,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
+    margin: 20,
   },
   currencyRow: {
     flexDirection: 'row',
@@ -302,7 +325,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   alertButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: 'black',
     padding: 10,
     borderRadius: 5,
     flex: 1,
@@ -310,7 +333,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selectedButton: {
-    backgroundColor: '#0056b3',
+    backgroundColor: 'black',
   },
   alertButtonText: {
     color: '#fff',
@@ -328,7 +351,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   adjustButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: 'black',
     borderRadius: 5,
     padding: 10,
   },
@@ -342,7 +365,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   createButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: 'black',
     padding: 15,
     borderRadius: 5,
     alignItems: 'center',

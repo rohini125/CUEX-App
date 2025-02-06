@@ -1,10 +1,21 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Link } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function AccountDetails() {
+   const router = useRouter();
   return (
     <ScrollView contentContainerStyle={styles.container}>
+         {/* Back Button */}
+   <View style={styles.header}>
+      <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
+        <Ionicons name="arrow-back" size={24} color="#black" />
+      </TouchableOpacity>
+      {/* About Section */}
+        <Text style={styles.headerTitle}>Account Details</Text>
+    </View>
       {/* Profile Section */}
       <View style={styles.profileSection}>
         <Image
@@ -59,8 +70,26 @@ export default function AccountDetails() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    backgroundColor: '#f8f8f8',
+    flexGrow: 1,
+    backgroundColor: '#ADD8E6',
+    
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    marginBottom:10
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+   backButton: {
+    marginRight: 10,
+    padding: 10,
   },
   profileSection: {
     alignItems: 'center',

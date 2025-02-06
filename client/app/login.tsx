@@ -709,11 +709,8 @@ const Login = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [otp, setOtp] = useState('');
-  const [error, setError] = useState<string | null>(null);
-
-  const API_URL = 'http://192.168.43.102:7000/api/auth';
+  const [resetSuccess, setResetSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null); // Ensure error type is defined
 
   const onLogin = async () => {
     if (!emailOrPhone || !password) {
@@ -744,22 +741,27 @@ const Login = () => {
   };
 
   const onResetPassword = async () => {
-    if (!emailOrPhone) {
-      Alert.alert('Error', 'Please enter your email.');
-      return;
-    }
-    setLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/forgot-password`, { emailOrPhone });
+      const response = await axios.post('http://192.168.52.190:9000/api/auth/login', { emailOrPhone });
       if (response.data.success) {
-        Alert.alert('Success', 'Reset link sent to your email.');
+        setResetSuccess(true);
+
       } else {
-        Alert.alert('Error', response.data.message || 'Failed to send reset link.');
+        setError(response.data.message || 'Failed to send reset link');
       }
-    } catch (err) {
-      Alert.alert('Error', 'Something went wrong.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     }
-    setLoading(false);
+  };
+
+  const onCloseModal = () => {
+    setModalVisible(false);
+    setResetSuccess(false);
+    setError(null);
   };
 
   return (
@@ -782,12 +784,138 @@ const Login = () => {
 export default Login;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  image: { width: "100%", height: 300 },
-  input: { borderWidth: 1, height: 50, paddingHorizontal: 20, borderRadius: 10 },
-  signInButton: { backgroundColor: 'blue', borderRadius: 10, alignItems: 'center', paddingVertical: 15 },
-  signInButtonText: { color: 'white', fontSize: 16 },
-  forgotPassword: { color: 'blue', fontSize: 14, textAlign: 'center' },
-  link: { color: 'blue', textDecorationLine: 'underline' },
-  errorText: { color: 'red', textAlign: 'center', marginTop: 10 },
+  container: {
+    flex: 1,
+
+  },
+  image: {
+    width: "100%",
+    height: 300,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    height: 50,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+signInButton: {
+  backgroundColor: 'blue',
+  borderRadius: 10,
+  alignItems: 'center',
+  paddingVertical: 15,
+},
+signInButtonText: {
+  color: 'white',
+  fontSize: 16,
+},
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
+  forgotPassword: {
+    color: 'blue',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContainer: {
+    width: '100%',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 10,
+  },
+  closeButtonText: {
+    fontSize: 18,
+    color: '#333',
+  },
+  modalHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
+  },
+  modalDescription: {
+    fontSize: 14,
+    marginBottom: 15,
+    color: '#555',
+  },
+  modalInput: {
+    height: 50,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+  },
+  modalButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 12,
+    borderRadius: 50,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  modalButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  modalButtonCancel: {
+    backgroundColor: '#fff',
+    paddingVertical: 12,
+    borderRadius: 50,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  modalButtonTextCancel: {
+    color: '#007bff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  successContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  checkCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#28a745',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  checkCircleText: {
+    fontSize: 24,
+    color: '#fff',
+  },
+  successMessage: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#28a745',
+  },
+  emailConfirmation: {
+    fontSize: 14,
+    color: '#555',
+    marginTop: 20,
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 10,
+  },
 });

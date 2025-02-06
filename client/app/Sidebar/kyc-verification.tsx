@@ -130,11 +130,12 @@ const KYCVerification = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
       <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
-        <Ionicons name="arrow-back" size={24} color="#333" />
+        <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <Text style={styles.header}>KYC Verification</Text>
-
+      <Text style={styles.headerTitle}>KYC Verification</Text>
+      </View>
       <View style={styles.card}>
         <Text style={styles.label}>Document Type:</Text>
         <RNPickerSelect
@@ -268,20 +269,29 @@ const pickerSelectStyles = StyleSheet.create({
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 16,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
   backButton: {
-    marginBottom: 16,
+    marginRight: 10,
+    padding: 10,
   },
   header: {
-    fontSize: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    marginBottom:10
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
     fontWeight: 'bold',
-    marginBottom: 16,
   },
   card: {
-    backgroundColor: '#fff',
-    padding: 16,
+    backgroundColor: '#E6F2FA',
+    padding: 20,
+    margin:20,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -311,7 +321,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   verifyButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: 'black',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
@@ -322,7 +332,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   verifyOtpButton: {
-    backgroundColor: '#28a745',
+    backgroundColor: 'black',
     paddingVertical: 8,
     borderRadius: 8,
     marginTop: 10,
@@ -332,7 +342,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   uploadButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: 'black',
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 8,
@@ -351,7 +361,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   submitButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: 'black',
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',

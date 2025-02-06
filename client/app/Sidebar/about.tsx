@@ -117,28 +117,28 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     backgroundColor: '#ADD8E6',
     paddingHorizontal: 16,
-    marginBottom:10
+    
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 25,
     color: 'black',
     fontWeight: 'bold',
   },
   section: {
-    backgroundColor: '#E6F2FA',
+    backgroundColor: 'white',
     padding: 16,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-    marginBottom: 16,
+    margin: 16,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '600',
     marginBottom: 10,
-    color: '#007BFF',
+    color: 'black',
     textAlign: 'center',
   },
   card: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   },
   cardText: {
     fontSize: 14,
-    color: '#555',
+    color: 'black',
     textAlign: 'center',
   },
   label: {

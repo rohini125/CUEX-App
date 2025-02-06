@@ -8,11 +8,12 @@ const AccountingSettings = () => {
 
   return (
     <View style={styles.container}>
-      <View>
+          
+      <View style={styles.header}>
           <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="#333" />
+          <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-      <Text style={styles.header}>ACCOUNTING SETTINGS</Text>
+      <Text style={styles.headerTitle}> Account Settings </Text>
       </View>
       {/* KYC Verification */}
       <TouchableOpacity
@@ -56,14 +57,20 @@ const AccountingSettings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ADD8E6',
   },
   header: {
-    fontSize: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    marginBottom:10
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
     fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#000',
   },
   backButton: {
     marginRight: 10,
