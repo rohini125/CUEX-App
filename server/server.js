@@ -8,6 +8,7 @@ import conversionRoutes from "./routes/conversionRoutes.js";
 import nomineeRoutes from "./routes/nomineeRoutes.js";
 import kycRoutes from "./routes/kycRoutes.js";
 import upiPinRoutes from "./routes/upiPinRoutes.js";
+import contactRoute from "./routes/contactRoute.js";
 import historyRoute from "./routes/historyRoute.js";
 import cookieParser from "cookie-parser";
 dotenv.config();

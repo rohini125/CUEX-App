@@ -1,4 +1,4 @@
-
+//////////////////////////without backend ////////////////////////////////
 
 // import React, { useState } from 'react';
 // import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
@@ -15,7 +15,7 @@
 //   };
 
 //   const onSignUp = () => {
-//     router.navigate('/UpiPin');
+//     router.navigate('/login');
 //   };
 
 //   return (
@@ -144,281 +144,196 @@
 // });
 
 
-// import React, { useState } from 'react';
-// import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
-// import { Link, useRouter } from 'expo-router';
-// import { Ionicons } from '@expo/vector-icons'; // Importing Ionicons for the eye icon
-// import axios from 'axios'; // Importing axios for API requests
 
-// const SignUp = () => {
-//   const router = useRouter();
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-//   const [name, setName] = useState('');
-//   const [emailOrPhone, setEmailOrPhone] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState('');
+////////////////// simple backend correct code //////////////////////////////////////////
 
-//   const onPhone = () => {
-//     router.navigate('/login');
-//   };
 
-//   const onSignUp = async () => {
+
+// import React, { useState } from "react";
+// import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from "react-native";
+// import axios from "axios";
+
+// const RegisterScreen = () => {
+//   const [name, setName] = useState("");
+//   const [emailOrPhone, setEmailOrPhone] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [confirmPassword, setConfirmPassword] = useState("");
+
+//   const handleRegister = async () => {
 //     if (!name || !emailOrPhone || !password || !confirmPassword) {
-//       Alert.alert('Error', 'Please fill out all fields.');
+//       Alert.alert("Error", "All fields are required.");
 //       return;
 //     }
 //     if (password !== confirmPassword) {
-//       Alert.alert('Error', 'Passwords do not match.');
+//       Alert.alert("Error", "Passwords do not match.");
 //       return;
 //     }
-
+    
 //     try {
-//       const response = await axios.post('https://your-backend-url.com/api/signup', {
+//       const response = await axios.post("http://192.168.52.190:9000/api/auth/signup", {
 //         name,
 //         emailOrPhone,
 //         password,
+//         confirmPassword,
 //       });
-//       Alert.alert('Success', response.data.message);
-//       router.navigate('/UpiPin');
+//       Alert.alert("Success", response.data.message);
 //     } catch (error) {
-//       console.error(error);
-//       Alert.alert('Error', 'Failed to sign up. Please try again.');
+//       Alert.alert("Error");
 //     }
 //   };
 
 //   return (
-//     <ScrollView style={styles.container}>
-//       <View style={{ padding: 20, gap: 20 }}>
-//         <Image source={require("@/assets/images/signup.jpg")} style={styles.image} resizeMode="cover" />
-//         <TextInput
-//           placeholder="Enter Your Name"
-//           style={styles.input}
-//           value={name}
-//           onChangeText={setName}
-//         />
-//         <TextInput
-//           placeholder="Enter Your Email / Mobile No"
-//           style={styles.input}
-//           value={emailOrPhone}
-//           onChangeText={setEmailOrPhone}
-//         />
-
-//         {/* Password Field with Eye Icon Inside Input */}
-//         <View style={styles.inputWrapper}>
-//           <TextInput
-//             placeholder="Enter Your Password"
-//             style={styles.inputWithIcon}
-//             secureTextEntry={!showPassword}
-//             value={password}
-//             onChangeText={setPassword}
-//           />
-//           <TouchableOpacity
-//             style={styles.iconWrapper}
-//             onPress={() => setShowPassword(!showPassword)}
-//           >
-//             <Ionicons
-//               name={showPassword ? 'eye' : 'eye-off'}
-//               size={24}
-//               color="gray"
-//             />
-//           </TouchableOpacity>
-//         </View>
-
-//         {/* Confirm Password Field with Eye Icon Inside Input */}
-//         <View style={styles.inputWrapper}>
-//           <TextInput
-//             placeholder="Confirm Your Password"
-//             style={styles.inputWithIcon}
-//             secureTextEntry={!showConfirmPassword}
-//             value={confirmPassword}
-//             onChangeText={setConfirmPassword}
-//           />
-//           <TouchableOpacity
-//             style={styles.iconWrapper}
-//             onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-//           >
-//             <Ionicons
-//               name={showConfirmPassword ? 'eye' : 'eye-off'}
-//               size={24}
-//               color="gray"
-//             />
-//           </TouchableOpacity>
-//         </View>
-
-//         <TouchableOpacity activeOpacity={0.7} style={styles.signUpButton} onPress={onSignUp}>
-//           <Text style={styles.signUpButtonText}>Sign Up</Text>
-//         </TouchableOpacity>
-
-//         <Text style={{ textAlign: 'center' }}>
-//           Already a member?{' '}
-//           <Text style={styles.link} onPress={onPhone}>
-//             Login
-//           </Text>
-//         </Text>
-//       </View>
-//     </ScrollView>
+//     <View style={styles.container}>
+//       <Text style={styles.title}>Register</Text>
+//       <TextInput
+//         style={styles.input}
+//         placeholder="Name"
+//         value={name}
+//         onChangeText={setName}
+//       />
+//       <TextInput
+//         style={styles.input}
+//         placeholder="Email or Phone"
+//         value={emailOrPhone}
+//         onChangeText={setEmailOrPhone}
+//       />
+//       <TextInput
+//         style={styles.input}
+//         placeholder="Password"
+//         secureTextEntry
+//         value={password}
+//         onChangeText={setPassword}
+//       />
+//       <TextInput
+//         style={styles.input}
+//         placeholder="Confirm Password"
+//         secureTextEntry
+//         value={confirmPassword}
+//         onChangeText={setConfirmPassword}
+//       />
+//       <TouchableOpacity style={styles.button} onPress={handleRegister}>
+//         <Text style={styles.buttonText}>Register</Text>
+//       </TouchableOpacity>
+//     </View>
 //   );
 // };
-
-// export default SignUp;
 
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
-//     backgroundColor:'#ADD8E6',
+//     justifyContent: "center",
+//     alignItems: "center",
+//     padding: 20,
 //   },
-//   image: {
-//     width: "100%",
-//     height: 250,
+//   title: {
+//     fontSize: 24,
+//     fontWeight: "bold",
+//     marginBottom: 20,
 //   },
 //   input: {
-//     backgroundColor:'#fff',
-//     // borderWidth: 1,
-//     height: 50,
-//     paddingHorizontal: 20,
-//     borderRadius: 10,
+//     width: "100%",
+//     padding: 10,
+//     borderWidth: 1,
+//     borderColor: "#ccc",
+//     borderRadius: 5,
+//     marginBottom: 10,
 //   },
-//   inputWrapper: {
-//     position: 'relative',
+//   button: {
+//     backgroundColor: "#007bff",
+//     padding: 10,
+//     borderRadius: 5,
 //   },
-//   inputWithIcon: {
-//     // borderWidth: 1,
-//     height: 50,
-//     backgroundColor:'#fff',
-//     paddingHorizontal: 20,
-//     borderRadius: 10,
-//     paddingRight: 50, // To leave space for the eye icon
-//   },
-//   iconWrapper: {
-//     position: 'absolute',
-//     right: 15,
-//     top: 12,
-//   },
-//   signUpButton: {
-//     // backgroundColor: 'blue',
-//     backgroundColor:'black',
-//     borderRadius: 10,
-//     alignItems: 'center',
-//     paddingVertical: 15,
-//   },
-//   signUpButtonText: {
-//     color: 'white',
+//   buttonText: {
+//     color: "white",
 //     fontSize: 16,
-//   },
-//   link: {
-//     color: 'blue',
-//     textDecorationLine: 'underline',
 //   },
 // });
 
+// export default RegisterScreen;
+
+
+
+//////////////////////////// with backend /////////////////////////////////////////////
+
+
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert ,StatusBar} from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons'; // Importing Ionicons for the eye icon
-import axios from 'axios'; // Importing axios for API requests
+import { View, Text, StyleSheet, Image, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
 
 const SignUp = () => {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [name, setName] = useState('');
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const API_URL = 'http://192.168.52.190:9000/api/auth/signup';
-
-  const onPhone = () => {
-    router.navigate('/login');
-  };
-
-  const onSignUp = async () => {
-    // Validation
+  const handleSignUp = async () => {
     if (!name || !emailOrPhone || !password || !confirmPassword) {
-      Alert.alert('Error', 'Please fill out all fields.');
+      Alert.alert('Error', 'All fields are required.');
       return;
     }
     if (password !== confirmPassword) {
       Alert.alert('Error', 'Passwords do not match.');
       return;
     }
-
     try {
-      // API Request
-      const response = await axios.post(API_URL, {
+      const response = await axios.post('http://192.168.52.190:9000/api/auth/signup', {
         name,
         emailOrPhone,
         password,
+        confirmPassword,
       });
-
-      if (response.status === 201 || response.data.success) {
-        Alert.alert('Success', response.data.message || 'Signup successful!');
-        // router.navigate('/UpiPin');
-        router.navigate('/login');
-      } else {
-        Alert.alert('Error', response.data.message || 'Something went wrong.');
-      }
+      Alert.alert('Success', response.data.message);
+      router.replace('/login');
     } catch (error) {
-      // console.error('Signup Error:', error.response || message);
-      // const errorMessage = error.response?.data?.message || 'Failed to sign up. Please try again.';
-      Alert.alert('Error');
+      Alert.alert('Error', 'Something went wrong.');
     }
   };
 
   return (
     <ScrollView style={styles.container}>
-         {/* <StatusBar backgroundColor={'#ADD8E6'} barStyle={'dark-content'}/> */}
       <View style={{ padding: 20, gap: 20 }}>
-        <Image source={require("@/assets/images/signup.jpg")} style={styles.image} resizeMode="cover" />
-        <TextInput
-          placeholder="Enter Your Name"
-          style={styles.input}
-          value={name}
-          onChangeText={setName}
-        />
-        <TextInput
-          placeholder="Enter Your Email / Mobile No"
-          style={styles.input}
-          value={emailOrPhone}
-          onChangeText={setEmailOrPhone}
-        />
+        <Image source={require('@/assets/images/signup.jpg')} style={styles.image} resizeMode='cover' />
+        <TextInput placeholder='Enter Your Name' style={styles.input} value={name} onChangeText={setName} />
+        <TextInput placeholder='Enter Your Email / Mobile No' style={styles.input} value={emailOrPhone} onChangeText={setEmailOrPhone} />
+
         <View style={styles.inputWrapper}>
           <TextInput
-            placeholder="Enter Your Password"
+            placeholder='Enter Your Password'
             style={styles.inputWithIcon}
             secureTextEntry={!showPassword}
             value={password}
             onChangeText={setPassword}
           />
-          <TouchableOpacity
-            style={styles.iconWrapper}
-            onPress={() => setShowPassword(!showPassword)}
-          >
-            <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color="gray" />
+          <TouchableOpacity style={styles.iconWrapper} onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons name={showPassword ? 'eye' : 'eye-off'} size={24} color='gray' />
           </TouchableOpacity>
         </View>
+
         <View style={styles.inputWrapper}>
           <TextInput
-            placeholder="Confirm Your Password"
+            placeholder='Confirm Your Password'
             style={styles.inputWithIcon}
             secureTextEntry={!showConfirmPassword}
             value={confirmPassword}
             onChangeText={setConfirmPassword}
           />
-          <TouchableOpacity
-            style={styles.iconWrapper}
-            onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-          >
-            <Ionicons name={showConfirmPassword ? 'eye' : 'eye-off'} size={24} color="gray" />
+          <TouchableOpacity style={styles.iconWrapper} onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+            <Ionicons name={showConfirmPassword ? 'eye' : 'eye-off'} size={24} color='gray' />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity activeOpacity={0.7} style={styles.signUpButton} onPress={onSignUp}>
+
+        <TouchableOpacity activeOpacity={0.7} style={styles.signUpButton} onPress={handleSignUp}>
           <Text style={styles.signUpButtonText}>Sign Up</Text>
         </TouchableOpacity>
+
         <Text style={{ textAlign: 'center' }}>
           Already a member?{' '}
-          <Text style={styles.link} onPress={onPhone}>
+          <Text style={styles.link} onPress={() => router.navigate('/login')}>
             Sign In
           </Text>
         </Text>
@@ -430,26 +345,48 @@ const SignUp = () => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 , backgroundColor: "#ADD8E6",},
-  image: { width: '100%', height: 250 },
-  input: { 
-    // borderWidth: 1,
-    backgroundColor:'#fff',
-    height: 50, 
-    paddingHorizontal: 20, 
-    borderRadius: 10 
-    },
-  inputWrapper: { position: 'relative' },
-  inputWithIcon: {
-    // borderWidth: 1,
-    backgroundColor:'#fff',
+  container: {
+    flex: 1,
+    backgroundColor: '#ADD8E6',
+  },
+  image: {
+    width: '100%',
+    height: 250,
+  },
+  input: {
+    backgroundColor: '#fff',
     height: 50,
     paddingHorizontal: 20,
     borderRadius: 10,
-    paddingRight: 50, // Space for eye icon
   },
-  iconWrapper: { position: 'absolute', right: 15, top: 12 },
-  signUpButton: { backgroundColor: 'black', borderRadius: 10, alignItems: 'center', paddingVertical: 15 },
-  signUpButtonText: { color: 'white', fontSize: 16 },
-  link: { color: 'blue', textDecorationLine: 'underline' },
+  inputWrapper: {
+    position: 'relative',
+    backgroundColor: '#ADD8E6',
+  },
+  inputWithIcon: {
+    height: 50,
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    paddingRight: 50,
+  },
+  iconWrapper: {
+    position: 'absolute',
+    right: 15,
+    top: 12,
+  },
+  signUpButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    alignItems: 'center',
+    paddingVertical: 15,
+  },
+  signUpButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
 });
