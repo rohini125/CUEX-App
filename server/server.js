@@ -33,6 +33,9 @@ app.use(cookieParser());
 // Middleware to parse JSON
 app.use(express.json());
 
+// contact routes
+app.use("/newuser", contactRoute);
+
 //user routes
 app.use("/api/auth", userRoute);
 

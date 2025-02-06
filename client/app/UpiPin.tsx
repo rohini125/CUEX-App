@@ -12,9 +12,9 @@ const SetUPIPinPage = () => {
   const handleSetPin = async () => {
     if (pin === confirmPin && pin.length === 4) {
       try {
-        console.log("Sending PIN to the server...");
-        const response = await axios.post("http://192.168.52.190:9000/api/upi-pin/set-pin", {
-         pin,
+        // Call API to save the UPI PIN in the backend (example API call)
+        const response = await axios.post('https://your-api-endpoint.com/set-upi-pin', {
+          pin: pin,
         });
   
         if (response.status === 201) {
