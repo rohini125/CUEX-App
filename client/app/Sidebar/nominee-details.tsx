@@ -20,6 +20,7 @@ export default function NomineeDetails() {
   //   router.push("/Sidebar/AccountSetting"); // Navigate to another page
   // };
 
+  const API_URL = 'http://172.27.16.1:7000/api/nominees';
   const handleSave = async () => {
     if (!nomineeName || !relationship || !contactNumber) {
       alert("Please fill in all fields.");
@@ -27,7 +28,7 @@ export default function NomineeDetails() {
     }
   
     try {
-      const response = await axios.post('http://192.168.1.9/api/nominees', {
+      const response = await axios.post(API_URL, {
         nomineeName,
         relationship,
         contactNumber,
@@ -44,7 +45,7 @@ export default function NomineeDetails() {
       alert("An error occurred while saving nominee details.");
     }
   };
-
+  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>

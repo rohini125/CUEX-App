@@ -16,6 +16,7 @@ const AccountingSettings = () => {
       <Text style={styles.headerTitle}> Account Settings </Text>
       </View>
       {/* KYC Verification */}
+      < View style={styles.card}>
       <TouchableOpacity
         style={styles.option}
         onPress={() => router.push('/Sidebar/kyc-verification')}
@@ -50,26 +51,6 @@ const AccountingSettings = () => {
         <Text style={styles.optionTitle}> NOMINEE DETAILS</Text>
         <Text style={styles.arrow}>➔</Text>
       </TouchableOpacity>
-
-      {/* UPI PIN SETUP */}
-      <View
-        style={styles.option}
-        // onPress={() => router.push('/Sidebar/nominee-details')}
-      >
-        <Text style={styles.optionTitle}> SET UPI PIN </Text>
-          <TouchableOpacity
-          style={styles.Button}
-          onPress={() => router.push('/Sidebar/nominee-details')}
-          >
-            SET
-          </TouchableOpacity>
-          <TouchableOpacity
-          style={styles.Button}
-          onPress={() => router.push('/Sidebar/nominee-details')}
-          >
-            Reset
-          </TouchableOpacity>
-        {/* <Text style={styles.arrow}>➔</Text> */}
       </View>
     </View>
   );
@@ -96,21 +77,18 @@ const styles = StyleSheet.create({
   backButton: {
     marginRight: 10,
   },
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#fff',
+  card: {
+    backgroundColor: "#E6F2FA",
+    borderRadius: 12,
     padding: 16,
-    borderRadius: 8,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
+    margin: 20,
   },
-  Button: {
+  option: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -127,7 +105,7 @@ const styles = StyleSheet.create({
   optionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#007AFF',
+    color: 'black',
     flex: 3,
   },
   optionDescription: {
@@ -138,7 +116,7 @@ const styles = StyleSheet.create({
   arrow: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#007AFF',
+    color: 'black',
     flex: 1,
     textAlign: 'right',
   },

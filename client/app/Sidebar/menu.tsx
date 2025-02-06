@@ -14,7 +14,7 @@ const menu = () => {
   return (
     <View style={styles.container}>
 
-      <ScrollView contentContainerStyle={styles.menuList}>
+      <View style={styles.menuList}>
         {/* Profile */}
         <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('/Sidebar/profile')}>
           <Feather name="user" size={20} color="#4A4A4A" />
@@ -56,7 +56,7 @@ const menu = () => {
           <Feather name="log-out" size={20} color="#4A4A4A" />
           <Text style={styles.menuText}>Logout</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ADD8E6',
     padding: 16,
+   
   },
   header: {
     fontSize: 25,
@@ -76,7 +77,8 @@ const styles = StyleSheet.create({
   menuList: {
     padding: 20,
     margin:10,
-    backgroundColor:'#E6F2FA'
+    backgroundColor:'#E6F2FA',
+     height:'100%'
   },
   menuItem: {
     flexDirection: 'row',
