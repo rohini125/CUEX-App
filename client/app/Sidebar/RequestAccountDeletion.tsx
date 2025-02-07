@@ -202,14 +202,14 @@ export default function AccountDelete() {
         <Text style={styles.warning}>
           Deleting your account will remove all your data permanently.
         </Text>
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.7}
           style={[styles.deleteButton, loading && { opacity: 0.7 }]}
           onPress={handleDeleteAccount}
           disabled={loading}
         >
           {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.deleteButtonText}>Delete My Account</Text>}
         </TouchableOpacity>
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.7}
           onPress={() => router.push("/Sidebar/AccountSetting")}
           style={styles.cancelButton}
         >
