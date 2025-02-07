@@ -188,6 +188,8 @@ export default History;
 
 
 
+
+
 // import React, { useState, useEffect } from 'react';
 // import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 // import Header from "../Header";
@@ -218,7 +220,7 @@ export default History;
 //   // Function to fetch history data from the backend
 //   const fetchHistoryData = async () => {
 //     try {
-//       const response = await fetch('https://your-api-endpoint.com/history');
+//       const response = await fetch('http://192.168.52.190:9000/history/');
       
 //       if (!response.ok) {
 //         throw new Error(`HTTP error! status: ${response.status}`);

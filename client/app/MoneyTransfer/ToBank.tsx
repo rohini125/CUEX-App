@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 15,
   },
   backButton: {
     marginRight: 10,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between', // Buttons spacing maintain honar
   },  
   optionText: {
-    fontSize: 16,
+    fontSize: 14,
     // color: '#007BFF',
     color: '#555',
     // fontWeight: 'bold',
