@@ -196,12 +196,12 @@ const Profile = () => {
       )}
        <View style={styles.backButton}>
         <View>
-      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} >
+      <TouchableOpacity  activeOpacity={0.7} onPress={() => router.push('/Sidebar/menu')} >
         <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
       </View>
       <View>
-      <TouchableOpacity onPress={handleFinalSave} style={styles.finalSaveButton}>
+      <TouchableOpacity  activeOpacity={0.7} onPress={handleFinalSave} style={styles.finalSaveButton}>
           <Text style={styles.finalSaveButtonText}>Save</Text>
         </TouchableOpacity></View>
         </View>
@@ -275,7 +275,7 @@ const Profile = () => {
   {upiId ? `UPI ID: ${upiId}` : ''}
 </Text>
 
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.7}
           style={styles.saveButton}
           onPress={() => setIsEditing(false)}
         >
@@ -290,7 +290,7 @@ const Profile = () => {
           Mobile: {countryCode} {mobile}
         </Text>
         <Text style={styles.detailText}>UPI ID: {upiId}</Text>
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.7}
           style={styles.editButton}
           onPress={() => setIsEditing(true)}
         >
@@ -461,7 +461,7 @@ const Profile = () => {
       <Text style={styles.detailText}>
         {index + 1}. {address}
       </Text>
-      <TouchableOpacity 
+      <TouchableOpacity   activeOpacity={0.7}
         style={styles.deleteButton} 
         onPress={() => deleteAddress(index)}
       >
@@ -477,10 +477,10 @@ const Profile = () => {
         value={newAddress}
         onChangeText={setNewAddress}
       />
-      <TouchableOpacity style={styles.saveButton} onPress={saveAddress}>
+      <TouchableOpacity  activeOpacity={0.7} style={styles.saveButton} onPress={saveAddress}>
         <Text style={styles.saveButtonText}>Save Address</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      <TouchableOpacity  activeOpacity={0.7}
         style={styles.cancelButton}
         onPress={() => setShowAddressInput(false)}
       >
@@ -488,7 +488,7 @@ const Profile = () => {
       </TouchableOpacity>
     </View>
   ) : (
-    <TouchableOpacity
+    <TouchableOpacity  activeOpacity={0.7}
       style={styles.addAddressBox}
       onPress={() => setShowAddressInput(true)}
     >

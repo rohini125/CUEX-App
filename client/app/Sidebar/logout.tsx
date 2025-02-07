@@ -63,7 +63,7 @@ const LogoutPage = () => {
             <View style={styles.card}>
                 <Text style={styles.header}>Logout</Text>
                 <Text style={styles.subText}>Are you sure you want to log out of your account?</Text>
-                <TouchableOpacity
+                <TouchableOpacity activeOpacity={0.7}
                     style={styles.logoutButton}
                     onPress={handleLogout}
                     disabled={isLoggingOut}

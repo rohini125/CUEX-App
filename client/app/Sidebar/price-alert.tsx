@@ -131,7 +131,7 @@ const handleCreateAlert = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-              <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+              <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
                 <Ionicons name="arrow-back" size={24} color="black" />
               </TouchableOpacity>
             {/* Header */}
@@ -152,7 +152,7 @@ const handleCreateAlert = () => {
           data={filteredCurrencies}
           keyExtractor={(item) => item.code}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.currencyItem} onPress={() => handleCurrencySelect(item)}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.currencyItem} onPress={() => handleCurrencySelect(item)}>
               <Text style={styles.currencyCode}>{item.code}</Text>
               <Text style={styles.currencyName}>{item.name}</Text>
             </TouchableOpacity>
@@ -171,13 +171,13 @@ const handleCreateAlert = () => {
 
       {/* Mode Selection */}
       <View style={styles.alertOptions}>
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.7}
           style={[styles.alertButton, selectedMode === 'price' && styles.selectedButton]}
           onPress={handleByPrice}
         >
           <Text style={styles.alertButtonText}>BY PRICE</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        <TouchableOpacity activeOpacity={0.7}
           style={[styles.alertButton, selectedMode === 'percentage' && styles.selectedButton]}
           onPress={handleByPercentageChange}
         >
@@ -190,14 +190,14 @@ const handleCreateAlert = () => {
         <View>
           <Text style={styles.alertLabel}>ALERT PRICE:</Text>
           <View style={styles.priceAdjuster}>
-            <TouchableOpacity style={styles.adjustButton} onPress={() => adjustAlertPrice(-0.1)}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.adjustButton} onPress={() => adjustAlertPrice(-0.1)}>
               <Text style={styles.adjustButtonText}>-</Text>
             </TouchableOpacity>
             <Text style={styles.alertPrice}>
               {selectedCurrency.symbol}
               {alertPrice.toFixed(2)}
             </Text>
-            <TouchableOpacity style={styles.adjustButton} onPress={() => adjustAlertPrice(0.1)}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.adjustButton} onPress={() => adjustAlertPrice(0.1)}>
               <Text style={styles.adjustButtonText}>+</Text>
             </TouchableOpacity>
           </View>
@@ -206,11 +206,11 @@ const handleCreateAlert = () => {
         <View>
           <Text style={styles.alertLabel}>ALERT % CHANGE:</Text>
           <View style={styles.priceAdjuster}>
-            <TouchableOpacity style={styles.adjustButton} onPress={() => adjustPercentageChange(-1)}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.adjustButton} onPress={() => adjustPercentageChange(-1)}>
               <Text style={styles.adjustButtonText}>-</Text>
             </TouchableOpacity>
             <Text style={styles.alertPrice}>{percentageChange}%</Text>
-            <TouchableOpacity style={styles.adjustButton} onPress={() => adjustPercentageChange(1)}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.adjustButton} onPress={() => adjustPercentageChange(1)}>
               <Text style={styles.adjustButtonText}>+</Text>
             </TouchableOpacity>
           </View>
@@ -218,7 +218,7 @@ const handleCreateAlert = () => {
       )}
 
       {/* Create Alert Button */}
-      <TouchableOpacity style={styles.createButton} onPress={handleCreateAlert}>
+      <TouchableOpacity activeOpacity={0.7} style={styles.createButton} onPress={handleCreateAlert}>
         <Text style={styles.createButtonText}>CREATE ALERT</Text>
       </TouchableOpacity>
 
@@ -231,7 +231,7 @@ const handleCreateAlert = () => {
   renderItem={({ item, index }) => (
     <View style={styles.alertItem}>
       <Text style={styles.alertDescription}>{item.description}</Text>
-      <TouchableOpacity
+      <TouchableOpacity activeOpacity={0.7}
         style={styles.deleteButton}
         onPress={() => handleDeleteAlert(index)} // Pass the index to handleDeleteAlert
       >
