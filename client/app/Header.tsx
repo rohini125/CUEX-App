@@ -82,12 +82,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: moderateScale(10),
-    margin:10
+   paddingTop:moderateScale(10)
   },
   headerLeftView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:20
+    
   },
   user: {
     width: scale(40),

@@ -61,7 +61,7 @@ const help = () => {
     };
 
     return (
-      <TouchableOpacity
+      <TouchableOpacity activeOpacity={0.7}
         style={styles.optionContainer}
         onPress={clickHandlers[item.id]}
       >
@@ -77,7 +77,7 @@ const help = () => {
       {/* Back Button */}
       
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+        <TouchableOpacity  activeOpacity={0.7} onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         {/* Help Section */}
@@ -100,7 +100,7 @@ const help = () => {
       <View style={styles.assistanceContainer}>
         <Text style={styles.assistanceText}>Need further assistance?</Text>
         <Text style={styles.subText}>We are here to help you!</Text>
-        <TouchableOpacity style={styles.callButton} onPress={() => router.push('/Sidebar/contact')}>
+        <TouchableOpacity activeOpacity={0.7} style={styles.callButton} onPress={() => router.push('/Sidebar/contact')}>
           <Text style={styles.callButtonText}>Call Us</Text>
         </TouchableOpacity>
       </View>

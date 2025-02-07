@@ -125,25 +125,31 @@
 
 
 
-
-
 import React, { useCallback, useState } from "react";
 import { View, Text, TouchableOpacity, Alert, StyleSheet, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function AccountDelete() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const API_URL = 'http://172.27.16.1:7000/api/auth/deleteAccount';
 
   // Function to call the API for account deletion
   const deleteAccount = async () => {
     try {
       setLoading(true);
-      const response = await fetch("YOUR_API_ENDPOINT", {
+      const token = await AsyncStorage.getItem("authToken"); // Securely retrieve token
+      
+      if (!token) {
+        throw new Error("Authentication token not found");
+      }
+
+      const response = await fetch(API_URL, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer YOUR_AUTH_TOKEN", // Replace with actual auth token
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -160,9 +166,17 @@ export default function AccountDelete() {
       }
     } catch (error) {
       setLoading(false);
-      Alert.alert("Error", "Something went wrong. Please try again.");
+      
+      let errorMessage = "Something went wrong. Please try again.";
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+    
+      Alert.alert("Error", errorMessage);
       console.error("API error:", error);
     }
+    
   };
 
   // Function to handle delete account action
@@ -270,4 +284,3 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
 });
-

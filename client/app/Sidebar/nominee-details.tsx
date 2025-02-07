@@ -49,7 +49,7 @@ export default function NomineeDetails() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
       {/* Header */}
@@ -93,7 +93,7 @@ export default function NomineeDetails() {
       </View>
 
       {/* Save Button */}
-      <TouchableOpacity style={styles.button} onPress={handleSave}>
+      <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={handleSave}>
         <Text style={styles.buttonText}>Save Nominee</Text>
       </TouchableOpacity>
     </ScrollView>

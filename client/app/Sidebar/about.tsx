@@ -30,7 +30,7 @@ const About = () => {
     <ScrollView contentContainerStyle={styles.container}>
    {/* Back Button */}
    <View style={styles.header}>
-      <TouchableOpacity onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/Sidebar/menu')} style={styles.backButton}>
         <Ionicons name="arrow-back" size={24} color="#black" />
       </TouchableOpacity>
       {/* About Section */}
@@ -86,7 +86,7 @@ const About = () => {
           onChangeText={(value) => handleInputChange('message', value)}
           multiline
         />
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </View>
