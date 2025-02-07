@@ -17,16 +17,48 @@ const contact = () => {
   };
   
 
-  const handleSubmit = () => {
-    if (formData.name && formData.email && formData.subject && formData.message) {
-      Alert.alert('Form Submitted', 'Thank you for contacting us!');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } else {
+  // const handleSubmit = () => {
+  //   if (formData.name && formData.email && formData.subject && formData.message) {
+  //     Alert.alert('Form Submitted', 'Thank you for contacting us!');
+  //     setFormData({ name: '', email: '', subject: '', message: '' });
+  //   } else {
+  //     Alert.alert('Error', 'Please fill in all required fields.');
+  //   }
+  //    // Navigate to the help page
+  // router.push('/Sidebar/help/help'); // Replace '/help' with the actual path of your Help page
+  // };
+
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       Alert.alert('Error', 'Please fill in all required fields.');
+      return;
     }
-     // Navigate to the help page
-  router.push('/Sidebar/help/help'); // Replace '/help' with the actual path of your Help page
+  
+    try {
+      console.log("Sending request to API:", formData);
+  
+      const response = await fetch('http://172.27.16.1:7000/newuser/user', {  
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+      console.log("Response from API:", data);
+  
+      if (response.ok) {
+        Alert.alert('Success', data.message);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        Alert.alert('Error', data.message || 'Something went wrong.');
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+      Alert.alert('Error', 'Failed to send message.');
+    }
   };
+  
+  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

@@ -108,12 +108,19 @@ const Profile = () => {
 
   
     // States for personal information
-    const [gender, setGender] = useState('gender');
+    // const [gender, setGender] = useState('gender');
     const [age, setAge] = useState('');
     const [maritalStatus, setMaritalStatus] = useState('Status');
     const [education, setEducation] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [currentField, setCurrentField] = useState('');
+    const [gender, setGender] = useState<string | null>(null);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    
+    const handleGenderSelection = (selectedGender: string) => {
+      setGender(selectedGender);
+      setIsModalVisible(false); // Close modal after selection
+    };
   
     const openModal = (field: 'Gender' | 'Marital Status') => {
       setCurrentField(field);
@@ -301,7 +308,7 @@ const Profile = () => {
 
       <List.Item
           title="Gender"
-          description={gender}
+          description={gender || "Select Gender"}
           right={() => (
             <TouchableOpacity onPress={() => openModal('Gender')}>
               <List.Icon icon="chevron-right" />
