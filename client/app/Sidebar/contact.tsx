@@ -95,7 +95,7 @@ const contact = () => {
           onChangeText={(value) => handleInputChange('message', value)}
           multiline
         />
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </View>
