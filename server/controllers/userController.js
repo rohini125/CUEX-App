@@ -326,21 +326,20 @@ export const logoutUser = async (req, res) => {
 // Delete User Account
 export const deleteUserAccount = async (req, res) => {
   try {
-    const { userId } = req.body;
+    // Extract user ID from the authenticated request (assuming JWT authentication)
+    const userId = req.user.id;
 
-    // Check if userId is provided
     if (!userId) {
-      return res
-        .status(400)
-        .json({ message: "User ID is required to delete the account." });
+      return res.status(400).json({ message: "User authentication required." });
     }
 
-    // Find and delete the user from the database
+    // Find user by ID
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
 
+    // Delete the user
     await User.findByIdAndDelete(userId);
 
     res.status(200).json({ message: "User account deleted successfully." });

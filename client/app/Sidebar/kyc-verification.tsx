@@ -420,20 +420,10 @@ const KYCVerification = () => {
   const [kycStatus, setKycStatus] = useState('Not Verified');
   const router = useRouter();
 
-  const handleDocumentUpload = async (side: 'front' | 'back') => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled && result.assets.length > 0) {
-      const { uri } = result.assets[0];
-      side === 'front' ? setFrontImage(uri) : setBackImage(uri);
-    }
+  
+  const handleDocumentUpload = () => {
+    router.push('/Sidebar/upload-document'); // Create this route
   };
-
   const handleVerification = async () => {
     setIsSubmitting(true);
 
@@ -514,15 +504,9 @@ const KYCVerification = () => {
         />
 
         <Text style={styles.label}>Upload Document:</Text>
-        <TouchableOpacity onPress={() => handleDocumentUpload('front')} style={styles.uploadButton}>
-          <Text style={styles.uploadButtonText}>Upload Front Side</Text>
+        <TouchableOpacity onPress={ handleDocumentUpload} style={styles.uploadButton}>
+          <Text style={styles.uploadButtonText}>Upload </Text>
         </TouchableOpacity>
-        {frontImage && <Image source={{ uri: frontImage }} style={styles.uploadedImage} />}
-
-        <TouchableOpacity onPress={() => handleDocumentUpload('back')} style={styles.uploadButton}>
-          <Text style={styles.uploadButtonText}>Upload Back Side</Text>
-        </TouchableOpacity>
-        {backImage && <Image source={{ uri: backImage }} style={styles.uploadedImage} />}
 
         <TouchableOpacity style={styles.submitButton} onPress={handleVerification} disabled={isSubmitting}>
           {isSubmitting ? <ActivityIndicator color="#fff" /> : <Text style={styles.submitButtonText}>Proceed to Verification</Text>}
