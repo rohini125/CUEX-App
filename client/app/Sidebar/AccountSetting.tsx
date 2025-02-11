@@ -17,40 +17,57 @@ const AccountingSettings = () => {
       </View>
       {/* KYC Verification */}
       < View style={styles.card}>
-      <TouchableOpacity
-        style={styles.option}
-        onPress={() => router.push('/Sidebar/kyc-verification')}
-      >
-        <Text style={styles.optionTitle}> KYC VERIFICATION</Text>
-        <Text style={styles.arrow}>➔</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.option}
+          onPress={() => router.push('/Sidebar/kyc-verification')}
+        >
+          <Text style={styles.optionTitle}> KYC VERIFICATION</Text>
+          <Text style={styles.arrow}>➔</Text>
+        </TouchableOpacity>
 
-      {/* Account Details */}
-      <TouchableOpacity
-        style={styles.option}
-        onPress={() => router.push('/Sidebar/account-details')}
-      >
-        <Text style={styles.optionTitle}> ACCOUNT DETAILS</Text>
-        <Text style={styles.arrow}>➔</Text>
-      </TouchableOpacity>
+        {/* Account Details */}
+        <TouchableOpacity
+          style={styles.option}
+          onPress={() => router.push('/Sidebar/account-details')}
+        >
+          <Text style={styles.optionTitle}> ACCOUNT DETAILS</Text>
+          <Text style={styles.arrow}>➔</Text>
+        </TouchableOpacity>
 
-      {/* Request Account Delete */}
-      <TouchableOpacity
-        style={styles.option}
-        onPress={() => router.push('/Sidebar/RequestAccountDeletion')}
-      >
-        <Text style={styles.optionTitle}> REQUEST ACCOUNT DELETE</Text>
-        <Text style={styles.arrow}>➔</Text>
-      </TouchableOpacity>
+        {/* Request Account Delete */}
+        <TouchableOpacity
+          style={styles.option}
+          onPress={() => router.push('/Sidebar/RequestAccountDeletion')}
+        >
+          <Text style={styles.optionTitle}> REQUEST ACCOUNT DELETE</Text>
+          <Text style={styles.arrow}>➔</Text>
+        </TouchableOpacity>
 
-      {/* Nominee Details */}
-      <TouchableOpacity
-        style={styles.option}
-        onPress={() => router.push('/Sidebar/nominee-details')}
-      >
-        <Text style={styles.optionTitle}> NOMINEE DETAILS</Text>
-        <Text style={styles.arrow}>➔</Text>
-      </TouchableOpacity>
+        {/* Nominee Details */}
+        <TouchableOpacity
+          style={styles.option}
+          onPress={() => router.push('/Sidebar/nominee-details')}
+        >
+          <Text style={styles.optionTitle}> NOMINEE DETAILS</Text>
+          <Text style={styles.arrow}>➔</Text>
+        </TouchableOpacity>
+
+        {/* UPI PIN  */}
+        <View style={styles.option}>
+          <Text style={styles.optionTitle}>UPI PIN</Text>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => router.push('/Sidebar/UpiSet')}
+          >
+            <Text style={styles.Button}> SET</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => router.push('/Sidebar/nominee-details')}
+          >
+            <Text style={styles.Button}> RESET</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -101,6 +118,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+  },
+  Button:{
+    alignItems: 'center',
+    textAlign:'center',
+    backgroundColor: 'black',
+    color:'#fff',
+    padding: 6,
+    borderRadius: 6,
+    marginHorizontal: 10,
+    height:28,
+    width:65,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.1,
+    // shadowRadius: 4,
+    // elevation: 3,
   },
   optionTitle: {
     fontSize: 16,
