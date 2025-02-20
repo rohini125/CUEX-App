@@ -10,6 +10,7 @@ import kycRoutes from "./routes/kycRoutes.js";
 import upiPinRoutes from "./routes/upiPinRoutes.js";
 import contactRoute from "./routes/contactRoute.js";
 import historyRoute from "./routes/historyRoute.js";
+import walletRoute from "./routes/walletRoute.js";
 import cookieParser from "cookie-parser";
 dotenv.config();
 
@@ -51,6 +52,9 @@ app.use("/api/kyc", kycRoutes);
 
 // upi-pin Routes
 app.use("/api/upi-pin", upiPinRoutes);
+
+//wallet Route 
+app.use("/api/wallet",walletRoute);
 
 // History Routes
 app.use("/history", historyRoute);
