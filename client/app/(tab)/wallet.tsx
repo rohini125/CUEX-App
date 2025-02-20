@@ -276,7 +276,7 @@ const Wallet = () => {
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/currencies");
+        const response = await axios.get("http://192.168.52.190:9000/currencies");
         setCurrencies(response.data);
         const total = response.data.reduce(
           (sum: number, currency: Currency) => sum + currency.amount,
