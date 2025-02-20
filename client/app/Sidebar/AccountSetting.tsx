@@ -19,7 +19,7 @@ const AccountingSettings = () => {
       < View style={styles.card}>
         <TouchableOpacity
           style={styles.option}
-          onPress={() => router.push('/Sidebar/kyc-verification')}
+          onPress={() => router.push('/Sidebar/kycVerification/introduction')}
         >
           <Text style={styles.optionTitle}> KYC VERIFICATION</Text>
           <Text style={styles.arrow}>➔</Text>
