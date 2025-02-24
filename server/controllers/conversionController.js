@@ -56,7 +56,9 @@ export const getHistory = async (req, res) => {
 export const clearHistory = async (req, res) => {
   try {
     await Conversion.deleteMany();
-    res.status(200).json({ success: true, message: "History cleared successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "History cleared successfully" });
   } catch (error) {
     console.error("Error clearing history:", error);
     res.status(500).json({ error: "Failed to clear history" });
