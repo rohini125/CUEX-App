@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 
@@ -7,42 +7,64 @@ export default function FaceRecognitionScreen() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const router = useRouter();
 
+  // Function to open the camera
   const openCamera = async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== 'granted') {
-      alert('Camera access is required for face verification.');
+    console.log('Requesting camera permissions...');
+    
+    const { status: cameraStatus } = await ImagePicker.requestCameraPermissionsAsync();
+    const { status: mediaLibraryStatus } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    console.log(`Camera Permission: ${cameraStatus}, Media Library Permission: ${mediaLibraryStatus}`);
+
+    if (cameraStatus !== 'granted' || mediaLibraryStatus !== 'granted') {
+      Alert.alert('Permission Required', 'Camera and media library access are required for face verification.');
       return;
     }
 
+    console.log('Opening camera...');
     const result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.7,
     });
 
+    console.log('Camera result:', result);
+
     if (!result.canceled && result.assets.length > 0) {
+      console.log('Image selected:', result.assets[0].uri);
       setSelectedImage(result.assets[0].uri);
+    } else {
+      console.log('Camera was closed or no image was taken.');
     }
   };
 
+  // Function to open the gallery
   const openGallery = async () => {
+    console.log('Opening gallery...');
     const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.7,
     });
 
+    console.log('Gallery result:', result);
+
     if (!result.canceled && result.assets.length > 0) {
+      console.log('Image selected from gallery:', result.assets[0].uri);
       setSelectedImage(result.assets[0].uri);
+    } else {
+      console.log('No image was selected.');
     }
   };
 
+  // Function to handle next button click
   const handleNext = () => {
+    console.log('Next button clicked.');
     if (selectedImage) {
-      alert('Face verification successful!');
+      Alert.alert('Success', 'Face verification successful!');
       router.push('/Sidebar/kycVerification/ProofOfIdentity');
     } else {
-      alert('Please take or upload a photo for verification.');
+      Alert.alert('Error', 'Please take or upload a photo for verification.');
     }
   };
 
@@ -74,6 +96,7 @@ export default function FaceRecognitionScreen() {
   );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -100,7 +123,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#007BFF',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     backgroundColor: '#e0e0e0',
     marginBottom: 20,
   },

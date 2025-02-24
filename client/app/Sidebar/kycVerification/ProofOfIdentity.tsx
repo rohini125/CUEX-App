@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function ProofOfIdentityScreen() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
+  const [frontImage, setFrontImage] = useState<string | null>(null);
+  const [backImage, setBackImage] = useState<string | null>(null);
   const router = useRouter();
 
-  const openGallery = async () => {
+  const openGallery = async (side: 'front' | 'back') => {
     const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
@@ -16,20 +18,25 @@ export default function ProofOfIdentityScreen() {
     });
 
     if (!result.canceled && result.assets.length > 0) {
-      setSelectedImage(result.assets[0].uri);
+      if (side === 'front') {
+        setFrontImage(result.assets[0].uri);
+      } else {
+        setBackImage(result.assets[0].uri);
+      }
     }
   };
 
   const handleNext = () => {
-    if (selectedDoc && selectedImage) {
-      alert('Document uploaded successfully!');
+    if (selectedDoc && frontImage && backImage) {
+      alert('Documents uploaded successfully!');
       router.push('/Sidebar/kycVerification/IdCardUpload');
     } else {
-      alert('Please select a document type and upload an image.');
+      alert('Please select a document type and upload both front and back images.');
     }
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.title}>Proof of Identity</Text>
       <Text style={styles.subtitle}>Choose the type of document you want to upload.</Text>
@@ -48,18 +55,30 @@ export default function ProofOfIdentityScreen() {
         ))}
       </View>
 
-      {/* Image Preview */}
+      {/* Front Side Upload */}
+      <Text style={styles.sectionTitle}>Upload Front Side</Text>
       <View style={styles.imageContainer}>
-        {selectedImage ? (
-          <Image source={{ uri: selectedImage }} style={styles.image} />
+        {frontImage ? (
+          <Image source={{ uri: frontImage }} style={styles.image} />
         ) : (
           <Text style={styles.placeholderText}>No image selected</Text>
         )}
       </View>
+      <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => openGallery('front')}>
+        <Text style={styles.buttonText}>Upload Front</Text>
+      </TouchableOpacity>
 
-      {/* Upload Button */}
-      <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={openGallery}>
-        <Text style={styles.buttonText}>Upload Document</Text>
+      {/* Back Side Upload */}
+      <Text style={styles.sectionTitle}>Upload Back Side</Text>
+      <View style={styles.imageContainer}>
+        {backImage ? (
+          <Image source={{ uri: backImage }} style={styles.image} />
+        ) : (
+          <Text style={styles.placeholderText}>No image selected</Text>
+        )}
+      </View>
+      <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => openGallery('back')}>
+        <Text style={styles.buttonText}>Upload Back</Text>
       </TouchableOpacity>
 
       {/* Next Button */}
@@ -67,6 +86,7 @@ export default function ProofOfIdentityScreen() {
         <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
   );
 }
 
@@ -118,6 +138,12 @@ const styles = StyleSheet.create({
   selectedText: {
     color: '#fff',
   },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    marginTop: 10,
+  },
   imageContainer: {
     width: 250,
     height: 150,
@@ -161,10 +187,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     borderRadius: 10,
     elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
   },
   nextButtonText: {
     color: '#fff',
