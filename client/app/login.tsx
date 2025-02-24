@@ -355,11 +355,11 @@ import { Ionicons } from '@expo/vector-icons';
 
 const Login = () => {
   const router = useRouter();
-  const [modalVisible, setModalVisible] = useState(false);
+  // const [modalVisible, setModalVisible] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [resetSuccess, setResetSuccess] = useState(false);
+  // const [resetSuccess, setResetSuccess] = useState(false);
 
   const handleLogin = async () => {
     if (!emailOrPhone || !password) {
@@ -403,7 +403,7 @@ const Login = () => {
           </View>
 
 
-        <Text style={styles.forgotPassword} onPress={() => setModalVisible(true)}>Forgot Password?</Text>
+        {/* <Text style={styles.forgotPassword} onPress={() => setModalVisible(true)}>Forgot Password?</Text> */}
         <TouchableOpacity activeOpacity={0.7} style={styles.signInButton} onPress={handleLogin}>
           <Text style={styles.signInButtonText}>Sign In</Text>
         </TouchableOpacity>
@@ -424,6 +424,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ADD8E6',
+    // backgroundColor:'#000000'
   },
   image: {
     width: '100%',
