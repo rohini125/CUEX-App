@@ -361,24 +361,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   // const [resetSuccess, setResetSuccess] = useState(false);
 
-<<<<<<< HEAD
-//   const handleLogin = async () => {
-//     if (!emailOrPhone || !password) {
-//       Alert.alert('Error', 'All fields are required.');
-//       return;
-//     }
-//     try {
-//       const response = await axios.post('http://172.27.16.1:7000/api/auth/login', {
-//         emailOrPhone,
-//         password,
-//       });
-//       Alert.alert('Success', response.data.message);
-//       router.push({ pathname: '/verification', params: { emailOrPhone } });
-//     } catch (error) {
-//       Alert.alert('Error');
-//     }
-//   };
-=======
   const handleLogin = async () => {
     if (!emailOrPhone || !password) {
       Alert.alert('Error', 'All fields are required.');
@@ -395,7 +377,6 @@ const Login = () => {
       Alert.alert('Error');
     }
   };
->>>>>>> 95880ae540a435eef512055055c8838731ea6238
 
   return (
     <ScrollView style={styles.container}>
