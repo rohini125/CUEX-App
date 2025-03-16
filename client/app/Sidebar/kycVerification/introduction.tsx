@@ -1,21 +1,27 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router'; // Import useRouter from Expo Router
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
 const KYCIntroScreen = () => {
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.push('/Sidebar/AccountSetting')} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>KYC Verification</Text>
+      </View>
+
       <View style={styles.card}>
-        <Text style={styles.title}>
-          You are almost ready to start your transactions
-        </Text>
+        <Text style={styles.title}>You are almost ready to start your transactions</Text>
         <Text style={styles.subtitle}>
           Please complete the KYC verification to continue using our services.
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push('/Sidebar/kycVerification/contactInfo')} // Navigate using Expo Router
+          onPress={() => router.push('/Sidebar/kycVerification/contactInfo')}
         >
           <Text style={styles.buttonText}>Start Verification</Text>
         </TouchableOpacity>
@@ -27,22 +33,42 @@ const KYCIntroScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#ADD8E6',
     justifyContent: 'center',
+  },
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ebf5fc',
-    padding: 16,
+    paddingVertical: 16,
+    backgroundColor: '#ADD8E6',
+    paddingHorizontal: 16,
+    justifyContent: 'center',
+  },
+  headerTitle: {
+    fontSize: 25,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  backButton: {
+    position: 'absolute',
+    left: 16,
+    padding: 10,
   },
   card: {
     backgroundColor: 'white',
     borderRadius: 20,
+    flex: 1,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
     elevation: 4,
     padding: 24,
-    width: '85%',
+    margin:30,
+    width: '95%',
+    alignSelf: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 18,
